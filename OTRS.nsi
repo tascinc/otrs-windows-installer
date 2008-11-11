@@ -2,7 +2,7 @@
 # OTRS.nsi - a script to generate the otrs4win installer
 # Copyright (C) 2001-2008 OTRS AG, http://otrs.org/
 # --
-# $Id: OTRS.nsi,v 1.5 2008-11-11 03:09:22 mh Exp $
+# $Id: OTRS.nsi,v 1.6 2008-11-11 03:15:14 mh Exp $
 # --
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -58,12 +58,11 @@
 RequestExecutionLevel admin
 CRCCheck              on
 XPStyle               on
-# TODO Reactivate
-SetCompress           off
-#SetCompress           Auto
-#SetCompressor         /SOLID lzma
-#SetCompressorDictSize 4
-#SetDatablockOptimize  On
+#SetCompress           off
+SetCompress           Auto
+SetCompressor         /SOLID lzma
+SetCompressorDictSize 4
+SetDatablockOptimize  On
 
 Name         "${OTRS_Name} ${OTRS_Version} ${OTRS_Version_Postfix}"
 OutFile      "${Installer_Home}\otrs-${OTRS_Version}${OTRS_Version_Jointer}${OTRS_Version_Postfix}-win-installer-${Installer_Version}${Installer_Version_Jointer}${Installer_Version_Postfix}.exe"
