@@ -2,7 +2,7 @@
 # OTRS.nsi - a script to generate the otrs4win installer
 # Copyright (C) 2001-2008 OTRS AG, http://otrs.org/
 # --
-# $Id: OTRS.nsi,v 1.6 2008-11-11 03:15:14 mh Exp $
+# $Id: OTRS.nsi,v 1.7 2008-11-11 03:33:58 mh Exp $
 # --
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -308,8 +308,8 @@ Section -InstOTRS
     # create start menu entries
     !insertmacro MUI_STARTMENU_WRITE_BEGIN Application
     SetOutPath $SMPROGRAMS\$StartMenuGroup
-    CreateShortcut "$SMPROGRAMS\$StartMenuGroup\${OTRS_Name}       Agent-Interface.lnk"    "http://localhost/otrs/index.pl"     "" "$INSTDIR\otrs4win\OTRS.ico"
-    CreateShortcut "$SMPROGRAMS\$StartMenuGroup\${OTRS_Name}       Customer-Interface.lnk" "http://localhost/otrs/customer.pl"  "" "$INSTDIR\otrs4win\OTRS.ico"
+    CreateShortcut "$SMPROGRAMS\$StartMenuGroup\${OTRS_Name} Agent-Interface.lnk"    "http://localhost/otrs/index.pl"     "" "$INSTDIR\otrs4win\OTRS.ico"
+    CreateShortcut "$SMPROGRAMS\$StartMenuGroup\${OTRS_Name} Customer-Interface.lnk" "http://localhost/otrs/customer.pl"  "" "$INSTDIR\otrs4win\OTRS.ico"
     CreateShortcut "$SMPROGRAMS\$StartMenuGroup\Tools\${OTRS_Name} Web-Installer.lnk"      "http://localhost/otrs/installer.pl" "" "$INSTDIR\otrs4win\OTRS.ico"
     !insertmacro MUI_STARTMENU_WRITE_END
 
