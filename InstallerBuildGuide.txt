@@ -1,0 +1,205 @@
+# --
+# InstallerBuildGuide.txt - guide to prepare components to build a win installer
+# Copyright (C) 2001-2008 OTRS AG, http://otrs.org/
+# --
+# $Id: InstallerBuildGuide.txt,v 1.1.1.1 2008-11-11 02:21:17 mh Exp $
+# --
+# This software comes with ABSOLUTELY NO WARRANTY. For details, see
+# the enclosed file COPYING for license information (GPL). If you
+# did not receive this file, see http://www.gnu.org/licenses/gpl-2.0.txt.
+# --
+
+Prepare Prerequisites
+=====================
+
+    1. Download and install the newerst NSIS installer from
+       http://nsis.sourceforge.net/
+
+    2. Download and install the newerst Eclipse framework from
+       http://www.eclipse.org/
+
+    3. Download and install the newerst EclipseNSIS plugin from
+       http://eclipsensis.sf.net/
+
+Prepare otrs4win
+================
+
+    1. Checkout the module otrs4win in the local directory C:\otrs4win
+
+    2. Create a new project in your Eclipse
+
+Prepare OTRS
+============
+
+    1. Download the newerst version of OTRS from ftp.otrs.org
+
+    2. Unzip the content to C:\otrs4win\OTRS\
+
+    3. Update the version number (and the version postfix) in the OTRS.nsi file
+
+Prepare Strawberry Perl
+=======================
+
+    1. Download the laterst ZIP version of strawberry perl from
+        http://strawberryperl.com/
+
+    2. Extract the files to C:\strawberry\
+
+    3. Add the following pathes to the PATH variable in the registry
+        HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Environment\Path
+        C:\strawberry\c\bin;C:\strawberry\perl\bin;
+
+    4. Start the CPAN shell and reload the package index
+        cpan> reload index
+
+    5. Install CPAN modules using the CPAN shell
+
+        # OTRS modules
+        cpan> install CGI
+        cpan> install Date::Pcalc
+        cpan> install Date::Format
+        cpan> install DBI
+        cpan> install Digest::MD5
+        cpan> install Crypt::PasswdMD5
+        cpan> install LWP::UserAgent
+        cpan> install IO::Scalar
+        cpan> install IO::Wrap
+        cpan> install MIME::Base64
+        cpan> install Mail::Internet
+        cpan> install MIME::Tools
+        cpan> install Net::DNS
+        cpan> install Net::POP3
+        cpan> install Net::IMAP::Simple
+        cpan> install Net::SMTP
+        cpan> install Authen::SASL
+        cpan> install XML::Parser
+        cpan> install Net::LDAP
+        cpan> install PDF::API2::Version
+        cpan> install DBD::ODBC
+        cpan> install Text::CSV_XS
+        cpan> install Archive::Tar
+        cpan> install Compress::Zlib
+        cpan> install MIME::Types
+
+        # CronW
+        cpan> install Module::Build
+        cpan> install Number::Compare
+        cpan> install Attribute::Handlers
+        cpan> install Text::Glob
+        cpan> install File::Find::Rule
+        cpan> install Params::Validate
+        cpan> install Date::Manip
+        cpan> install Log::Dispatch
+        cpan> install Log::Log4perl
+        cpan> install Log::Dispatch::FileRotate
+        cpan> install Win32::Process
+
+    6. Clean the system and quit
+        cpan> reload cpan
+        cpan> clean
+        cpan> quit
+
+    7. Delete the cpan directory to save space
+        del c:\strawberry\cpan
+
+    8. Correcting the Path in perl/site/lib/ppm.xml
+        BUILDDIR="D:\DOCUME~1\ADAM~1.KEN\LOCALS~1\Temp" must be
+        BUILDDIR="C:\strawberry\temp"
+
+    9. Remove useless repositories from perl/site/lib/ppm.xml
+        Remove all repositories excluding cpan.uwinnipeg.ca
+
+    10. Install required CPAN modules using the PPM mechanism
+        perl\bin\ppm.bat install http://cpan.uwinnipeg.ca/PPMPackages/10xx/SOAP-Lite.ppd
+
+    11. Install CPAN modules using the PPM mechanism
+
+        # OTRS
+        perl\bin\ppm.bat install http://cpan.uwinnipeg.ca/PPMPackages/10xx/DBD-mysql.ppd
+        perl\bin\ppm.bat install http://cpan.uwinnipeg.ca/PPMPackages/10xx/mod_perl.ppd
+            Copy mod_perl.so to C:/strawberry/perl/
+        perl\bin\ppm.bat install http://cpan.uwinnipeg.ca/PPMPackages/10xx/GD.ppd
+        perl\bin\ppm.bat install http://cpan.uwinnipeg.ca/PPMPackages/10xx/GDTextUtil.ppd
+        perl\bin\ppm.bat install http://cpan.uwinnipeg.ca/PPMPackages/10xx/GDGraph.ppd
+
+    12. Install the newerst Win32::Daemon module
+
+        -Download the newerst version of the Win32::Daemon module from
+         www.roth.net/perl/Daemon/
+
+        -Extract it in a temporary folder
+
+        -Copy DEAMON.PM to C:\strawberry\perl\site\lib\Win32\
+
+        -Copy all files in test\ to C:\strawberry\perl\site\lib\Win32\daemon\
+
+        -Copy bin\daemon.DLL to C:\strawberry\perl\site\lib\auto\Win32\daemon\
+
+    13. Delete the temp directory
+        del c:\strawberry\temp
+
+    14. Copy the strawberry perl files to C:\otrs4win\StrawberryPerl\
+
+
+Prepare Apache
+==============
+
+    1. Download the newerst Apache server with SSL!! from
+       http://httpd.apache.org/
+
+    2. Install it on a test system to extract the needed files
+
+        -Set "somenet.com" as network domain
+
+        -Set "webmaster@somenet.com" as administrator's email address
+
+        -Install it for all users on port 80
+
+        -Select "Custom" as install type
+
+        -Select all components but deselect "Apache Documentation" and
+         "Apache Service Taskbar Icon"
+
+        -Install the Apache to C:\Apache
+
+        -Start the installation
+
+    3. Stop the apache service
+
+    4. Copy the apache files to C:\otrs4win\Apache\
+
+Prepare MySQL
+=============
+
+    1. Download the newerst MySQL server "Windows Essentials (x86)" from
+       http://dev.mysql.com/downloads/
+
+    2. Install it on a test system to extract the needed files
+
+        -Select "Custom" installation method
+
+        -Select ALL components
+
+        -Install the MySQL server to C:\MySQL
+
+    3. Copy the mysql file to C:\otrs4win\MySQL\
+
+Prepare CRONw
+=============
+
+    1. Download the newerst CRONw from http://cronw.sourceforge.net/
+
+    2. Copy the mysql file to C:\otrs4win\CRONw\
+
+    3. Delete the useless modules directory
+        del C:\otrs4win\CRONw\modules
+
+Build the Installer
+===================
+
+    1. Start your Eclipse
+
+    2. Open the OTRS.nsi file
+
+    3. Build the installer
+
