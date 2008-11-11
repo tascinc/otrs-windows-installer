@@ -3,7 +3,7 @@
 # ConfigureOTRS.pl - script to configure OTRS
 # Copyright (C) 2001-2008 OTRS AG, http://otrs.org/
 # --
-# $Id: ConfigureOTRS.pl,v 1.1.1.1 2008-11-11 02:21:17 mh Exp $
+# $Id: ConfigureOTRS.pl,v 1.2 2008-11-11 03:09:22 mh Exp $
 # --
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -27,7 +27,7 @@ use Getopt::Std;
 use File::Find;
 
 use vars qw($VERSION);
-$VERSION = qw($Revision: 1.1.1.1 $) [1];
+$VERSION = qw($Revision: 1.2 $) [1];
 
 # get options
 my %Opts = ();
@@ -137,7 +137,7 @@ sub ReplaceOTRSDir {
 
         # add directory to otrs
         my $File = $OTRSDirQuoated . '/' . $FileName;
-    
+
         # check if file exists
         next FILE if !-e $File;
 
@@ -270,4 +270,3 @@ sub ConfigCron4Win32Pl {
 }
 
 exit 0;
-
