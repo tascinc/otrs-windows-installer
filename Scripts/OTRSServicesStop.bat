@@ -3,7 +3,7 @@ REM --
 REM OTRSServicesStop.bat - a script to stop the OTRS services
 REM Copyright (C) 2001-2009 OTRS AG, http://otrs.org/
 REM --
-REM $Id: OTRSServicesStop.bat,v 1.1.1.1 2008-11-11 02:21:17 mh Exp $
+REM $Id: OTRSServicesStop.bat,v 1.2 2008-11-11 02:52:31 mh Exp $
 REM --
 REM This program is free software; you can redistribute it and/or modify
 REM it under the terms of the GNU General Public License as published by
