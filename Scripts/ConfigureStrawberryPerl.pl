@@ -3,7 +3,7 @@
 # ConfigureStrawberryPerl.pl - script to configure StrawberryPerl
 # Copyright (C) 2001-2008 OTRS AG, http://otrs.org/
 # --
-# $Id: ConfigureStrawberryPerl.pl,v 1.1.1.1 2008-11-11 02:21:17 mh Exp $
+# $Id: ConfigureStrawberryPerl.pl,v 1.2 2008-11-27 14:17:11 mh Exp $
 # --
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -27,18 +27,19 @@ use Getopt::Std;
 use File::Find;
 
 use vars qw($VERSION);
-$VERSION = qw($Revision: 1.1.1.1 $) [1];
+$VERSION = qw($Revision: 1.2 $) [1];
 
 # get options
 my %Opts = ();
-getopt('d', \%Opts);
+getopt( 'd', \%Opts );
 
 # check arguments
 if ( !$Opts{'d'} ) {
     $Opts{'h'} = 1;
 }
 if ( $Opts{'h'} ) {
-    print STDOUT "ConfigureStrawberryPerl.pl <Revision $VERSION> - script to configure StrawberryPerl\n";
+    print STDOUT
+        "ConfigureStrawberryPerl.pl <Revision $VERSION> - script to configure StrawberryPerl\n";
     print STDOUT "Copyright (C) 2001-2008 OTRS AG, http://otrs.org/\n";
     print STDOUT "usage: ConfigureStrawberryPerl.pl -d <install directory>\n\n";
     exit 1;
@@ -69,4 +70,3 @@ $StrawberryPerlDirQuoated =~ s{\\}{/}xmsg;
 1;
 
 exit 0;
-

@@ -3,7 +3,7 @@
 # ConfigureMySQL.pl - script to configure MySQL
 # Copyright (C) 2001-2008 OTRS AG, http://otrs.org/
 # --
-# $Id: ConfigureMySQL.pl,v 1.1.1.1 2008-11-11 02:21:17 mh Exp $
+# $Id: ConfigureMySQL.pl,v 1.2 2008-11-27 14:17:11 mh Exp $
 # --
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -27,11 +27,11 @@ use Getopt::Std;
 use File::Find;
 
 use vars qw($VERSION);
-$VERSION = qw($Revision: 1.1.1.1 $) [1];
+$VERSION = qw($Revision: 1.2 $) [1];
 
 # get options
 my %Opts = ();
-getopt('d', \%Opts);
+getopt( 'd', \%Opts );
 
 # check arguments
 if ( !$Opts{'d'} ) {
@@ -124,7 +124,7 @@ sub PrepareMyIni {
 sub ConfigOTRSServiceStart {
 
     FILE:
-    for my $FileName ( qw(OTRSServicesStart.bat OTRSServicesRestart.bat) ) {
+    for my $FileName (qw(OTRSServicesStart.bat OTRSServicesRestart.bat)) {
 
         # add install directory
         my $File = $InstallDirQuoated . '/otrs4win/Scripts/' . $FileName;
@@ -173,7 +173,7 @@ NET START MySQL";
 sub ConfigOTRSServiceStop {
 
     FILE:
-    for my $FileName ( qw(OTRSServicesStop.bat OTRSServicesRestart.bat) ) {
+    for my $FileName (qw(OTRSServicesStop.bat OTRSServicesRestart.bat)) {
 
         # add install directory
         my $File = $InstallDirQuoated . '/otrs4win/Scripts/' . $FileName;
@@ -220,4 +220,3 @@ NET STOP MySQL";
 }
 
 exit 0;
-

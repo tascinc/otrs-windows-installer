@@ -3,7 +3,7 @@
 # ConfigureOTRS.pl - script to configure OTRS
 # Copyright (C) 2001-2008 OTRS AG, http://otrs.org/
 # --
-# $Id: ConfigureOTRS.pl,v 1.2 2008-11-11 03:09:22 mh Exp $
+# $Id: ConfigureOTRS.pl,v 1.3 2008-11-27 14:17:11 mh Exp $
 # --
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -27,11 +27,11 @@ use Getopt::Std;
 use File::Find;
 
 use vars qw($VERSION);
-$VERSION = qw($Revision: 1.2 $) [1];
+$VERSION = qw($Revision: 1.3 $) [1];
 
 # get options
 my %Opts = ();
-getopt('d', \%Opts);
+getopt( 'd', \%Opts );
 
 # check arguments
 if ( !$Opts{'d'} ) {
@@ -83,6 +83,7 @@ ConfigCron4Win32Pl();
 sub ReplaceShebangLine {
 
     # get filename
+
     my $File = $File::Find::name;
 
     # return if file is not a .pl file
@@ -133,7 +134,10 @@ sub ReplaceShebangLine {
 sub ReplaceOTRSDir {
 
     FILE:
-    for my $FileName ( qw(Kernel/Config.pm scripts/apache2-httpd-new.include.conf scripts/apache2-perl-startup.pl) ) {
+    for my $FileName (
+        qw(Kernel/Config.pm scripts/apache2-httpd-new.include.conf scripts/apache2-perl-startup.pl)
+        )
+    {
 
         # add directory to otrs
         my $File = $OTRSDirQuoated . '/' . $FileName;
@@ -253,7 +257,8 @@ sub ConfigCron4Win32Pl {
     my $NewString = $OrgString;
 
     # insert configuration
-    $NewString =~ s{(my \$PerlExe   = ")(";)}{$1$InstallDirQuoated/StrawberryPerl/perl/bin/perl.exe$2};
+    $NewString
+        =~ s{(my \$PerlExe   = ")(";)}{$1$InstallDirQuoated/StrawberryPerl/perl/bin/perl.exe$2};
     $NewString =~ s{(my \$Directory = ")(";)}{$1$OTRSDirQuoated/var/cron/$2};
     $NewString =~ s{(my \$CronTab   = ")(";)}{$1$InstallDirQuoated/CRONw/crontab.txt$2};
     $NewString =~ s{(my \$OTRSHome  = ")(";)}{$1$OTRSDirQuoated/OTRS$2};
