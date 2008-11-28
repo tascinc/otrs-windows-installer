@@ -2,7 +2,7 @@
 # InstallerBuildGuide.txt - guide to prepare components to build a win installer
 # Copyright (C) 2001-2008 OTRS AG, http://otrs.org/
 # --
-# $Id: InstallerBuildGuide.txt,v 1.6 2008-11-28 13:17:39 mh Exp $
+# $Id: InstallerBuildGuide.txt,v 1.7 2008-11-28 14:09:53 mh Exp $
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -200,7 +200,7 @@ Prepare CRONw
 
     1. Download the newerst CRONw from http://cronw.sourceforge.net/
 
-    2. Copy the mysql file to C:\otrs4win\CRONw\
+    2. Copy the CRONw files to C:\otrs4win\CRONw\
 
     3. Delete the useless modules directory
         del C:\otrs4win\CRONw\modules
