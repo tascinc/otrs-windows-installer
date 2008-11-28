@@ -2,7 +2,7 @@
 # InstallerBuildGuide.txt - guide to prepare components to build a win installer
 # Copyright (C) 2001-2008 OTRS AG, http://otrs.org/
 # --
-# $Id: InstallerBuildGuide.txt,v 1.5 2008-11-28 11:21:29 mh Exp $
+# $Id: InstallerBuildGuide.txt,v 1.6 2008-11-28 13:17:39 mh Exp $
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -72,7 +72,7 @@ Prepare Strawberry Perl
         cpan> install Net::IMAP::Simple
         cpan> install Net::SMTP
         cpan> install Authen::SASL
-        cpan> install XML::Parser
+#        cpan> install XML::Parser
         cpan> install Net::LDAP
         cpan> install PDF::API2::Version
         cpan> install DBD::ODBC
@@ -193,7 +193,7 @@ Prepare MySQL
 
         -Install the MySQL server to C:\MySQL
 
-    3. Copy the mysql file to C:\otrs4win\MySQL\
+    3. Copy the mysql files to C:\otrs4win\MySQL\
 
 Prepare CRONw
 =============
