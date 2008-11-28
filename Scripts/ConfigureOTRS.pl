@@ -3,7 +3,7 @@
 # ConfigureOTRS.pl - script to configure OTRS
 # Copyright (C) 2001-2008 OTRS AG, http://otrs.org/
 # --
-# $Id: ConfigureOTRS.pl,v 1.3 2008-11-27 14:17:11 mh Exp $
+# $Id: ConfigureOTRS.pl,v 1.4 2008-11-28 14:21:17 mh Exp $
 # --
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -27,7 +27,7 @@ use Getopt::Std;
 use File::Find;
 
 use vars qw($VERSION);
-$VERSION = qw($Revision: 1.3 $) [1];
+$VERSION = qw($Revision: 1.4 $) [1];
 
 # get options
 my %Opts = ();
@@ -261,7 +261,7 @@ sub ConfigCron4Win32Pl {
         =~ s{(my \$PerlExe   = ")(";)}{$1$InstallDirQuoated/StrawberryPerl/perl/bin/perl.exe$2};
     $NewString =~ s{(my \$Directory = ")(";)}{$1$OTRSDirQuoated/var/cron/$2};
     $NewString =~ s{(my \$CronTab   = ")(";)}{$1$InstallDirQuoated/CRONw/crontab.txt$2};
-    $NewString =~ s{(my \$OTRSHome  = ")(";)}{$1$OTRSDirQuoated/OTRS$2};
+    $NewString =~ s{(my \$OTRSHome  = ")(";)}{$1$OTRSDirQuoated$2};
 
     # return if no changes
     return 1 if $OrgString eq $NewString;
