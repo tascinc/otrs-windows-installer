@@ -3,7 +3,7 @@
 # ConfigureMySQL.pl - script to configure MySQL
 # Copyright (C) 2001-2008 OTRS AG, http://otrs.org/
 # --
-# $Id: ConfigureMySQL.pl,v 1.2 2008-11-27 14:17:11 mh Exp $
+# $Id: ConfigureMySQL.pl,v 1.3 2008-11-28 13:41:07 mh Exp $
 # --
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -27,7 +27,7 @@ use Getopt::Std;
 use File::Find;
 
 use vars qw($VERSION);
-$VERSION = qw($Revision: 1.2 $) [1];
+$VERSION = qw($Revision: 1.3 $) [1];
 
 # get options
 my %Opts = ();
@@ -103,6 +103,12 @@ sub PrepareMyIni {
 
     # copy the string
     my $NewString = $OrgString;
+
+    # insert query cache
+    $NewString =~ s{ \[mysqld\] }{[mysqld]
+query_cache_limit = 8M
+query_cache_size = 32M
+query_cache_type = 1}xms;
 
     # insert basedir
     $NewString =~ s{ \[mysqld\] }{[mysqld]\nbasedir = $MySQLDirQuoated}xms;
