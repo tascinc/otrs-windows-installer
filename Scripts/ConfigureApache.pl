@@ -3,7 +3,7 @@
 # ConfigureApache.pl - script to configure the apache server
 # Copyright (C) 2001-2008 OTRS AG, http://otrs.org/
 # --
-# $Id: ConfigureApache.pl,v 1.2 2008-11-27 14:17:11 mh Exp $
+# $Id: ConfigureApache.pl,v 1.3 2008-11-28 11:54:38 mh Exp $
 # --
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -27,7 +27,7 @@ use Getopt::Std;
 use File::Find;
 
 use vars qw($VERSION);
-$VERSION = qw($Revision: 1.2 $) [1];
+$VERSION = qw($Revision: 1.3 $) [1];
 
 # get options
 my %Opts = ();
@@ -144,8 +144,8 @@ sub OTRSApacheConfigAdd {
 # ---
 
 # load mod_perl
-#LoadFile '$InstallDirQuoated/StrawberryPerl/perl/bin/perl510.dll'
-#LoadModule perl_module modules/mod_perl.so
+LoadFile '$InstallDirQuoated/StrawberryPerl/perl/bin/perl510.dll'
+LoadModule perl_module modules/mod_perl.so
 
 # include the OTRS configuration
 Include '$InstallDirQuoated/OTRS/scripts/apache2-httpd-new.include.conf'
