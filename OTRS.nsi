@@ -2,7 +2,7 @@
 # OTRS.nsi - a script to generate the otrs4win installer
 # Copyright (C) 2001-2008 OTRS AG, http://otrs.org/
 # --
-# $Id: OTRS.nsi,v 1.11 2008-11-28 14:42:33 mh Exp $
+# $Id: OTRS.nsi,v 1.12 2008-12-03 16:26:36 mh Exp $
 # --
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -378,6 +378,9 @@ Section -InstPost
     sleep 2000
     ExecWait "$INSTDIR\otrs4win\Scripts\OTRSServicesStart.bat"
 
+    # refresh the windows desktop (required for Vista's desktop)
+    System::Call 'Shell32::SHChangeNotify(i 0x8000000, i 0, i 0, i 0)'
+
 SectionEnd
 
 # ------------------------------------------------------------ #
@@ -482,6 +485,9 @@ Section -un.UninstPost
     # delete install directory
     sleep 1000  # sleep one second to give the OS time to unlock the directory
     RmDir /r /REBOOTOK $INSTDIR
+
+    # refresh the windows desktop (required for Vista's desktop)
+    System::Call 'Shell32::SHChangeNotify(i 0x8000000, i 0, i 0, i 0)'
 
 SectionEnd
 
