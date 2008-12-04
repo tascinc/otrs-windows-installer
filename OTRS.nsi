@@ -2,7 +2,7 @@
 # OTRS.nsi - a script to generate the otrs4win installer
 # Copyright (C) 2001-2008 OTRS AG, http://otrs.org/
 # --
-# $Id: OTRS.nsi,v 1.14 2008-12-03 16:41:55 mh Exp $
+# $Id: OTRS.nsi,v 1.15 2008-12-04 17:32:01 mh Exp $
 # --
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -153,8 +153,6 @@ ShowInstDetails NeverShow
 !define MUI_FINISHPAGE_RUN_TEXT      "Continue with Web-Installer"
 !define MUI_FINISHPAGE_LINK          "powered by ${OTRS_Company}"
 !define MUI_FINISHPAGE_LINK_LOCATION "http://${OTRS_Url}"
-#!define MUI_FINISHPAGE_TEXT          "The Web-Install will be started now!"
-#!define MUI_PAGE_CUSTOMFUNCTION_LEAVE InstStartWebInstaller
 !insertmacro MUI_PAGE_FINISH
 
 # ------------------------------------------------------------ #
