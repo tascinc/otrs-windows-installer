@@ -2,7 +2,7 @@
 # InstallerBuildGuide.txt - guide to prepare components to build a win installer
 # Copyright (C) 2001-2008 OTRS AG, http://otrs.org/
 # --
-# $Id: InstallerBuildGuide.txt,v 1.7 2008-11-28 14:09:53 mh Exp $
+# $Id: InstallerBuildGuide.txt,v 1.8 2008-12-04 14:17:21 mh Exp $
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -55,6 +55,7 @@ Prepare Strawberry Perl
     5. Install CPAN modules using the CPAN shell
 
         # OTRS modules
+        cpan> install Compress::Zlib
         cpan> install CGI
         cpan> install Date::Pcalc
         cpan> install Date::Format
@@ -72,14 +73,14 @@ Prepare Strawberry Perl
         cpan> install Net::IMAP::Simple
         cpan> install Net::SMTP
         cpan> install Authen::SASL
-#        cpan> install XML::Parser
+#        cpan> install XML::Parser  (not required with StrawberryPerl 5.10.0.3)
         cpan> install Net::LDAP
         cpan> install PDF::API2::Version
         cpan> install DBD::ODBC
         cpan> install Text::CSV_XS
         cpan> install Archive::Tar
-        cpan> install Compress::Zlib
         cpan> install MIME::Types
+        cpan> install Apache::DBI
 
         # CronW
         cpan> install Module::Build
@@ -111,10 +112,6 @@ Prepare Strawberry Perl
 
     10. Install required CPAN modules using the PPM mechanism
         perl\bin\ppm.bat install http://cpan.uwinnipeg.ca/PPMPackages/10xx/SOAP-Lite.ppd
-
-    11. Install CPAN modules using the PPM mechanism
-
-        # OTRS
         perl\bin\ppm.bat install http://cpan.uwinnipeg.ca/PPMPackages/10xx/DBD-mysql.ppd
         perl\bin\ppm.bat install http://cpan.uwinnipeg.ca/PPMPackages/10xx/mod_perl.ppd
             Copy mod_perl.so to C:/strawberry/perl/
@@ -122,7 +119,7 @@ Prepare Strawberry Perl
         perl\bin\ppm.bat install http://cpan.uwinnipeg.ca/PPMPackages/10xx/GDTextUtil.ppd
         perl\bin\ppm.bat install http://cpan.uwinnipeg.ca/PPMPackages/10xx/GDGraph.ppd
 
-    12. Install the newerst Apache2::Reload module
+    11. Install the newerst Apache2::Reload module
 
         -Download the newerst version of theApache2::Reload module from
          http://search.cpan.org/~phred/Apache-Reload-0.10/
@@ -133,7 +130,7 @@ Prepare Strawberry Perl
 
         -Copy lib\Apache2\Reload.pm to C:\strawberry\perl\site\lib\Apache2
 
-    13. Install the newerst Win32::Daemon module
+    12. Install the newerst Win32::Daemon module
 
         -Download the newerst version of the Win32::Daemon module from
          www.roth.net/perl/Daemon/
@@ -146,10 +143,10 @@ Prepare Strawberry Perl
 
         -Copy bin\daemon.DLL to C:\strawberry\perl\site\lib\auto\Win32\daemon\
 
-    14. Delete the temp directory
+    13. Delete the temp directory
         del c:\strawberry\temp
 
-    15. Copy the strawberry perl files to C:\otrs4win\StrawberryPerl\
+    14. Copy the strawberry perl files to C:\otrs4win\StrawberryPerl\
 
 
 Prepare Apache
