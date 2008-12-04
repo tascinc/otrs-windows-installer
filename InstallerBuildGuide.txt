@@ -2,7 +2,7 @@
 # InstallerBuildGuide.txt - guide to prepare components to build a win installer
 # Copyright (C) 2001-2008 OTRS AG, http://otrs.org/
 # --
-# $Id: InstallerBuildGuide.txt,v 1.8 2008-12-04 14:17:21 mh Exp $
+# $Id: InstallerBuildGuide.txt,v 1.9 2008-12-04 15:09:46 mh Exp $
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (GPL). If you
@@ -49,10 +49,13 @@ Prepare Strawberry Perl
         HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Environment\Path
         C:\strawberry\c\bin;C:\strawberry\perl\bin;
 
-    4. Start the CPAN shell and reload the package index
+    4. Copy libexpat.dll to fix dependency problems with the preinstalled XML::Parser
+        -Copy C:\strawberry\perl\bin\libexpat.dll to C:\strawberry\perl\site\lib\auto\XML\Parser\Expat
+
+    5. Start the CPAN shell and reload the package index
         cpan> reload index
 
-    5. Install CPAN modules using the CPAN shell
+    6. Install CPAN modules using the CPAN shell
 
         # OTRS modules
         cpan> install Compress::Zlib
@@ -73,7 +76,7 @@ Prepare Strawberry Perl
         cpan> install Net::IMAP::Simple
         cpan> install Net::SMTP
         cpan> install Authen::SASL
-#        cpan> install XML::Parser  (not required with StrawberryPerl 5.10.0.3)
+        cpan> install XML::Parser
         cpan> install Net::LDAP
         cpan> install PDF::API2::Version
         cpan> install DBD::ODBC
@@ -95,22 +98,22 @@ Prepare Strawberry Perl
         cpan> install Log::Dispatch::FileRotate
         cpan> install Win32::Process
 
-    6. Clean the system and quit
+    7. Clean the system and quit
         cpan> reload cpan
         cpan> clean
         cpan> quit
 
-    7. Delete the cpan directory to save space
+    8. Delete the cpan directory to save space
         del c:\strawberry\cpan
 
-    8. Correcting the Path in perl/site/lib/ppm.xml
+    9. Correcting the Path in perl/site/lib/ppm.xml
         BUILDDIR="D:\DOCUME~1\ADAM~1.KEN\LOCALS~1\Temp" must be
         BUILDDIR="C:\strawberry\temp"
 
-    9. Remove useless repositories from perl/site/lib/ppm.xml
+    10. Remove useless repositories from perl/site/lib/ppm.xml
         Remove all repositories excluding cpan.uwinnipeg.ca
 
-    10. Install required CPAN modules using the PPM mechanism
+    11. Install required CPAN modules using the PPM mechanism
         perl\bin\ppm.bat install http://cpan.uwinnipeg.ca/PPMPackages/10xx/SOAP-Lite.ppd
         perl\bin\ppm.bat install http://cpan.uwinnipeg.ca/PPMPackages/10xx/DBD-mysql.ppd
         perl\bin\ppm.bat install http://cpan.uwinnipeg.ca/PPMPackages/10xx/mod_perl.ppd
@@ -119,34 +122,25 @@ Prepare Strawberry Perl
         perl\bin\ppm.bat install http://cpan.uwinnipeg.ca/PPMPackages/10xx/GDTextUtil.ppd
         perl\bin\ppm.bat install http://cpan.uwinnipeg.ca/PPMPackages/10xx/GDGraph.ppd
 
-    11. Install the newerst Apache2::Reload module
-
+    12. Install the newerst Apache2::Reload module
         -Download the newerst version of theApache2::Reload module from
          http://search.cpan.org/~phred/Apache-Reload-0.10/
-
         -Extract it in a temporary folder
-
         -Copy lib\Apache\Reload.pm to C:\strawberry\perl\site\lib\Apache
-
         -Copy lib\Apache2\Reload.pm to C:\strawberry\perl\site\lib\Apache2
 
-    12. Install the newerst Win32::Daemon module
-
+    13. Install the newerst Win32::Daemon module
         -Download the newerst version of the Win32::Daemon module from
          www.roth.net/perl/Daemon/
-
         -Extract it in a temporary folder
-
         -Copy DEAMON.PM to C:\strawberry\perl\site\lib\Win32\
-
         -Copy all files in test\ to C:\strawberry\perl\site\lib\Win32\daemon\
-
         -Copy bin\daemon.DLL to C:\strawberry\perl\site\lib\auto\Win32\daemon\
 
-    13. Delete the temp directory
+    14. Delete the temp directory
         del c:\strawberry\temp
 
-    14. Copy the strawberry perl files to C:\otrs4win\StrawberryPerl\
+    15. Copy the strawberry perl files to C:\otrs4win\StrawberryPerl\
 
 
 Prepare Apache
