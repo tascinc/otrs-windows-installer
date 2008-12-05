@@ -2,7 +2,7 @@
 # OTRS.nsi - a script to generate the otrs4win installer
 # Copyright (C) 2001-2008 OTRS AG, http://otrs.org/
 # --
-# $Id: OTRS.nsi,v 1.23 2008-12-05 14:27:19 mh Exp $
+# $Id: OTRS.nsi,v 1.24 2008-12-05 16:01:47 mh Exp $
 # --
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -325,6 +325,9 @@ Section -InstOTRS
 
     # Copy Config.pm.dist to Config.pm
     CopyFiles /SILENT /FILESONLY $INSTDIR\OTRS\Kernel\Config.pm.dist $INSTDIR\OTRS\Kernel\Config.pm 5
+
+    # Copy GenericAgent.pm.dist to GenericAgent.pm
+    CopyFiles /SILENT /FILESONLY $INSTDIR\OTRS\Kernel\Config\GenericAgent.pm.dist $INSTDIR\OTRS\Kernel\Config\GenericAgent.pm 2
 
     # configure OTRS
     GetFullPathName /SHORT $InstallDirShort $INSTDIR
