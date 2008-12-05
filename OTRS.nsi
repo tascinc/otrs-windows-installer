@@ -2,7 +2,7 @@
 # OTRS.nsi - a script to generate the otrs4win installer
 # Copyright (C) 2001-2008 OTRS AG, http://otrs.org/
 # --
-# $Id: OTRS.nsi,v 1.24 2008-12-05 16:01:47 mh Exp $
+# $Id: OTRS.nsi,v 1.25 2008-12-05 16:36:47 mh Exp $
 # --
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -390,9 +390,9 @@ Section -InstPost
     !insertmacro MUI_STARTMENU_WRITE_BEGIN Application
     SetOutPath $SMPROGRAMS\$StartMenuGroup\Tools
     CreateShortcut "$SMPROGRAMS\$StartMenuGroup\Tools\Uninstall ${OTRS_Name}.lnk"        "$INSTDIR\uninstall.exe"
-    CreateShortcut "$SMPROGRAMS\$StartMenuGroup\Tools\${OTRS_Name} Services Start.lnk"   "$INSTDIR\otrs4win\Scripts\OTRSServicesStart.bat"
-    CreateShortcut "$SMPROGRAMS\$StartMenuGroup\Tools\${OTRS_Name} Services Stop.lnk"    "$INSTDIR\otrs4win\Scripts\OTRSServicesStop.bat"
-    CreateShortcut "$SMPROGRAMS\$StartMenuGroup\Tools\${OTRS_Name} Services Restart.lnk" "$INSTDIR\otrs4win\Scripts\OTRSServicesRestart.bat"
+    CreateShortcut "$SMPROGRAMS\$StartMenuGroup\Tools\${OTRS_Name} Services Start.lnk"   "$INSTDIR\otrs4win\Scripts\OTRSServicesStart.bat"   "" "$INSTDIR\otrs4win\OTRSServices.ico"
+    CreateShortcut "$SMPROGRAMS\$StartMenuGroup\Tools\${OTRS_Name} Services Stop.lnk"    "$INSTDIR\otrs4win\Scripts\OTRSServicesStop.bat"    "" "$INSTDIR\otrs4win\OTRSServices.ico"
+    CreateShortcut "$SMPROGRAMS\$StartMenuGroup\Tools\${OTRS_Name} Services Restart.lnk" "$INSTDIR\otrs4win\Scripts\OTRSServicesRestart.bat" "" "$INSTDIR\otrs4win\OTRSServices.ico"
     !insertmacro MUI_STARTMENU_WRITE_END
 
     # if InstApache is selected
