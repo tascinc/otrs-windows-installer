@@ -2,7 +2,7 @@
 # OTRS.nsi - a script to generate the otrs4win installer
 # Copyright (C) 2001-2008 OTRS AG, http://otrs.org/
 # --
-# $Id: OTRS.nsi,v 1.22 2008-12-05 14:02:46 mh Exp $
+# $Id: OTRS.nsi,v 1.23 2008-12-05 14:27:19 mh Exp $
 # --
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -307,7 +307,7 @@ Section /o -InstApache InstApache
     ExecWait '"$INSTDIR\Apache\bin\httpd.exe" -k install'
 
     # add the apache service to the firewall exection list
-    SimpleFC::AddApplication "Apache" "$INSTDIR\Apache\bin\httpd.exe" 0 2 "" 1
+    SimpleFC::AddApplication "Apache HTTP Server" "$INSTDIR\Apache\bin\httpd.exe" 0 2 "" 1
     Pop $0
 
     # remove the helper script
