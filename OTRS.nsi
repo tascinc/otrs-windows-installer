@@ -2,7 +2,7 @@
 # OTRS.nsi - a script to generate the otrs4win installer
 # Copyright (C) 2001-2008 OTRS AG, http://otrs.org/
 # --
-# $Id: OTRS.nsi,v 1.19 2008-12-05 13:12:10 mh Exp $
+# $Id: OTRS.nsi,v 1.20 2008-12-05 13:26:35 mh Exp $
 # --
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -193,7 +193,7 @@ ShowUninstDetails NeverShow
 LangString mui_finishpage_run_text ${LANG_ENGLISH} "Continue with Web-Installer"
 
 # german strings
-LangString mui_finishpage_run_text ${LANG_GERMAN} "Weitermachen mit Web-Installer"
+LangString mui_finishpage_run_text ${LANG_GERMAN} "Weiter mit Web-Installer"
 
 # spanish strings
 LangString mui_finishpage_run_text ${LANG_SPANISH} "Continue with Web-Installer"
