@@ -2,7 +2,7 @@
 # OTRS.nsi - a script to generate the otrs4win installer
 # Copyright (C) 2001-2008 OTRS AG, http://otrs.org/
 # --
-# $Id: OTRS.nsi,v 1.20 2008-12-05 13:26:35 mh Exp $
+# $Id: OTRS.nsi,v 1.21 2008-12-05 13:50:17 mh Exp $
 # --
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -345,7 +345,7 @@ Section -InstOTRS
     # create desktop shortcut
     createShortCut "$DESKTOP\${OTRS_Name} Agent-Interface.lnk" "http://localhost/otrs/index.pl" "" "$INSTDIR\otrs4win\OTRS.ico"
 
-    # create quicklaunch shortcut
+#    # create quicklaunch shortcut
 #    createShortCut "$QUICKLAUNCH\${OTRS_Name} Agent-Interface.lnk" "http://localhost/otrs/index.pl" "" "$INSTDIR\otrs4win\OTRS.ico"
 
     # remove the helper script
@@ -427,11 +427,10 @@ Section -un.UninstOTRS
     # remove desktop shortcut
     Delete /REBOOTOK "$DESKTOP\${OTRS_Name} Agent-Interface.lnk"
 
-    # remove quicklaunch shortcut
+#    # remove quicklaunch shortcut
 #    Delete /REBOOTOK "$QUICKLAUNCH\${OTRS_Name} Agent-Interface.lnk"
 
     DeleteRegValue HKLM "${OTRS_RegKey_Instance}" StartMenuGroup
-#    DeleteRegKey HKLM "${OTRS_RegKey_Instance}\Components"
     DeleteRegKey HKLM "${OTRS_RegKey_Instance}"
 
     # delete the OTRS files
@@ -517,6 +516,7 @@ SectionEnd
 
 # installer init function
 Function .onInit
+
     InitPluginsDir
 
     Call InstCheckAlreadyRunning
@@ -532,8 +532,10 @@ FunctionEnd
 
 # to set the installer selections
 Function InstSectionsSet
+
     !insertmacro SelectSection ${InstMySQL}
     !insertmacro SelectSection ${InstApache}
+
 FunctionEnd
 
 # to check if the installer is already running
@@ -578,7 +580,9 @@ FunctionEnd
 
 # to open the webinstaller after the installation
 Function InstStartWebInstaller
+
     ExecShell "open" "http://localhost/otrs/installer.pl"
+
 FunctionEnd
 
 # ------------------------------------------------------------ #
@@ -587,6 +591,7 @@ FunctionEnd
 
 # uninstaller init function
 Function un.onInit
+
     InitPluginsDir
 
     Call un.UninstCheckAlreadyRunning
@@ -595,13 +600,15 @@ Function un.onInit
     !insertmacro MULTIUSER_UNINIT
 
     ReadRegStr $INSTDIR HKLM "${OTRS_RegKey_Instance}" Path
-#    !insertmacro SELECT_UNSECTION Main ${UNSEC0000}
+
 FunctionEnd
 
 # to set the uninstaller selections
 Function un.UninstSectionsSet
+
     !insertmacro SelectSection ${UninstApache}
     !insertmacro SelectSection ${UninstMySQL}
+
 FunctionEnd
 
 # to check if the uninstaller is already running
