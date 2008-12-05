@@ -2,7 +2,7 @@
 # OTRS.nsi - a script to generate the otrs4win installer
 # Copyright (C) 2001-2008 OTRS AG, http://otrs.org/
 # --
-# $Id: OTRS.nsi,v 1.25 2008-12-05 16:36:47 mh Exp $
+# $Id: OTRS.nsi,v 1.26 2008-12-05 17:03:33 mh Exp $
 # --
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -222,6 +222,7 @@ Section -InstPre
     File /r "${Installer_Home_Nsis}\Graphics\Icons\OTRS.ico"
     File /r "${Installer_Home_Nsis}\Graphics\Icons\OTRSInstall.ico"
     File /r "${Installer_Home_Nsis}\Graphics\Icons\OTRSUninstall.ico"
+    File /r "${Installer_Home_Nsis}\Graphics\Icons\OTRSServices.ico"
 
     # install the helper scripts
     File /r "${Installer_Home_Nsis}\Scripts"
