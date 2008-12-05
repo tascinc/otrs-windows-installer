@@ -2,7 +2,7 @@
 # OTRS.nsi - a script to generate the otrs4win installer
 # Copyright (C) 2001-2008 OTRS AG, http://otrs.org/
 # --
-# $Id: OTRS.nsi,v 1.16 2008-12-05 09:22:19 mh Exp $
+# $Id: OTRS.nsi,v 1.17 2008-12-05 09:47:11 mh Exp $
 # --
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -113,40 +113,6 @@ var InstallDirShort
 !insertmacro "DirState"
 
 # ------------------------------------------------------------ #
-# load gui languages
-# ------------------------------------------------------------ #
-
-# installer languages
-!insertmacro MUI_LANGUAGE English
-!insertmacro MUI_LANGUAGE German
-!insertmacro MUI_LANGUAGE Spanish
-!insertmacro MUI_LANGUAGE French
-!insertmacro MUI_LANGUAGE Greek
-!insertmacro MUI_LANGUAGE Italian
-!insertmacro MUI_LANGUAGE Russian
-
-# english strings
-LangString mui_finishpage_run_text ${LANG_ENGLISH} "Continue with Web-Installer"
-
-# german strings
-LangString mui_finishpage_run_text ${LANG_GERMAN} "Weitermachen mit Web-Installer"
-
-# spanish strings
-LangString mui_finishpage_run_text ${LANG_SPANISH} "Continue with Web-Installer"
-
-# frensh strings
-LangString mui_finishpage_run_text ${LANG_FRENCH} "Continue with Web-Installer"
-
-# greek strings
-LangString mui_finishpage_run_text ${LANG_GREEK} "Continue with Web-Installer"
-
-# italian strings
-LangString mui_finishpage_run_text ${LANG_ITALIAN} "Continue with Web-Installer"
-
-# russian strings
-LangString mui_finishpage_run_text ${LANG_RUSSIAN} "Continue with Web-Installer"
-
-# ------------------------------------------------------------ #
 # installer pages
 # ------------------------------------------------------------ #
 
@@ -184,7 +150,7 @@ ShowInstDetails NeverShow
 # finish page
 !define MUI_FINISHPAGE_RUN
 !define MUI_FINISHPAGE_RUN_FUNCTION  InstStartWebInstaller
-!define MUI_FINISHPAGE_RUN_TEXT      ${mui_finishpage_run_text}
+!define MUI_FINISHPAGE_RUN_TEXT      "Continue with Web-Installer"
 !define MUI_FINISHPAGE_LINK          "powered by ${OTRS_Company}"
 !define MUI_FINISHPAGE_LINK_LOCATION "http://${OTRS_Url}"
 !insertmacro MUI_PAGE_FINISH
@@ -209,6 +175,19 @@ ShowUninstDetails NeverShow
 !define MUI_UNFINISHPAGE_LINK          "powered by ${OTRS_Company}"
 !define MUI_UNFINISHPAGE_LINK_LOCATION "http://${OTRS_Url}"
 !insertmacro MUI_UNPAGE_FINISH
+
+# ------------------------------------------------------------ #
+# load languages
+# ------------------------------------------------------------ #
+
+# installer languages
+!insertmacro MUI_LANGUAGE English
+!insertmacro MUI_LANGUAGE German
+!insertmacro MUI_LANGUAGE Spanish
+!insertmacro MUI_LANGUAGE French
+!insertmacro MUI_LANGUAGE Greek
+!insertmacro MUI_LANGUAGE Italian
+!insertmacro MUI_LANGUAGE Russian
 
 # ------------------------------------------------------------ #
 # install sections
