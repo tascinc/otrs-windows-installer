@@ -2,7 +2,7 @@
 # OTRS.nsi - a script to generate the otrs4win installer
 # Copyright (C) 2001-2008 OTRS AG, http://otrs.org/
 # --
-# $Id: OTRS.nsi,v 1.28 2009-01-12 15:20:16 mh Exp $
+# $Id: OTRS.nsi,v 1.29 2009-01-13 10:20:24 mh Exp $
 # --
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -121,12 +121,15 @@ var InstallDirShort
 !insertmacro MUI_PAGE_WELCOME
 
 # license page (GPL v2)
+!define MUI_LICENSEPAGE_RADIOBUTTONS
 !insertmacro MUI_PAGE_LICENSE "${Installer_Home_Nsis}\Licenses\GNU_License_v2.rtf"
 
 # license page (GPL v1 for dmake)
+!define MUI_LICENSEPAGE_RADIOBUTTONS
 !insertmacro MUI_PAGE_LICENSE "${Installer_Home_Nsis}\Licenses\GNU_License_v1.rtf"
 
 # license page (Apache v2)
+!define MUI_LICENSEPAGE_RADIOBUTTONS
 !insertmacro MUI_PAGE_LICENSE "${Installer_Home_Nsis}\Licenses\Apache_License_v2.rtf"
 
 # directory page
