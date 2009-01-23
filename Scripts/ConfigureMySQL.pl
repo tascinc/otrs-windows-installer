@@ -1,9 +1,9 @@
 #!/usr/bin/perl -w
 # --
 # ConfigureMySQL.pl - script to configure MySQL
-# Copyright (C) 2001-2008 OTRS AG, http://otrs.org/
+# Copyright (C) 2001-2009 OTRS AG, http://otrs.org/
 # --
-# $Id: ConfigureMySQL.pl,v 1.3 2008-11-28 13:41:07 mh Exp $
+# $Id: ConfigureMySQL.pl,v 1.4 2009-01-23 12:03:47 mh Exp $
 # --
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -24,10 +24,11 @@ use strict;
 use warnings;
 
 use Getopt::Std;
+use File::Copy;
 use File::Find;
 
 use vars qw($VERSION);
-$VERSION = qw($Revision: 1.3 $) [1];
+$VERSION = qw($Revision: 1.4 $) [1];
 
 # get options
 my %Opts = ();
@@ -66,6 +67,9 @@ $InstallDirQuoated =~ s{\\}{/}xmsg;
 my $MySQLDirQuoated = $MySQLDir;
 $MySQLDirQuoated =~ s{\\}{/}xmsg;
 
+# create my.ini
+CreateMyIni();
+
 # set required parameters in my.ini
 PrepareMyIni();
 
@@ -76,6 +80,22 @@ ConfigOTRSServiceStart();
 ConfigOTRSServiceStop();
 
 1;
+
+sub CreateMyIni {
+
+    my $SourceFile      = $MySQLDirQuoated . '/my-medium.ini';
+    my $DestinationFile = $MySQLDirQuoated . '/my.ini';
+
+    # check if source file exists
+    return if !-e $SourceFile;
+
+    # check if source file is a directory
+    return if -d $SourceFile;
+
+    copy( $SourceFile, $DestinationFile );
+
+    return 1;
+}
 
 sub PrepareMyIni {
 

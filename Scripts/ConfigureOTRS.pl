@@ -1,9 +1,9 @@
 #!/usr/bin/perl -w
 # --
 # ConfigureOTRS.pl - script to configure OTRS
-# Copyright (C) 2001-2008 OTRS AG, http://otrs.org/
+# Copyright (C) 2001-2009 OTRS AG, http://otrs.org/
 # --
-# $Id: ConfigureOTRS.pl,v 1.4 2008-11-28 14:21:17 mh Exp $
+# $Id: ConfigureOTRS.pl,v 1.5 2009-01-23 12:03:47 mh Exp $
 # --
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -24,10 +24,11 @@ use strict;
 use warnings;
 
 use Getopt::Std;
+use File::Copy;
 use File::Find;
 
 use vars qw($VERSION);
-$VERSION = qw($Revision: 1.4 $) [1];
+$VERSION = qw($Revision: 1.5 $) [1];
 
 # get options
 my %Opts = ();
@@ -66,6 +67,12 @@ $InstallDirQuoated =~ s{\\}{/}xmsg;
 my $OTRSDirQuoated = $OTRSDir;
 $OTRSDirQuoated =~ s{\\}{/}xmsg;
 
+# create Config.pm file
+CreateConfigPm();
+
+# create GenericAgent.pm file
+CreateGenericAgentPm();
+
 # set shebangline with the correct perl directory in all .pl files
 find( \&ReplaceShebangLine, ($OTRSDir) );
 
@@ -79,6 +86,38 @@ PrepareConfigPm();
 ConfigCron4Win32Pl();
 
 1;
+
+sub CreateConfigPm {
+
+    my $SourceFile      = $OTRSDirQuoated . '/Kernel/Config.pm.dist';
+    my $DestinationFile = $OTRSDirQuoated . '/Kernel/Config.pm';
+
+    # check if source file exists
+    return if !-e $SourceFile;
+
+    # check if source file is a directory
+    return if -d $SourceFile;
+
+    copy( $File, $DestinationFile );
+
+    return 1;
+}
+
+sub CreateGenericAgentPm {
+
+    my $SourceFile      = $OTRSDirQuoated . '/Kernel/Config/GenericAgent.pm.dist';
+    my $DestinationFile = $OTRSDirQuoated . '/Kernel/Config/GenericAgent.pm';
+
+    # check if source file exists
+    return if !-e $SourceFile;
+
+    # check if source file is a directory
+    return if -d $SourceFile;
+
+    copy( $SourceFile, $DestinationFile );
+
+    return 1;
+}
 
 sub ReplaceShebangLine {
 

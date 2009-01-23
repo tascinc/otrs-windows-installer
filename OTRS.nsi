@@ -2,7 +2,7 @@
 # OTRS.nsi - a script to generate the otrs4win installer
 # Copyright (C) 2001-2008 OTRS AG, http://otrs.org/
 # --
-# $Id: OTRS.nsi,v 1.30 2009-01-23 08:58:31 mh Exp $
+# $Id: OTRS.nsi,v 1.31 2009-01-23 12:03:47 mh Exp $
 # --
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -27,7 +27,7 @@
 !define Installer_Home_Nsis       "${Installer_Home}\otrs4win"
 !define Installer_Version_Major   2
 !define Installer_Version_Minor   0
-!define Installer_Version_Patch   2
+!define Installer_Version_Patch   3
 !define Installer_Version_Jointer ""
 !define Installer_Version_Postfix ""
 
@@ -71,6 +71,7 @@ BrandingText "otrs4win installer - version ${Installer_Version} ${Installer_Vers
 InstallDir $PROGRAMFILES32\${OTRS_Name}
 InstallDirRegKey HKLM "${OTRS_RegKey_Instance}" Path
 var InstallDirShort
+var InstallMode
 
 # ------------------------------------------------------------ #
 # define multi user information
@@ -246,8 +247,10 @@ Section -InstStrawberryPerl
     ExecWait "$\"$INSTDIR\StrawberryPerl\perl\bin\perl.exe$\" $\"$INSTDIR\otrs4win\Scripts\ConfigureStrawberryPerl.pl$\" -d $\"$InstallDirShort$\""
 
     # remove the helper script
-    sleep 1000  # sleep one second to give the OS time to unlock the file
-    Delete /REBOOTOK "$INSTDIR\otrs4win\Scripts\ConfigureStrawberryPerl.pl"
+    ${If} $InstallMode != "Unittest"
+        sleep 1000  # sleep one second to give the OS time to unlock the file
+        Delete /REBOOTOK "$INSTDIR\otrs4win\Scripts\ConfigureStrawberryPerl.pl"
+    ${EndIf}
 
 SectionEnd
 
@@ -266,8 +269,10 @@ Section -InstCRONw
     ExecWait "$\"$INSTDIR\StrawberryPerl\perl\bin\perl.exe$\" $\"$INSTDIR\CRONw\cronHelper.pl$\" --install"
 
     # remove the helper script
-    sleep 1000  # sleep one second to give the OS time to unlock the file
-    Delete /REBOOTOK "$INSTDIR\otrs4win\Scripts\ConfigureCRONw.pl"
+    ${If} $InstallMode != "Unittest"
+        sleep 1000  # sleep one second to give the OS time to unlock the file
+        Delete /REBOOTOK "$INSTDIR\otrs4win\Scripts\ConfigureCRONw.pl"
+    ${EndIf}
 
 SectionEnd
 
@@ -278,9 +283,6 @@ Section /o -InstMySQL InstMySQL
     SetOutPath $INSTDIR
     File /r "${Installer_Home}\MySQL"
 
-    # Copy my-medium.ini to my.ini
-    CopyFiles /SILENT /FILESONLY $INSTDIR\MySQL\my-medium.ini $INSTDIR\MySQL\my.ini 5
-
     # configure the mysql server
     GetFullPathName /SHORT $InstallDirShort $INSTDIR
     ExecWait "$\"$INSTDIR\StrawberryPerl\perl\bin\perl.exe$\" $\"$INSTDIR\otrs4win\Scripts\ConfigureMySQL.pl$\" -d $\"$InstallDirShort$\""
@@ -289,8 +291,10 @@ Section /o -InstMySQL InstMySQL
     ExecWait '"$INSTDIR\MySQL\bin\mysqld-nt.exe" --install MySQL --defaults-file="$INSTDIR\MySQL\my.ini"'
 
     # remove the helper script
-    sleep 1000  # sleep one second to give the OS time to unlock the file
-    Delete /REBOOTOK "$INSTDIR\otrs4win\Scripts\ConfigureMySQL.pl"
+    ${If} $InstallMode != "Unittest"
+        sleep 1000  # sleep one second to give the OS time to unlock the file
+        Delete /REBOOTOK "$INSTDIR\otrs4win\Scripts\ConfigureMySQL.pl"
+    ${EndIf}
 
 SectionEnd
 
@@ -313,8 +317,10 @@ Section /o -InstApache InstApache
     Pop $0
 
     # remove the helper script
-    sleep 1000  # sleep one second to give the OS time to unlock the file
-    Delete /REBOOTOK "$INSTDIR\otrs4win\Scripts\ConfigureApache.pl"
+    ${If} $InstallMode != "Unittest"
+        sleep 1000  # sleep one second to give the OS time to unlock the file
+        Delete /REBOOTOK "$INSTDIR\otrs4win\Scripts\ConfigureApache.pl"
+    ${EndIf}
 
 SectionEnd
 
@@ -324,12 +330,6 @@ Section -InstOTRS
     # install OTRS files
     SetOutPath $INSTDIR
     File /r "${Installer_Home}\OTRS"
-
-    # Copy Config.pm.dist to Config.pm
-    CopyFiles /SILENT /FILESONLY $INSTDIR\OTRS\Kernel\Config.pm.dist $INSTDIR\OTRS\Kernel\Config.pm 5
-
-    # Copy GenericAgent.pm.dist to GenericAgent.pm
-    CopyFiles /SILENT /FILESONLY $INSTDIR\OTRS\Kernel\Config\GenericAgent.pm.dist $INSTDIR\OTRS\Kernel\Config\GenericAgent.pm 2
 
     # configure OTRS
     GetFullPathName /SHORT $InstallDirShort $INSTDIR
@@ -354,12 +354,11 @@ Section -InstOTRS
     # create desktop shortcut
     createShortCut "$DESKTOP\${OTRS_Name} Agent-Interface.lnk" "http://localhost/otrs/index.pl" "" "$INSTDIR\otrs4win\OTRS.ico"
 
-#    # create quicklaunch shortcut
-#    createShortCut "$QUICKLAUNCH\${OTRS_Name} Agent-Interface.lnk" "http://localhost/otrs/index.pl" "" "$INSTDIR\otrs4win\OTRS.ico"
-
     # remove the helper script
-    sleep 1000  # sleep one second to give the OS time to unlock the file
-    Delete /REBOOTOK "$INSTDIR\otrs4win\Scripts\ConfigureOTRS.pl"
+    ${If} $InstallMode != "Unittest"
+        sleep 1000  # sleep one second to give the OS time to unlock the file
+        Delete /REBOOTOK "$INSTDIR\otrs4win\Scripts\ConfigureOTRS.pl"
+    ${EndIf}
 
 SectionEnd
 
@@ -435,9 +434,6 @@ Section -un.UninstOTRS
 
     # remove desktop shortcut
     Delete /REBOOTOK "$DESKTOP\${OTRS_Name} Agent-Interface.lnk"
-
-#    # remove quicklaunch shortcut
-#    Delete /REBOOTOK "$QUICKLAUNCH\${OTRS_Name} Agent-Interface.lnk"
 
     DeleteRegValue HKLM "${OTRS_RegKey_Instance}" StartMenuGroup
     DeleteRegKey HKLM "${OTRS_RegKey_Instance}"
@@ -542,6 +538,14 @@ Function .onInit
     # activate optional installater sections
     !insertmacro SelectSection ${InstMySQL}
     !insertmacro SelectSection ${InstApache}
+
+    # investigate the install mode
+    ClearErrors
+    ${GetOptions} $CMDLINE "/U" $R0
+    IfErrors 0 +3
+        StrCpy $InstallMode "Normal"
+        goto +2
+        StrCpy $InstallMode "Unittest"
 
 FunctionEnd
 
