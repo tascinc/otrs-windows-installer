@@ -3,7 +3,7 @@
 # ConfigureOTRS.pl - script to configure OTRS
 # Copyright (C) 2001-2009 OTRS AG, http://otrs.org/
 # --
-# $Id: ConfigureOTRS.pl,v 1.5 2009-01-23 12:03:47 mh Exp $
+# $Id: ConfigureOTRS.pl,v 1.6 2009-01-23 13:59:20 mh Exp $
 # --
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -28,7 +28,7 @@ use File::Copy;
 use File::Find;
 
 use vars qw($VERSION);
-$VERSION = qw($Revision: 1.5 $) [1];
+$VERSION = qw($Revision: 1.6 $) [1];
 
 # get options
 my %Opts = ();
@@ -98,7 +98,7 @@ sub CreateConfigPm {
     # check if source file is a directory
     return if -d $SourceFile;
 
-    copy( $File, $DestinationFile );
+    copy( $SourceFile, $DestinationFile );
 
     return 1;
 }
