@@ -2,7 +2,7 @@
 # OTRS.nsi - a script to generate the otrs4win installer
 # Copyright (C) 2001-2008 OTRS AG, http://otrs.org/
 # --
-# $Id: OTRS.nsi,v 1.29 2009-01-13 10:20:24 mh Exp $
+# $Id: OTRS.nsi,v 1.30 2009-01-23 08:58:31 mh Exp $
 # --
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -147,7 +147,6 @@ Var StartMenuGroup
 
 # install page
 ShowInstDetails NeverShow
-!define MUI_PAGE_CUSTOMFUNCTION_PRE InstSectionsSet
 !insertmacro MUI_PAGE_INSTFILES
 
 # finish page
@@ -171,7 +170,6 @@ ShowInstDetails NeverShow
 
 # uninstall page
 ShowUninstDetails NeverShow
-!define MUI_PAGE_CUSTOMFUNCTION_PRE un.UninstSectionsSet
 !insertmacro MUI_UNPAGE_INSTFILES
 
 # finish page
@@ -537,17 +535,11 @@ Function .onInit
     Call InstCheckAlreadyRunning
     Call InstCheckAlreadyInstalled
 
-    # insert language plugin
+    # insert plugins
     !insertmacro MUI_LANGDLL_DISPLAY
-
-    # insert multiuser plugin
     !insertmacro MULTIUSER_INIT
 
-FunctionEnd
-
-# to set the installer selections
-Function InstSectionsSet
-
+    # activate optional installater sections
     !insertmacro SelectSection ${InstMySQL}
     !insertmacro SelectSection ${InstApache}
 
@@ -616,11 +608,7 @@ Function un.onInit
 
     ReadRegStr $INSTDIR HKLM "${OTRS_RegKey_Instance}" Path
 
-FunctionEnd
-
-# to set the uninstaller selections
-Function un.UninstSectionsSet
-
+    # activate optional uninstaller sections
     !insertmacro SelectSection ${UninstApache}
     !insertmacro SelectSection ${UninstMySQL}
 
