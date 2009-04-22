@@ -1,22 +1,23 @@
 # --
 # OTRS.nsi - a script to generate the otrs4win installer
-# Copyright (C) 2001-2008 OTRS AG, http://otrs.org/
+# Copyright (C) 2001-2009 OTRS AG, http://otrs.org/
 # --
-# $Id: OTRS.nsi,v 1.31 2009-01-23 12:03:47 mh Exp $
+# $Id: OTRS.nsi,v 1.32 2009-04-22 08:32:54 mh Exp $
 # --
 # This program is free software; you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation; either version 2 of the License, or
-# (at your option) any later version.
+# it under the terms of the GNU AFFERO General Public License as published by
+# the Free Software Foundation; either version 3 of the License, or
+# any later version.
 #
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
-# You should have received a copy of the GNU General Public License
+# You should have received a copy of the GNU Affero General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+# or see http://www.gnu.org/licenses/agpl.txt.
 # --
 
 # ------------------------------------------------------------ #
@@ -27,18 +28,20 @@
 !define Installer_Home_Nsis       "${Installer_Home}\otrs4win"
 !define Installer_Version_Major   2
 !define Installer_Version_Minor   0
-!define Installer_Version_Patch   3
+!define Installer_Version_Patch   4
+#!define Installer_Version_Jointer "-"
+#!define Installer_Version_Postfix "beta1"
 !define Installer_Version_Jointer ""
 !define Installer_Version_Postfix ""
 
 !define OTRS_Name            "OTRS"
 !define OTRS_Version_Major   2
-!define OTRS_Version_Minor   3
-!define OTRS_Version_Patch   4
-#!define OTRS_Version_Jointer "-"
-#!define OTRS_Version_Postfix "beta1"
-!define OTRS_Version_Jointer ""
-!define OTRS_Version_Postfix ""
+!define OTRS_Version_Minor   4
+!define OTRS_Version_Patch   0
+!define OTRS_Version_Jointer "-"
+!define OTRS_Version_Postfix "beta1"
+#!define OTRS_Version_Jointer ""
+#!define OTRS_Version_Postfix ""
 !define OTRS_Company         "OTRS AG"
 !define OTRS_Url             "www.otrs.com"
 !define OTRS_Instance_Number 1
