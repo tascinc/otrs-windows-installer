@@ -2,7 +2,7 @@
 # OTRS.nsi - a script to generate the otrs4win installer
 # Copyright (C) 2001-2009 OTRS AG, http://otrs.org/
 # --
-# $Id: OTRS.nsi,v 1.33 2009-09-03 10:55:42 mb Exp $
+# $Id: OTRS.nsi,v 1.34 2009-09-03 11:00:16 mb Exp $
 # --
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU AFFERO General Public License as published by
@@ -295,7 +295,7 @@ Section /o -InstMySQL InstMySQL
     ExecWait "$\"$INSTDIR\StrawberryPerl\perl\bin\perl.exe$\" $\"$INSTDIR\otrs4win\Scripts\ConfigureMySQL.pl$\" -d $\"$InstallDirShort$\""
 
     # register mysql as service
-    ExecWait '"$INSTDIR\MySQL\bin\mysqld-nt.exe" --install MySQL --defaults-file="$INSTDIR\MySQL\my.ini"'
+    ExecWait '"$INSTDIR\MySQL\bin\mysqld.exe" --install MySQL --defaults-file="$INSTDIR\MySQL\my.ini"'
 
     # remove the helper script
     ${If} $InstallMode != "Unittest"
@@ -480,7 +480,7 @@ SectionEnd
 Section /o -un.UninstMySQL UninstMySQL
 
     # deregister mysql as service
-    ExecWait '"$INSTDIR\MySQL\bin\mysqld-nt"  --remove MySQL'
+    ExecWait '"$INSTDIR\MySQL\bin\mysqld"  --remove MySQL'
 
     # delete the MySQL files
     RmDir /r /REBOOTOK $INSTDIR\MySQL
