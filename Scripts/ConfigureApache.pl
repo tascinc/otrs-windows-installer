@@ -1,23 +1,24 @@
 #!/usr/bin/perl -w
 # --
 # ConfigureApache.pl - script to configure the apache server
-# Copyright (C) 2001-2008 OTRS AG, http://otrs.org/
+# Copyright (C) 2001-2009 OTRS AG, http://otrs.org/
 # --
-# $Id: ConfigureApache.pl,v 1.3 2008-11-28 11:54:38 mh Exp $
+# $Id: ConfigureApache.pl,v 1.4 2009-09-04 12:19:24 mb Exp $
 # --
 # This program is free software; you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation; either version 2 of the License, or
-# (at your option) any later version.
+# it under the terms of the GNU AFFERO General Public License as published by
+# the Free Software Foundation; either version 3 of the License, or
+# any later version.
 #
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
-# You should have received a copy of the GNU General Public License
+# You should have received a copy of the GNU Affero General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+# or see http://www.gnu.org/licenses/agpl.txt.
 # --
 
 use strict;
@@ -27,7 +28,7 @@ use Getopt::Std;
 use File::Find;
 
 use vars qw($VERSION);
-$VERSION = qw($Revision: 1.3 $) [1];
+$VERSION = qw($Revision: 1.4 $) [1];
 
 # get options
 my %Opts = ();
@@ -39,7 +40,7 @@ if ( !$Opts{'d'} ) {
 }
 if ( $Opts{'h'} ) {
     print STDOUT "ConfigureApache.pl <Revision $VERSION> - script to configure the apache\n";
-    print STDOUT "Copyright (C) 2001-2008 OTRS AG, http://otrs.org/\n";
+    print STDOUT "Copyright (C) 2001-2009 OTRS AG, http://otrs.org/\n";
     print STDOUT "usage: ConfigureApache.pl -d <install directory>\n\n";
     exit 1;
 }
@@ -59,12 +60,12 @@ if ( !-e $ApacheDir || !-d $ApacheDir ) {
 }
 
 # quoate the install directory
-my $InstallDirQuoated = $InstallDir;
-$InstallDirQuoated =~ s{\\}{/}xmsg;
+my $InstallDirQuoted = $InstallDir;
+$InstallDirQuoted =~ s{\\}{/}xmsg;
 
 # quoate the apache directory
-my $ApacheDirQuoated = $ApacheDir;
-$ApacheDirQuoated =~ s{\\}{/}xmsg;
+my $ApacheDirQuoted = $ApacheDir;
+$ApacheDirQuoted =~ s{\\}{/}xmsg;
 
 # replace C:/Apache with the install directory in all config files
 find( \&ReplaceApacheDir, ($ApacheDir) );
@@ -113,7 +114,7 @@ sub ReplaceApacheDir {
     my $NewString = $OrgString;
 
     # find and replace all C:/Apache
-    $NewString =~ s{ C:\/Apache }{$ApacheDirQuoated}xmsg;
+    $NewString =~ s{ C:\/Apache }{$ApacheDirQuoted}xmsg;
 
     # next file if no changes
     return 1 if $OrgString eq $NewString;
@@ -144,11 +145,11 @@ sub OTRSApacheConfigAdd {
 # ---
 
 # load mod_perl
-LoadFile '$InstallDirQuoated/StrawberryPerl/perl/bin/perl510.dll'
+LoadFile '$InstallDirQuoted/StrawberryPerl/perl/bin/perl510.dll'
 LoadModule perl_module modules/mod_perl.so
 
 # include the OTRS configuration
-Include '$InstallDirQuoated/OTRS/scripts/apache2-httpd-new.include.conf'
+Include '$InstallDirQuoted/OTRS/scripts/apache2-httpd-new.include.conf'
 
 # ---
 ";
@@ -167,7 +168,7 @@ sub ConfigOTRSServiceStart {
     for my $FileName (qw(OTRSServicesStart.bat OTRSServicesRestart.bat)) {
 
         # add install directory
-        my $File = $InstallDirQuoated . '/otrs4win/Scripts/' . $FileName;
+        my $File = $InstallDirQuoted . '/otrs4win/Scripts/' . $FileName;
 
         # check if file exists
         next FILE if !-e $File;
@@ -216,7 +217,7 @@ sub ConfigOTRSServiceStop {
     for my $FileName (qw(OTRSServicesStop.bat OTRSServicesRestart.bat)) {
 
         # add install directory
-        my $File = $InstallDirQuoated . '/otrs4win/Scripts/' . $FileName;
+        my $File = $InstallDirQuoted . '/otrs4win/Scripts/' . $FileName;
 
         # check if file exists
         next FILE if !-e $File;

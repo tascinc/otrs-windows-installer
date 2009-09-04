@@ -3,21 +3,22 @@
 # ConfigureMySQL.pl - script to configure MySQL
 # Copyright (C) 2001-2009 OTRS AG, http://otrs.org/
 # --
-# $Id: ConfigureMySQL.pl,v 1.4 2009-01-23 12:03:47 mh Exp $
+# $Id: ConfigureMySQL.pl,v 1.5 2009-09-04 12:19:24 mb Exp $
 # --
 # This program is free software; you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation; either version 2 of the License, or
-# (at your option) any later version.
+# it under the terms of the GNU AFFERO General Public License as published by
+# the Free Software Foundation; either version 3 of the License, or
+# any later version.
 #
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
-# You should have received a copy of the GNU General Public License
+# You should have received a copy of the GNU Affero General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+# or see http://www.gnu.org/licenses/agpl.txt.
 # --
 
 use strict;
@@ -28,7 +29,7 @@ use File::Copy;
 use File::Find;
 
 use vars qw($VERSION);
-$VERSION = qw($Revision: 1.4 $) [1];
+$VERSION = qw($Revision: 1.5 $) [1];
 
 # get options
 my %Opts = ();
@@ -40,7 +41,7 @@ if ( !$Opts{'d'} ) {
 }
 if ( $Opts{'h'} ) {
     print STDOUT "ConfigureMySQL.pl <Revision $VERSION> - script to configure MySQL\n";
-    print STDOUT "Copyright (C) 2001-2008 OTRS AG, http://otrs.org/\n";
+    print STDOUT "Copyright (C) 2001-2009 OTRS AG, http://otrs.org/\n";
     print STDOUT "usage: ConfigureMySQL.pl -d <install directory>\n\n";
     exit 1;
 }
@@ -60,12 +61,12 @@ if ( !-e $MySQLDir || !-d $MySQLDir ) {
 }
 
 # quoate the install directory
-my $InstallDirQuoated = $InstallDir;
-$InstallDirQuoated =~ s{\\}{/}xmsg;
+my $InstallDirQuoted = $InstallDir;
+$InstallDirQuoted =~ s{\\}{/}xmsg;
 
 # quoate the MySQL directory
-my $MySQLDirQuoated = $MySQLDir;
-$MySQLDirQuoated =~ s{\\}{/}xmsg;
+my $MySQLDirQuoted = $MySQLDir;
+$MySQLDirQuoted =~ s{\\}{/}xmsg;
 
 # create my.ini
 CreateMyIni();
@@ -83,8 +84,8 @@ ConfigOTRSServiceStop();
 
 sub CreateMyIni {
 
-    my $SourceFile      = $MySQLDirQuoated . '/my-medium.ini';
-    my $DestinationFile = $MySQLDirQuoated . '/my.ini';
+    my $SourceFile      = $MySQLDirQuoted . '/my-medium.ini';
+    my $DestinationFile = $MySQLDirQuoted . '/my.ini';
 
     # check if source file exists
     return if !-e $SourceFile;
@@ -99,7 +100,7 @@ sub CreateMyIni {
 
 sub PrepareMyIni {
 
-    my $File = $MySQLDirQuoated . '/my.ini';
+    my $File = $MySQLDirQuoted . '/my.ini';
 
     # check if file exists
     return if !-e $File;
@@ -131,7 +132,7 @@ query_cache_size = 32M
 query_cache_type = 1}xms;
 
     # insert basedir
-    $NewString =~ s{ \[mysqld\] }{[mysqld]\nbasedir = $MySQLDirQuoated}xms;
+    $NewString =~ s{ \[mysqld\] }{[mysqld]\nbasedir = $MySQLDirQuoted}xms;
 
     # increase max_allowed_packet
     $NewString =~ s{ max_allowed_packet \s* = \s* \d M }{max_allowed_packet = 20M}xmsg;
@@ -153,7 +154,7 @@ sub ConfigOTRSServiceStart {
     for my $FileName (qw(OTRSServicesStart.bat OTRSServicesRestart.bat)) {
 
         # add install directory
-        my $File = $InstallDirQuoated . '/otrs4win/Scripts/' . $FileName;
+        my $File = $InstallDirQuoted . '/otrs4win/Scripts/' . $FileName;
 
         # check if file exists
         next FILE if !-e $File;
@@ -202,7 +203,7 @@ sub ConfigOTRSServiceStop {
     for my $FileName (qw(OTRSServicesStop.bat OTRSServicesRestart.bat)) {
 
         # add install directory
-        my $File = $InstallDirQuoated . '/otrs4win/Scripts/' . $FileName;
+        my $File = $InstallDirQuoted . '/otrs4win/Scripts/' . $FileName;
 
         # check if file exists
         next FILE if !-e $File;

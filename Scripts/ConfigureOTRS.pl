@@ -3,21 +3,22 @@
 # ConfigureOTRS.pl - script to configure OTRS
 # Copyright (C) 2001-2009 OTRS AG, http://otrs.org/
 # --
-# $Id: ConfigureOTRS.pl,v 1.6 2009-01-23 13:59:20 mh Exp $
+# $Id: ConfigureOTRS.pl,v 1.7 2009-09-04 12:19:24 mb Exp $
 # --
 # This program is free software; you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation; either version 2 of the License, or
-# (at your option) any later version.
+# it under the terms of the GNU AFFERO General Public License as published by
+# the Free Software Foundation; either version 3 of the License, or
+# any later version.
 #
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
 #
-# You should have received a copy of the GNU General Public License
+# You should have received a copy of the GNU Affero General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+# or see http://www.gnu.org/licenses/agpl.txt.
 # --
 
 use strict;
@@ -28,7 +29,7 @@ use File::Copy;
 use File::Find;
 
 use vars qw($VERSION);
-$VERSION = qw($Revision: 1.6 $) [1];
+$VERSION = qw($Revision: 1.7 $) [1];
 
 # get options
 my %Opts = ();
@@ -40,7 +41,7 @@ if ( !$Opts{'d'} ) {
 }
 if ( $Opts{'h'} ) {
     print STDOUT "ConfigureOTRS.pl <Revision $VERSION> - script to configure OTRS\n";
-    print STDOUT "Copyright (C) 2001-2008 OTRS AG, http://otrs.org/\n";
+    print STDOUT "Copyright (C) 2001-2009 OTRS AG, http://otrs.org/\n";
     print STDOUT "usage: ConfigureOTRS.pl -d <install directory>\n\n";
     exit 1;
 }
@@ -60,12 +61,12 @@ if ( !-e $OTRSDir || !-d $OTRSDir ) {
 }
 
 # quoate the install directory
-my $InstallDirQuoated = $InstallDir;
-$InstallDirQuoated =~ s{\\}{/}xmsg;
+my $InstallDirQuoted = $InstallDir;
+$InstallDirQuoted =~ s{\\}{/}xmsg;
 
 # quoate the OTRS directory
-my $OTRSDirQuoated = $OTRSDir;
-$OTRSDirQuoated =~ s{\\}{/}xmsg;
+my $OTRSDirQuoted = $OTRSDir;
+$OTRSDirQuoted =~ s{\\}{/}xmsg;
 
 # create Config.pm file
 CreateConfigPm();
@@ -89,8 +90,8 @@ ConfigCron4Win32Pl();
 
 sub CreateConfigPm {
 
-    my $SourceFile      = $OTRSDirQuoated . '/Kernel/Config.pm.dist';
-    my $DestinationFile = $OTRSDirQuoated . '/Kernel/Config.pm';
+    my $SourceFile      = $OTRSDirQuoted . '/Kernel/Config.pm.dist';
+    my $DestinationFile = $OTRSDirQuoted . '/Kernel/Config.pm';
 
     # check if source file exists
     return if !-e $SourceFile;
@@ -105,8 +106,8 @@ sub CreateConfigPm {
 
 sub CreateGenericAgentPm {
 
-    my $SourceFile      = $OTRSDirQuoated . '/Kernel/Config/GenericAgent.pm.dist';
-    my $DestinationFile = $OTRSDirQuoated . '/Kernel/Config/GenericAgent.pm';
+    my $SourceFile      = $OTRSDirQuoted . '/Kernel/Config/GenericAgent.pm.dist';
+    my $DestinationFile = $OTRSDirQuoted . '/Kernel/Config/GenericAgent.pm';
 
     # check if source file exists
     return if !-e $SourceFile;
@@ -152,10 +153,10 @@ sub ReplaceShebangLine {
     my $NewString = $OrgString;
 
     # create path to perl
-    my $PerlQuoated = $InstallDirQuoated . '/StrawberryPerl/perl/bin/perl.exe';
+    my $PerlQuoted = $InstallDirQuoted . '/StrawberryPerl/perl/bin/perl.exe';
 
     # find and replace all #!/usr/bin/perl
-    $NewString =~ s{ ^ \#\!\/usr\/bin\/perl }{#!$PerlQuoated}xms;
+    $NewString =~ s{ ^ \#\!\/usr\/bin\/perl }{#!$PerlQuoted}xms;
 
     # next file if no changes
     return 1 if $OrgString eq $NewString;
@@ -179,7 +180,7 @@ sub ReplaceOTRSDir {
     {
 
         # add directory to otrs
-        my $File = $OTRSDirQuoated . '/' . $FileName;
+        my $File = $OTRSDirQuoted . '/' . $FileName;
 
         # check if file exists
         next FILE if !-e $File;
@@ -205,7 +206,7 @@ sub ReplaceOTRSDir {
         my $NewString = $OrgString;
 
         # find and replace all /opt/otrs
-        $NewString =~ s{ \/opt\/otrs }{$OTRSDirQuoated}xmsg;
+        $NewString =~ s{ \/opt\/otrs }{$OTRSDirQuoted}xmsg;
 
         # next file if no changes
         next FILE if $OrgString eq $NewString;
@@ -223,7 +224,7 @@ sub ReplaceOTRSDir {
 
 sub PrepareConfigPm {
 
-    my $File = $OTRSDirQuoated . '/Kernel/Config.pm';
+    my $File = $OTRSDirQuoted . '/Kernel/Config.pm';
 
     # check if file exists
     return if !-e $File;
@@ -250,7 +251,7 @@ sub PrepareConfigPm {
 
     my $Configuration = "
     \$Self->{LogModule}          = 'Kernel::System::Log::File';
-    \$Self->{LogModule::LogFile} = '$OTRSDirQuoated/var/log/otrs.log';
+    \$Self->{LogModule::LogFile} = '$OTRSDirQuoted/var/log/otrs.log';
     # \$DIBI\$
 ";
 
@@ -270,7 +271,7 @@ sub PrepareConfigPm {
 
 sub ConfigCron4Win32Pl {
 
-    my $File = $InstallDirQuoated . '/OTRS/bin/Cron4Win32.pl';
+    my $File = $InstallDirQuoted . '/OTRS/bin/Cron4Win32.pl';
 
     # check if file exists
     return if !-e $File;
@@ -297,10 +298,10 @@ sub ConfigCron4Win32Pl {
 
     # insert configuration
     $NewString
-        =~ s{(my \$PerlExe   = ")(";)}{$1$InstallDirQuoated/StrawberryPerl/perl/bin/perl.exe$2};
-    $NewString =~ s{(my \$Directory = ")(";)}{$1$OTRSDirQuoated/var/cron/$2};
-    $NewString =~ s{(my \$CronTab   = ")(";)}{$1$InstallDirQuoated/CRONw/crontab.txt$2};
-    $NewString =~ s{(my \$OTRSHome  = ")(";)}{$1$OTRSDirQuoated$2};
+        =~ s{(my \$PerlExe   = ")(";)}{$1$InstallDirQuoted/StrawberryPerl/perl/bin/perl.exe$2};
+    $NewString =~ s{(my \$Directory = ")(";)}{$1$OTRSDirQuoted/var/cron/$2};
+    $NewString =~ s{(my \$CronTab   = ")(";)}{$1$InstallDirQuoted/CRONw/crontab.txt$2};
+    $NewString =~ s{(my \$OTRSHome  = ")(";)}{$1$OTRSDirQuoted$2};
 
     # return if no changes
     return 1 if $OrgString eq $NewString;
