@@ -2,7 +2,7 @@
 # InstallerBuildGuide.txt - guide to prepare components to build a win installer
 # Copyright (C) 2001-2009 OTRS AG, http://otrs.org/
 # --
-# $Id: InstallerBuildGuide.txt,v 1.12 2009-04-27 12:19:37 mh Exp $
+# $Id: InstallerBuildGuide.txt,v 1.13 2009-09-14 08:46:32 mb Exp $
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -63,46 +63,27 @@ Prepare Strawberry Perl
     6. Install CPAN modules using the CPAN shell
 
         # OTRS modules
-        cpan> install Compress::Zlib
-        cpan> install CGI
         cpan> install Date::Pcalc
         cpan> install Date::Format
-        cpan> install DBI
-        cpan> install Digest::MD5
         cpan> install Crypt::PasswdMD5
-        cpan> install LWP::UserAgent
-        cpan> install IO::Scalar
-        cpan> install IO::Wrap
-        cpan> install MIME::Base64
         cpan> install Mail::Internet
         cpan> install MIME::Tools
         cpan> install Net::DNS
-        cpan> install Net::POP3
         cpan> install Net::IMAP::Simple
-        cpan> install Net::SMTP
         cpan> install Authen::SASL
-        cpan> install XML::Parser
         cpan> install Net::LDAP
         cpan> install PDF::API2::Version
-        cpan> install DBD::ODBC
         cpan> install Text::CSV_XS
-        cpan> install Archive::Tar
         cpan> install MIME::Types
         cpan> install Apache::DBI
         cpan> install Encode::HanExtra
 
         # CronW
-        cpan> install Module::Build
-        cpan> install Number::Compare
-        cpan> install Attribute::Handlers
-        cpan> install Text::Glob
-        cpan> install File::Find::Rule
         cpan> install Params::Validate
         cpan> install Date::Manip
         cpan> install Log::Dispatch
         cpan> install Log::Log4perl
         cpan> install Log::Dispatch::FileRotate
-        cpan> install Win32::Process
 
     7. Clean the system and quit
         cpan> reload cpan
@@ -121,7 +102,6 @@ Prepare Strawberry Perl
 
     11. Install required CPAN modules using the PPM mechanism
         perl\bin\ppm.bat install http://cpan.uwinnipeg.ca/PPMPackages/10xx/SOAP-Lite.ppd
-        perl\bin\ppm.bat install http://cpan.uwinnipeg.ca/PPMPackages/10xx/DBD-mysql.ppd
         perl\bin\ppm.bat install http://cpan.uwinnipeg.ca/PPMPackages/10xx/mod_perl.ppd
             Copy mod_perl.so to C:/strawberry/perl/
         perl\bin\ppm.bat install http://cpan.uwinnipeg.ca/PPMPackages/10xx/GD.ppd
