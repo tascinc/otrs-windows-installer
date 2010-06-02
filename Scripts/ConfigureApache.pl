@@ -1,9 +1,9 @@
 #!/usr/bin/perl -w
 # --
 # ConfigureApache.pl - script to configure the apache server
-# Copyright (C) 2001-2009 OTRS AG, http://otrs.org/
+# Copyright (C) 2001-2010 OTRS AG, http://otrs.org/
 # --
-# $Id: ConfigureApache.pl,v 1.4 2009-09-04 12:19:24 mb Exp $
+# $Id: ConfigureApache.pl,v 1.5 2010-06-02 11:49:47 mb Exp $
 # --
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU AFFERO General Public License as published by
@@ -28,7 +28,7 @@ use Getopt::Std;
 use File::Find;
 
 use vars qw($VERSION);
-$VERSION = qw($Revision: 1.4 $) [1];
+$VERSION = qw($Revision: 1.5 $) [1];
 
 # get options
 my %Opts = ();
@@ -40,7 +40,7 @@ if ( !$Opts{'d'} ) {
 }
 if ( $Opts{'h'} ) {
     print STDOUT "ConfigureApache.pl <Revision $VERSION> - script to configure the apache\n";
-    print STDOUT "Copyright (C) 2001-2009 OTRS AG, http://otrs.org/\n";
+    print STDOUT "Copyright (C) 2001-2010 OTRS AG, http://otrs.org/\n";
     print STDOUT "usage: ConfigureApache.pl -d <install directory>\n\n";
     exit 1;
 }
@@ -150,6 +150,10 @@ LoadModule perl_module modules/mod_perl.so
 
 # include the OTRS configuration
 Include '$InstallDirQuoted/OTRS/scripts/apache2-httpd-new.include.conf'
+
+# redirect / to the Agent interface
+# just use customer.pl if you want the Customer interface as default
+RedirectMatch ^/$ /otrs/index.pl
 
 # ---
 ";
