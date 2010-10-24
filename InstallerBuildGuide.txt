@@ -1,8 +1,8 @@
 # --
 # InstallerBuildGuide.txt - guide to prepare components to build a win installer
-# Copyright (C) 2001-2009 OTRS AG, http://otrs.org/
+# Copyright (C) 2001-2010 OTRS AG, http://otrs.org/
 # --
-# $Id: InstallerBuildGuide.txt,v 1.13 2009-09-14 08:46:32 mb Exp $
+# $Id: InstallerBuildGuide.txt,v 1.14 2010-10-24 19:00:11 mb Exp $
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -84,6 +84,7 @@ Prepare Strawberry Perl
         cpan> install Log::Dispatch
         cpan> install Log::Log4perl
         cpan> install Log::Dispatch::FileRotate
+        cpan> install Win32::Daemon
 
     7. Clean the system and quit
         cpan> reload cpan
@@ -114,14 +115,6 @@ Prepare Strawberry Perl
         -Extract it in a temporary folder
         -Copy lib\Apache\Reload.pm to C:\strawberry\perl\site\lib\Apache
         -Copy lib\Apache2\Reload.pm to C:\strawberry\perl\site\lib\Apache2
-
-    13. Install the newerst Win32::Daemon module
-        -Download the newerst version of the Win32::Daemon module from
-         www.roth.net/perl/Daemon/
-        -Extract it in a temporary folder
-        -Copy DEAMON.PM to C:\strawberry\perl\site\lib\Win32\
-        -Copy all files in test\ to C:\strawberry\perl\site\lib\Win32\daemon\
-        -Copy bin\daemon.DLL to C:\strawberry\perl\site\lib\auto\Win32\daemon\
 
     14. Delete the temp directory
         del c:\strawberry\temp
