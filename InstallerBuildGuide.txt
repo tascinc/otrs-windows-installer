@@ -2,7 +2,7 @@
 # InstallerBuildGuide.txt - guide to prepare components to build a win installer
 # Copyright (C) 2001-2010 OTRS AG, http://otrs.org/
 # --
-# $Id: InstallerBuildGuide.txt,v 1.15 2010-10-24 19:34:39 mb Exp $
+# $Id: InstallerBuildGuide.txt,v 1.16 2010-10-25 10:29:26 mb Exp $
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -16,14 +16,14 @@ Prepare Prerequisites
        http://nsis.sourceforge.net/
 
     2. Install the NSIS Simple Firewall Plugin
-        -Download the newerst version from http://nsis.sourceforge.net/NSIS_Simple_Firewall_Plugin
+        -Download the most recent version from http://nsis.sourceforge.net/NSIS_Simple_Firewall_Plugin
         -Extract the files
         -Copy SimpleFC.dll to your NSIS Plugin directory (e. g. C:\Program Files\NSIS\Plugins)
 
     2. Download and install the newest Eclipse framework from
        http://www.eclipse.org/
 
-    3. Download and install the newerst EclipseNSIS plugin
+    3. Download and install the most recent EclipseNSIS plugin
         -Start Eclipse
         -Click Help > Install New Software
         -Add http://eclipsensis.sf.net/update as software location
@@ -64,21 +64,50 @@ Prepare Strawberry Perl
         cpan> install Crypt::PasswdMD5
         cpan> install Mail::Internet
         cpan> install MIME::Tools
-        cpan> install Net::DNS
-        cpan> install Net::IMAP::Simple
+        cpan> install enum
+        cpan> install Net::IP
+        cpan> install Win32::IPHelper
+        cpan> install Win32::Registry
+        # small workaround needed for https://rt.cpan.org/Public/Bug/Display.html?id=57039
+        cpan> get Net::DNS
+        cpan> look
+
+        now change
+        Change line 2 in netdns.h from:
+
+        #if defined(_MSC_VER) || defined(__MINGW32_VERSION)
+            to
+        #if defined(_MSC_VER) || defined(__MINGW32__)
+
+        perl Makefile.PL
+        dmake
+        dmake test
+        dmake install
+
+        # cpan> install Net::DNS
+
+        # Net::Server is a prerequisite for Coro, which itself is a prerequisite for Net::IMAP::Simple.
+        # One of the Net::Server tests is broken, at least on our Perl.
+
+        cpan> notest install Net::Server
+        cpan> install Net::IMAP::Simple  # LOTS of dependencies
         cpan> install Authen::SASL
         cpan> install Net::LDAP
-        cpan> install PDF::API2::Version
+        cpan> install PDF::API2
         cpan> install Text::CSV_XS
-        cpan> install MIME::Types
         cpan> install Apache::DBI
         cpan> install Encode::HanExtra
+        cpan> install SOAP::Lite
+        cpan> install GD::Text
+        cpan> install GD::Graph
 
         # CronW
-        cpan> install Params::Validate
         cpan> install Date::Manip
         cpan> install Log::Dispatch
-        cpan> install Log::Log4perl
+
+        # There's an issue with test 17 of Log::Log4perl; will be fixed in upcoming 1.31 release
+        # see https://rt.cpan.org/Public/Bug/Display.html?id=60665
+        cpan> notest install Log::Log4perl
         cpan> install Log::Dispatch::FileRotate
         cpan> install Win32::Daemon
 
@@ -90,24 +119,9 @@ Prepare Strawberry Perl
     8. Delete the cpan directory to save space
         del c:\strawberry\cpan
 
-    9. Correcting the Path in perl/site/lib/ppm.xml
-        BUILDDIR="D:\DOCUME~1\ADAM~1.KEN\LOCALS~1\Temp" must be
-        BUILDDIR="C:\strawberry\temp"
-
-    10. Remove useless repositories from perl/site/lib/ppm.xml
-        Remove all repositories excluding cpan.uwinnipeg.ca
-
-    11. Install required CPAN modules using the PPM mechanism
-        perl\bin\ppm.bat install http://cpan.uwinnipeg.ca/PPMPackages/10xx/SOAP-Lite.ppd
-        perl\bin\ppm.bat install http://cpan.uwinnipeg.ca/PPMPackages/10xx/mod_perl.ppd
-            Copy mod_perl.so to C:/strawberry/perl/
-        perl\bin\ppm.bat install http://cpan.uwinnipeg.ca/PPMPackages/10xx/GD.ppd
-        perl\bin\ppm.bat install http://cpan.uwinnipeg.ca/PPMPackages/10xx/GDTextUtil.ppd
-        perl\bin\ppm.bat install http://cpan.uwinnipeg.ca/PPMPackages/10xx/GDGraph.ppd
-
-    12. Install the newerst Apache2::Reload module
-        -Download the newerst version of theApache2::Reload module from
-         http://search.cpan.org/~phred/Apache-Reload-0.10/
+    12. Install the most recent Apache2::Reload module
+        -Download the most recent version of the Apache2::Reload module from
+         http://search.cpan.org/~phred/Apache-Reload-0.11/
         -Extract it in a temporary folder
         -Copy lib\Apache\Reload.pm to C:\strawberry\perl\site\lib\Apache
         -Copy lib\Apache2\Reload.pm to C:\strawberry\perl\site\lib\Apache2
@@ -121,7 +135,7 @@ Prepare Strawberry Perl
 Prepare Apache
 ==============
 
-    1. Download the newerst Apache server with SSL!! from
+    1. Download the most recent Apache server with SSL!! from
        http://httpd.apache.org/
 
     2. Install it on a test system to extract the needed files
@@ -141,7 +155,7 @@ Prepare Apache
 Prepare MySQL
 =============
 
-    1. Download the newerst MySQL server "Windows Essentials (x86)" from
+    1. Download the most recent MySQL server "Windows Essentials (x86)" from
        http://dev.mysql.com/downloads/
 
     2. Install it on a test system to extract the needed files
@@ -154,7 +168,7 @@ Prepare MySQL
 Prepare CRONw
 =============
 
-    1. Download the newerst CRONw from http://cronw.sourceforge.net/
+    1. Download the most recent CRONw from http://cronw.sourceforge.net/
 
     2. Copy the CRONw files to C:\otrs4win\CRONw\
 
