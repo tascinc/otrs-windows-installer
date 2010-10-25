@@ -1,8 +1,8 @@
 # --
 # OTRS.nsi - a script to generate the otrs4win installer
-# Copyright (C) 2001-2009 OTRS AG, http://otrs.org/
+# Copyright (C) 2001-2010 OTRS AG, http://otrs.org/
 # --
-# $Id: OTRS.nsi,v 1.35 2009-09-14 10:16:56 mh Exp $
+# $Id: OTRS.nsi,v 1.36 2010-10-25 11:39:33 mb Exp $
 # --
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU AFFERO General Public License as published by
@@ -27,7 +27,7 @@
 !define Installer_Home            "C:\otrs4win"
 !define Installer_Home_Nsis       "${Installer_Home}\otrs4win"
 !define Installer_Version_Major   2
-!define Installer_Version_Minor   1
+!define Installer_Version_Minor   4
 !define Installer_Version_Patch   1
 #!define Installer_Version_Jointer "-"
 #!define Installer_Version_Postfix "beta1"
@@ -36,13 +36,13 @@
 
 !define OTRS_Name            "OTRS"
 !define OTRS_Version_Major   2
-!define OTRS_Version_Minor   4
-!define OTRS_Version_Patch   4
-#!define OTRS_Version_Jointer "-"
-#!define OTRS_Version_Postfix "beta1"
-!define OTRS_Version_Jointer ""
-!define OTRS_Version_Postfix ""
-!define OTRS_Company         "OTRS AG"
+!define OTRS_Version_Minor   3
+!define OTRS_Version_Patch   0
+!define OTRS_Version_Jointer "-"
+!define OTRS_Version_Postfix "beta6"
+#!define OTRS_Version_Jointer ""
+#!define OTRS_Version_Postfix ""
+!define OTRS_Company         "OTRS Group"
 !define OTRS_Url             "www.otrs.com"
 !define OTRS_Instance_Number 1
 
@@ -402,12 +402,6 @@ Section -InstPost
     CreateShortcut "$SMPROGRAMS\$StartMenuGroup\Tools\${OTRS_Name} Services Stop.lnk"    "$INSTDIR\otrs4win\Scripts\OTRSServicesStop.bat"    "" "$INSTDIR\otrs4win\OTRSServices.ico"
     CreateShortcut "$SMPROGRAMS\$StartMenuGroup\Tools\${OTRS_Name} Services Restart.lnk" "$INSTDIR\otrs4win\Scripts\OTRSServicesRestart.bat" "" "$INSTDIR\otrs4win\OTRSServices.ico"
     !insertmacro MUI_STARTMENU_WRITE_END
-
-    # if InstApache is selected
-
-        # copy mod_perl.so to the apache modules directory
-        CopyFiles /SILENT /FILESONLY $INSTDIR\StrawberryPerl\perl\mod_perl.so $INSTDIR\Apache\modules\mod_perl.so 125
-    # endif
 
     # start the otrs services
     sleep 2000
