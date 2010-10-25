@@ -3,7 +3,7 @@
 # ConfigureOTRS.pl - script to configure OTRS
 # Copyright (C) 2001-2010 OTRS AG, http://otrs.org/
 # --
-# $Id: ConfigureOTRS.pl,v 1.8 2010-10-25 10:30:39 mb Exp $
+# $Id: ConfigureOTRS.pl,v 1.9 2010-10-25 11:46:19 mb Exp $
 # --
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU AFFERO General Public License as published by
@@ -29,7 +29,7 @@ use File::Copy;
 use File::Find;
 
 use vars qw($VERSION);
-$VERSION = qw($Revision: 1.8 $) [1];
+$VERSION = qw($Revision: 1.9 $) [1];
 
 # get options
 my %Opts = ();
@@ -175,7 +175,7 @@ sub ReplaceOTRSDir {
 
     FILE:
     for my $FileName (
-        qw(Kernel/Config.pm scripts/apache2-httpd-new.include.conf scripts/apache2-perl-startup.pl)
+        qw(Kernel/Config.pm scripts/apache2-httpd.include.conf scripts/apache2-perl-startup.pl)
         )
     {
 
