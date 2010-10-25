@@ -3,7 +3,7 @@
 # ConfigureApache.pl - script to configure the apache server
 # Copyright (C) 2001-2010 OTRS AG, http://otrs.org/
 # --
-# $Id: ConfigureApache.pl,v 1.7 2010-10-25 10:54:26 mb Exp $
+# $Id: ConfigureApache.pl,v 1.8 2010-10-25 11:00:17 mb Exp $
 # --
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU AFFERO General Public License as published by
@@ -28,7 +28,7 @@ use Getopt::Std;
 use File::Find;
 
 use vars qw($VERSION);
-$VERSION = qw($Revision: 1.7 $) [1];
+$VERSION = qw($Revision: 1.8 $) [1];
 
 # get options
 my %Opts = ();
@@ -154,7 +154,7 @@ Include '$InstallDirQuoted/OTRS/scripts/apache2-httpd-new.include.conf'
 
 # redirect / to the Agent interface
 # just use customer.pl if you want the Customer interface as default
-RedirectMatch ^/$ /otrs/index.pl
+RedirectMatch ^/\$ /otrs/index.pl
 
 # ---
 ";
