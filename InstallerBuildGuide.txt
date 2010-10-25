@@ -2,7 +2,7 @@
 # InstallerBuildGuide.txt - guide to prepare components to build a win installer
 # Copyright (C) 2001-2010 OTRS AG, http://otrs.org/
 # --
-# $Id: InstallerBuildGuide.txt,v 1.17 2010-10-25 10:51:37 mb Exp $
+# $Id: InstallerBuildGuide.txt,v 1.18 2010-10-25 11:22:20 mb Exp $
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -53,10 +53,7 @@ Prepare Strawberry Perl
 
     2. Extract the files to C:\strawberry\
 
-    5. Start the CPAN shell and reload the package index
-        cpan> reload index
-
-    6. Install CPAN modules using the CPAN shell
+    3. Install CPAN modules using the CPAN shell
 
         # OTRS modules
         cpan> install Date::Pcalc
@@ -83,6 +80,7 @@ Prepare Strawberry Perl
         dmake
         dmake test
         dmake install
+        exit
 
         # cpan> install Net::DNS
 
@@ -101,6 +99,20 @@ Prepare Strawberry Perl
         cpan> install GD::Text
         cpan> install GD::Graph
 
+        # Install GSSAPI for some connections to Exchange servers
+        # Copy the libraries for libidn and kfw from the following url and extract the zips in the
+        # strawberry dir: http://strawberryperl.com/package/kmx/32_libs/
+        cpan> install Net::LibIDN
+        # GSSAPI needs a build flag
+        cpan> get GSSAPI
+        cpan> look GSSAPI
+
+        perl Makefile.PL --gssapi_libs=-lgssapi32 --gssapi_inc=-DSSIZE_T_DEFINED
+        dmake
+        dmake test
+        dmake install
+        exit
+
         # CronW
         cpan> install Date::Manip
         cpan> install Log::Dispatch
@@ -111,18 +123,23 @@ Prepare Strawberry Perl
         cpan> install Log::Dispatch::FileRotate
         cpan> install Win32::Daemon
 
-    7. Clean the system and quit
+    4. Clean the system and quit
         cpan> reload cpan
         cpan> clean
         cpan> quit
 
-    8. Delete the cpan directory to save space
+    5. Add mod_perl
+        Install mod_perl binaries with the following commands (ref: http://strawberryperl.com/package/kmx/mod_perl/README-512.TXT)
+        pip http://strawberryperl.com/package/kmx/mod_perl/5.12_x86/mod_perl-2.0.4-MSWin32-x86-multi-thread-5.12.par
+        pip http://strawberryperl.com/package/kmx/mod_perl/5.12_x86/libapreq2-2.12-MSWin32-x86-multi-thread-5.12.par
+
+    6. Delete the cpan directory to save space
         del c:\strawberry\cpan
 
-    14. Delete the temp directory
+    7. Delete the temp directory
         del c:\strawberry\temp
 
-    15. Copy the strawberry perl files to C:\otrs4win\StrawberryPerl\
+    8. Copy the strawberry perl files to C:\otrs4win\StrawberryPerl\
 
 
 Prepare Apache
@@ -144,6 +161,11 @@ Prepare Apache
     3. Stop the apache service
 
     4. Copy the apache files to C:\otrs4win\Apache\
+
+    5. Download the following files and store them in C:\otrs4win\Apache\Modules
+        http://strawberryperl.com/package/kmx/mod_perl/5.12_x86/mod_perl.so
+        http://strawberryperl.com/package/kmx/mod_perl/5.12_x86/mod_apreq2.so
+        http://strawberryperl.com/package/kmx/mod_perl/5.12_x86/libapreq2.dll
 
 Prepare MySQL
 =============
@@ -167,10 +189,6 @@ Prepare CRONw
 
     3. Delete the useless modules directory
         del C:\otrs4win\CRONw\modules
-
-    4. Path the cronService.pl (workaround to work with Win32::Daemon
-       20080324-beta)
-        -add a "return 1;" at line 253
 
 Build the Installer
 ===================
