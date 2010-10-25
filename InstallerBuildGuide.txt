@@ -2,7 +2,7 @@
 # InstallerBuildGuide.txt - guide to prepare components to build a win installer
 # Copyright (C) 2001-2010 OTRS AG, http://otrs.org/
 # --
-# $Id: InstallerBuildGuide.txt,v 1.18 2010-10-25 11:22:20 mb Exp $
+# $Id: InstallerBuildGuide.txt,v 1.19 2010-10-25 11:31:28 mb Exp $
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -122,6 +122,11 @@ Prepare Strawberry Perl
         cpan> notest install Log::Log4perl
         cpan> install Log::Dispatch::FileRotate
         cpan> install Win32::Daemon
+
+        # the last two versions of SOAP::Lite are broken so we need to install a specific version. See:
+        # https://rt.cpan.org/Public/Bug/Display.html?id=58538
+        # http://forums.otrs.org/viewtopic.php?f=25&t=4443
+        cpan> install MKUTTER/SOAP-Lite-0.710.10.tar.gz
 
     4. Clean the system and quit
         cpan> reload cpan
