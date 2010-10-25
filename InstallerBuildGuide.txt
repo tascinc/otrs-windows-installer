@@ -2,7 +2,7 @@
 # InstallerBuildGuide.txt - guide to prepare components to build a win installer
 # Copyright (C) 2001-2010 OTRS AG, http://otrs.org/
 # --
-# $Id: InstallerBuildGuide.txt,v 1.16 2010-10-25 10:29:26 mb Exp $
+# $Id: InstallerBuildGuide.txt,v 1.17 2010-10-25 10:51:37 mb Exp $
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -118,13 +118,6 @@ Prepare Strawberry Perl
 
     8. Delete the cpan directory to save space
         del c:\strawberry\cpan
-
-    12. Install the most recent Apache2::Reload module
-        -Download the most recent version of the Apache2::Reload module from
-         http://search.cpan.org/~phred/Apache-Reload-0.11/
-        -Extract it in a temporary folder
-        -Copy lib\Apache\Reload.pm to C:\strawberry\perl\site\lib\Apache
-        -Copy lib\Apache2\Reload.pm to C:\strawberry\perl\site\lib\Apache2
 
     14. Delete the temp directory
         del c:\strawberry\temp
