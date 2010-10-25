@@ -1,9 +1,9 @@
 #!/usr/bin/perl -w
 # --
 # ConfigureStrawberryPerl.pl - script to configure StrawberryPerl
-# Copyright (C) 2001-2009 OTRS AG, http://otrs.org/
+# Copyright (C) 2001-2010 OTRS AG, http://otrs.org/
 # --
-# $Id: ConfigureStrawberryPerl.pl,v 1.3 2009-09-04 12:19:24 mb Exp $
+# $Id: ConfigureStrawberryPerl.pl,v 1.4 2010-10-25 10:30:39 mb Exp $
 # --
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU AFFERO General Public License as published by
@@ -28,7 +28,7 @@ use Getopt::Std;
 use File::Find;
 
 use vars qw($VERSION);
-$VERSION = qw($Revision: 1.3 $) [1];
+$VERSION = qw($Revision: 1.4 $) [1];
 
 # get options
 my %Opts = ();
@@ -41,7 +41,7 @@ if ( !$Opts{'d'} ) {
 if ( $Opts{'h'} ) {
     print STDOUT
         "ConfigureStrawberryPerl.pl <Revision $VERSION> - script to configure StrawberryPerl\n";
-    print STDOUT "Copyright (C) 2001-2009 OTRS AG, http://otrs.org/\n";
+    print STDOUT "Copyright (C) 2001-2010 OTRS AG, http://otrs.org/\n";
     print STDOUT "usage: ConfigureStrawberryPerl.pl -d <install directory>\n\n";
     exit 1;
 }
@@ -60,11 +60,11 @@ if ( !-e $StrawberryPerlDir || !-d $StrawberryPerlDir ) {
     exit 1;
 }
 
-# quoate the install directory
+# quote the install directory
 my $InstallDirQuoted = $InstallDir;
 $InstallDirQuoted =~ s{\\}{/}xmsg;
 
-# quoate the StrawberryPerl directory
+# quote the StrawberryPerl directory
 my $StrawberryPerlDirQuoted = $StrawberryPerlDir;
 $StrawberryPerlDirQuoted =~ s{\\}{/}xmsg;
 

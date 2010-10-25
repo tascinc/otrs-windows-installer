@@ -3,7 +3,7 @@
 # ConfigureApache.pl - script to configure the apache server
 # Copyright (C) 2001-2010 OTRS AG, http://otrs.org/
 # --
-# $Id: ConfigureApache.pl,v 1.5 2010-06-02 11:49:47 mb Exp $
+# $Id: ConfigureApache.pl,v 1.6 2010-10-25 10:30:39 mb Exp $
 # --
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU AFFERO General Public License as published by
@@ -28,7 +28,7 @@ use Getopt::Std;
 use File::Find;
 
 use vars qw($VERSION);
-$VERSION = qw($Revision: 1.5 $) [1];
+$VERSION = qw($Revision: 1.6 $) [1];
 
 # get options
 my %Opts = ();
@@ -59,11 +59,11 @@ if ( !-e $ApacheDir || !-d $ApacheDir ) {
     exit 1;
 }
 
-# quoate the install directory
+# quote the install directory
 my $InstallDirQuoted = $InstallDir;
 $InstallDirQuoted =~ s{\\}{/}xmsg;
 
-# quoate the apache directory
+# quote the apache directory
 my $ApacheDirQuoted = $ApacheDir;
 $ApacheDirQuoted =~ s{\\}{/}xmsg;
 

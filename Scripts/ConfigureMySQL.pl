@@ -1,9 +1,9 @@
 #!/usr/bin/perl -w
 # --
 # ConfigureMySQL.pl - script to configure MySQL
-# Copyright (C) 2001-2009 OTRS AG, http://otrs.org/
+# Copyright (C) 2001-2010 OTRS AG, http://otrs.org/
 # --
-# $Id: ConfigureMySQL.pl,v 1.5 2009-09-04 12:19:24 mb Exp $
+# $Id: ConfigureMySQL.pl,v 1.6 2010-10-25 10:30:39 mb Exp $
 # --
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU AFFERO General Public License as published by
@@ -29,7 +29,7 @@ use File::Copy;
 use File::Find;
 
 use vars qw($VERSION);
-$VERSION = qw($Revision: 1.5 $) [1];
+$VERSION = qw($Revision: 1.6 $) [1];
 
 # get options
 my %Opts = ();
@@ -41,7 +41,7 @@ if ( !$Opts{'d'} ) {
 }
 if ( $Opts{'h'} ) {
     print STDOUT "ConfigureMySQL.pl <Revision $VERSION> - script to configure MySQL\n";
-    print STDOUT "Copyright (C) 2001-2009 OTRS AG, http://otrs.org/\n";
+    print STDOUT "Copyright (C) 2001-2010 OTRS AG, http://otrs.org/\n";
     print STDOUT "usage: ConfigureMySQL.pl -d <install directory>\n\n";
     exit 1;
 }
@@ -60,11 +60,11 @@ if ( !-e $MySQLDir || !-d $MySQLDir ) {
     exit 1;
 }
 
-# quoate the install directory
+# quote the install directory
 my $InstallDirQuoted = $InstallDir;
 $InstallDirQuoted =~ s{\\}{/}xmsg;
 
-# quoate the MySQL directory
+# quote the MySQL directory
 my $MySQLDirQuoted = $MySQLDir;
 $MySQLDirQuoted =~ s{\\}{/}xmsg;
 
