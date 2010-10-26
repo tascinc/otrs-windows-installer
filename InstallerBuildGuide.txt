@@ -2,7 +2,7 @@
 # InstallerBuildGuide.txt - guide to prepare components to build a win installer
 # Copyright (C) 2001-2010 OTRS AG, http://otrs.org/
 # --
-# $Id: InstallerBuildGuide.txt,v 1.19 2010-10-25 11:31:28 mb Exp $
+# $Id: InstallerBuildGuide.txt,v 1.20 2010-10-26 12:27:03 mb Exp $
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -20,10 +20,15 @@ Prepare Prerequisites
         -Extract the files
         -Copy SimpleFC.dll to your NSIS Plugin directory (e. g. C:\Program Files\NSIS\Plugins)
 
-    2. Download and install the newest Eclipse framework from
+    3. Install the NSIS ShellLink Plugin
+        -Download the most recent version from http://nsis.sourceforge.net/ShellLink_plug-in
+        -Extract the files
+        -Copy ShellLink.dll to your NSIS Plugin directory (e. g. C:\Program Files\NSIS\Plugins)
+
+    4. Download and install the newest Eclipse framework from
        http://www.eclipse.org/
 
-    3. Download and install the most recent EclipseNSIS plugin
+    5. Download and install the most recent EclipseNSIS plugin
         -Start Eclipse
         -Click Help > Install New Software
         -Add http://eclipsensis.sf.net/update as software location
