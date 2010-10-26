@@ -3,7 +3,7 @@
 # ConfigureOTRS.pl - script to configure OTRS
 # Copyright (C) 2001-2010 OTRS AG, http://otrs.org/
 # --
-# $Id: ConfigureOTRS.pl,v 1.9 2010-10-25 11:46:19 mb Exp $
+# $Id: ConfigureOTRS.pl,v 1.10 2010-10-26 08:20:17 mb Exp $
 # --
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU AFFERO General Public License as published by
@@ -29,7 +29,7 @@ use File::Copy;
 use File::Find;
 
 use vars qw($VERSION);
-$VERSION = qw($Revision: 1.9 $) [1];
+$VERSION = qw($Revision: 1.10 $) [1];
 
 # get options
 my %Opts = ();
@@ -271,7 +271,7 @@ sub PrepareConfigPm {
 
 sub ConfigCron4Win32Pl {
 
-    my $File = $InstallDirQuoted . '/OTRS/bin/Cron4Win32.pl';
+    my $File = $InstallDirQuoted . '/OTRS/bin/otrs.Cron4Win32.pl';
 
     # check if file exists
     return if !-e $File;
