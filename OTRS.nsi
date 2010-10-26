@@ -2,7 +2,7 @@
 # OTRS.nsi - a script to generate the otrs4win installer
 # Copyright (C) 2001-2010 OTRS AG, http://otrs.org/
 # --
-# $Id: OTRS.nsi,v 1.37 2010-10-26 12:23:11 mb Exp $
+# $Id: OTRS.nsi,v 1.38 2010-10-26 13:48:21 mb Exp $
 # --
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU AFFERO General Public License as published by
@@ -197,27 +197,31 @@ ShowUninstDetails NeverShow
 !insertmacro MUI_LANGUAGE Greek
 !insertmacro MUI_LANGUAGE Italian
 !insertmacro MUI_LANGUAGE Russian
+!insertmacro MUI_LANGUAGE Dutch
 
 # english strings
-LangString mui_finishpage_run_text ${LANG_ENGLISH} "Continue with Web-Installer"
+LangString mui_finishpage_run_text ${LANG_ENGLISH} "Continue with Web Installer"
 
 # german strings
 LangString mui_finishpage_run_text ${LANG_GERMAN} "Weiter mit Web-Installer"
 
 # spanish strings
-LangString mui_finishpage_run_text ${LANG_SPANISH} "Continue with Web-Installer"
+LangString mui_finishpage_run_text ${LANG_SPANISH} "Continue with Web Installer"
 
-# frensh strings
-LangString mui_finishpage_run_text ${LANG_FRENCH} "Continue with Web-Installer"
+# french strings
+LangString mui_finishpage_run_text ${LANG_FRENCH} "Continue with Web Installer"
 
 # greek strings
-LangString mui_finishpage_run_text ${LANG_GREEK} "Continue with Web-Installer"
+LangString mui_finishpage_run_text ${LANG_GREEK} "Continue with Web Installer"
 
 # italian strings
-LangString mui_finishpage_run_text ${LANG_ITALIAN} "Continue with Web-Installer"
+LangString mui_finishpage_run_text ${LANG_ITALIAN} "Continue with Web Installer"
 
 # russian strings
-LangString mui_finishpage_run_text ${LANG_RUSSIAN} "Continue with Web-Installer"
+LangString mui_finishpage_run_text ${LANG_RUSSIAN} "Continue with Web Installer"
+
+# dutch strings
+LangString mui_finishpage_run_text ${LANG_DUTCH} "Verder met de Web Installer"
 
 # ------------------------------------------------------------ #
 # install sections
@@ -385,11 +389,11 @@ Section -InstPost
     WriteRegStr HKLM "${Win_RegKey_Uninstall}"   DisplayName     "${OTRS_Name}"
     WriteRegStr HKLM "${Win_RegKey_Uninstall}"   DisplayIcon     $INSTDIR\otrs4win\OTRSInstall.ico
     WriteRegStr HKLM "${Win_RegKey_Uninstall}"   Publisher       "${OTRS_Company}"
-    WriteRegStr HKLM "${Win_RegKey_Uninstall}"   HelpTelephone   "+49 6172 681988-0"
+    WriteRegStr HKLM "${Win_RegKey_Uninstall}"   HelpTelephone   "+1 408 725 7501"
     WriteRegStr HKLM "${Win_RegKey_Uninstall}"   HelpLink        "http://doc.otrs.org/"
     WriteRegStr HKLM "${Win_RegKey_Uninstall}"   URLInfoAbout    "http://${OTRS_Url}/"
     WriteRegStr HKLM "${Win_RegKey_Uninstall}"   URLUpdateInfo   "http://www.otrs.org/download/"
-    WriteRegStr HKLM "${Win_RegKey_Uninstall}"   Comments        "Open Ticket Request System"
+    WriteRegStr HKLM "${Win_RegKey_Uninstall}"   Comments        "OTRS Help Desk"
     WriteRegStr HKLM "${Win_RegKey_Uninstall}"   UninstallString $INSTDIR\uninstall.exe
     WriteRegDWORD HKLM "${Win_RegKey_Uninstall}" NoModify        1
     WriteRegDWORD HKLM "${Win_RegKey_Uninstall}" NoRepair        1
@@ -502,6 +506,7 @@ Section -un.UninstPost
     Delete /REBOOTOK "$SMPROGRAMS\$StartMenuGroup\Tools\${OTRS_Name} Services Start.lnk"
     Delete /REBOOTOK "$SMPROGRAMS\$StartMenuGroup\Tools\${OTRS_Name} Services Stop.lnk"
     Delete /REBOOTOK "$SMPROGRAMS\$StartMenuGroup\Tools\${OTRS_Name} Services Restart.lnk"
+    Delete /REBOOTOK "$SMPROGRAMS\$StartMenuGroup\Tools\${OTRS_Name} Perl Shell.lnk"
     sleep 1000  # sleep one second to give the OS time to unlock the directory
     RmDir /r /REBOOTOK $SMPROGRAMS\$StartMenuGroup\Tools
     sleep 2000  # sleep two second to give the OS time to unlock the directory
