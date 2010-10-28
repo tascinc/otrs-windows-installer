@@ -3,7 +3,7 @@
 # ConfigureStrawberryPerl.pl - script to configure StrawberryPerl
 # Copyright (C) 2001-2010 OTRS AG, http://otrs.org/
 # --
-# $Id: ConfigureStrawberryPerl.pl,v 1.5 2010-10-26 11:49:31 mb Exp $
+# $Id: ConfigureStrawberryPerl.pl,v 1.6 2010-10-28 07:30:12 mb Exp $
 # --
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU AFFERO General Public License as published by
@@ -28,7 +28,7 @@ use Getopt::Std;
 use File::Find;
 
 use vars qw($VERSION);
-$VERSION = qw($Revision: 1.5 $) [1];
+$VERSION = qw($Revision: 1.6 $) [1];
 
 # get options
 my %Opts = ();
@@ -77,66 +77,6 @@ if ( !-e $OTRSDir || !-d $OTRSDir ) {
 # quote the OTRS directory
 my $OTRSDirQuoted = $OTRSDir;
 $OTRSDirQuoted =~ s{\\}{/}xmsg;
-
-AddPerlPath();
-
 1;
-
-sub AddPerlPath {
-
-    FILE:
-    for my $FileName (
-        qw(scripts/apache2-perl-startup.pl)
-        )
-    {
-
-        # add directory to otrs
-        my $File = $OTRSDirQuoted . '/' . $FileName;
-
-        # check if file exists
-        next FILE if !-e $File;
-
-        # check if file is a directory
-        next FILE if -d $File;
-
-        # check if file is writeable
-        next FILE if !-w $File;
-
-        # check if file is a link
-        next FILE if -l $File;
-
-        # check if file is a text file
-        next FILE if !-T $File;
-
-        # read file
-        next FILE if !open my $FH1, '<', $File;
-        my $OrgString = do { local $/; <$FH1> };
-        close $FH1;
-        print "read in $File\n";
-
-        # copy the string
-        my $NewString = $OrgString;
-
-        # prepare Strawberry Path string
-        $StrawberryPerlDirQuoted =~ s{/}{\\}xmsg;
-        my $PerlPath
-            = "\$ENV{PATH} .= ';$StrawberryPerlDirQuoted\\site\\bin;$StrawberryPerlDirQuoted\\perl\\bin;$StrawberryPerlDirQuoted\\c\\bin';";
-
-        # find and replace path placeholder to Perl path
-        $NewString =~ s/# add perl path here if needed/$PerlPath/;
-
-        # next file if no changes
-        next FILE if $OrgString eq $NewString;
-
-        # write new file
-        return if !open my $FH2, '>', $File;
-        print $FH2 $NewString;
-        close $FH2;
-
-        print STDERR "Added Perl paths to $File\n";
-    }
-
-    return 1;
-}
 
 exit 0;
