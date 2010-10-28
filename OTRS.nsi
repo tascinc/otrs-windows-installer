@@ -2,7 +2,7 @@
 # OTRS.nsi - a script to generate the otrs4win installer
 # Copyright (C) 2001-2010 OTRS AG, http://otrs.org/
 # --
-# $Id: OTRS.nsi,v 1.38 2010-10-26 13:48:21 mb Exp $
+# $Id: OTRS.nsi,v 1.39 2010-10-28 07:33:35 mb Exp $
 # --
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU AFFERO General Public License as published by
@@ -113,6 +113,8 @@ var InstallMode
 !include Sections.nsh
 !include MUI2.nsh
 !include FileFunc.nsh
+!include LogicLib.nsh
+!include EnvVarUpdate.nsh
 
 !insertmacro "DirState"
 
@@ -376,6 +378,11 @@ SectionEnd
 # install post section
 Section -InstPost
 
+    # add paths
+    ${EnvVarUpdate} $0 "PATH" "A" "HKLM" "$INSTDIR\StrawberryPerl\site\bin"
+    ${EnvVarUpdate} $0 "PATH" "A" "HKLM" "$INSTDIR\StrawberryPerl\perl\bin"
+    ${EnvVarUpdate} $0 "PATH" "A" "HKLM" "$INSTDIR\StrawberryPerl\c\bin"
+
     # add common instance information
     WriteRegStr HKLM "${OTRS_RegKey_Instance}" Path                      $INSTDIR
     WriteRegStr HKLM "${OTRS_RegKey_Instance}" Installer_Version_Major   "${Installer_Version_Major}"
@@ -405,7 +412,6 @@ Section -InstPost
     CreateShortcut "$SMPROGRAMS\$StartMenuGroup\Tools\${OTRS_Name} Services Start.lnk"   "$INSTDIR\otrs4win\Scripts\OTRSServicesStart.bat"   "" "$INSTDIR\otrs4win\OTRSServices.ico"
     CreateShortcut "$SMPROGRAMS\$StartMenuGroup\Tools\${OTRS_Name} Services Stop.lnk"    "$INSTDIR\otrs4win\Scripts\OTRSServicesStop.bat"    "" "$INSTDIR\otrs4win\OTRSServices.ico"
     CreateShortcut "$SMPROGRAMS\$StartMenuGroup\Tools\${OTRS_Name} Services Restart.lnk" "$INSTDIR\otrs4win\Scripts\OTRSServicesRestart.bat" "" "$INSTDIR\otrs4win\OTRSServices.ico"
-    CreateShortcut "$SMPROGRAMS\$StartMenuGroup\Tools\${OTRS_Name} Perl Shell.lnk" "$INSTDIR\StrawberryPerl\portableshell.bat" "" ""
     ShellLink::SetRunAsAdministrator "$SMPROGRAMS\$StartMenuGroup\Tools\Uninstall ${OTRS_Name}.lnk"
     ShellLink::SetRunAsAdministrator "$SMPROGRAMS\$StartMenuGroup\Tools\${OTRS_Name} Services Start.lnk"
     ShellLink::SetRunAsAdministrator "$SMPROGRAMS\$StartMenuGroup\Tools\${OTRS_Name} Services Stop.lnk" 
@@ -447,6 +453,12 @@ Section -un.UninstOTRS
 
     DeleteRegValue HKLM "${OTRS_RegKey_Instance}" StartMenuGroup
     DeleteRegKey HKLM "${OTRS_RegKey_Instance}"
+    
+    # remove items from Path
+    ${un.EnvVarUpdate} $0 "PATH" "R" "HKLM" "$INSTDIR\StrawberryPerl\site\bin"
+    ${un.EnvVarUpdate} $0 "PATH" "R" "HKLM" "$INSTDIR\StrawberryPerl\perl\bin"
+    ${un.EnvVarUpdate} $0 "PATH" "R" "HKLM" "$INSTDIR\StrawberryPerl\c\bin"
+
 
     # delete the OTRS files
     RmDir /r /REBOOTOK $INSTDIR\OTRS
@@ -506,7 +518,6 @@ Section -un.UninstPost
     Delete /REBOOTOK "$SMPROGRAMS\$StartMenuGroup\Tools\${OTRS_Name} Services Start.lnk"
     Delete /REBOOTOK "$SMPROGRAMS\$StartMenuGroup\Tools\${OTRS_Name} Services Stop.lnk"
     Delete /REBOOTOK "$SMPROGRAMS\$StartMenuGroup\Tools\${OTRS_Name} Services Restart.lnk"
-    Delete /REBOOTOK "$SMPROGRAMS\$StartMenuGroup\Tools\${OTRS_Name} Perl Shell.lnk"
     sleep 1000  # sleep one second to give the OS time to unlock the directory
     RmDir /r /REBOOTOK $SMPROGRAMS\$StartMenuGroup\Tools
     sleep 2000  # sleep two second to give the OS time to unlock the directory
