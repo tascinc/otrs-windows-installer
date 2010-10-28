@@ -1,8 +1,8 @@
 # --
 # OTRS.nsi - a script to generate the otrs4win installer
-# Copyright (C) 2001-2009 OTRS AG, http://otrs.org/
+# Copyright (C) 2001-2010 OTRS AG, http://otrs.org/
 # --
-# $Id: OTRS.nsi,v 1.35 2009-09-14 10:16:56 mh Exp $
+# $Id: OTRS.nsi,v 1.35.2.1 2010-10-28 07:44:12 mb Exp $
 # --
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU AFFERO General Public License as published by
@@ -27,8 +27,8 @@
 !define Installer_Home            "C:\otrs4win"
 !define Installer_Home_Nsis       "${Installer_Home}\otrs4win"
 !define Installer_Version_Major   2
-!define Installer_Version_Minor   1
-!define Installer_Version_Patch   1
+!define Installer_Version_Minor   3
+!define Installer_Version_Patch   2
 #!define Installer_Version_Jointer "-"
 #!define Installer_Version_Postfix "beta1"
 !define Installer_Version_Jointer ""
@@ -37,12 +37,12 @@
 !define OTRS_Name            "OTRS"
 !define OTRS_Version_Major   2
 !define OTRS_Version_Minor   4
-!define OTRS_Version_Patch   4
+!define OTRS_Version_Patch   9
 #!define OTRS_Version_Jointer "-"
 #!define OTRS_Version_Postfix "beta1"
 !define OTRS_Version_Jointer ""
 !define OTRS_Version_Postfix ""
-!define OTRS_Company         "OTRS AG"
+!define OTRS_Company         "OTRS Group"
 !define OTRS_Url             "www.otrs.com"
 !define OTRS_Instance_Number 1
 
@@ -113,7 +113,8 @@ var InstallMode
 !include Sections.nsh
 !include MUI2.nsh
 !include FileFunc.nsh
-
+!include LogicLib.nsh
+!include EnvVarUpdate.nsh
 !insertmacro "DirState"
 
 # ------------------------------------------------------------ #
@@ -197,28 +198,31 @@ ShowUninstDetails NeverShow
 !insertmacro MUI_LANGUAGE Greek
 !insertmacro MUI_LANGUAGE Italian
 !insertmacro MUI_LANGUAGE Russian
+!insertmacro MUI_LANGUAGE Dutch
 
 # english strings
-LangString mui_finishpage_run_text ${LANG_ENGLISH} "Continue with Web-Installer"
+LangString mui_finishpage_run_text ${LANG_ENGLISH} "Continue with Web Installer"
 
 # german strings
 LangString mui_finishpage_run_text ${LANG_GERMAN} "Weiter mit Web-Installer"
 
 # spanish strings
-LangString mui_finishpage_run_text ${LANG_SPANISH} "Continue with Web-Installer"
+LangString mui_finishpage_run_text ${LANG_SPANISH} "Continue with Web Installer"
 
-# frensh strings
-LangString mui_finishpage_run_text ${LANG_FRENCH} "Continue with Web-Installer"
+# french strings
+LangString mui_finishpage_run_text ${LANG_FRENCH} "Continue with Web Installer"
 
 # greek strings
-LangString mui_finishpage_run_text ${LANG_GREEK} "Continue with Web-Installer"
+LangString mui_finishpage_run_text ${LANG_GREEK} "Continue with Web Installer"
 
 # italian strings
-LangString mui_finishpage_run_text ${LANG_ITALIAN} "Continue with Web-Installer"
+LangString mui_finishpage_run_text ${LANG_ITALIAN} "Continue with Web Installer"
 
 # russian strings
-LangString mui_finishpage_run_text ${LANG_RUSSIAN} "Continue with Web-Installer"
+LangString mui_finishpage_run_text ${LANG_RUSSIAN} "Continue with Web Installer"
 
+# dutch strings
+LangString mui_finishpage_run_text ${LANG_DUTCH} "Verder met de Web Installer"
 # ------------------------------------------------------------ #
 # install sections
 # ------------------------------------------------------------ #
@@ -372,6 +376,11 @@ SectionEnd
 # install post section
 Section -InstPost
 
+    # add paths
+    ${EnvVarUpdate} $0 "PATH" "A" "HKLM" "$INSTDIR\StrawberryPerl\site\bin"
+    ${EnvVarUpdate} $0 "PATH" "A" "HKLM" "$INSTDIR\StrawberryPerl\perl\bin"
+    ${EnvVarUpdate} $0 "PATH" "A" "HKLM" "$INSTDIR\StrawberryPerl\c\bin"
+
     # add common instance information
     WriteRegStr HKLM "${OTRS_RegKey_Instance}" Path                      $INSTDIR
     WriteRegStr HKLM "${OTRS_RegKey_Instance}" Installer_Version_Major   "${Installer_Version_Major}"
@@ -385,11 +394,11 @@ Section -InstPost
     WriteRegStr HKLM "${Win_RegKey_Uninstall}"   DisplayName     "${OTRS_Name}"
     WriteRegStr HKLM "${Win_RegKey_Uninstall}"   DisplayIcon     $INSTDIR\otrs4win\OTRSInstall.ico
     WriteRegStr HKLM "${Win_RegKey_Uninstall}"   Publisher       "${OTRS_Company}"
-    WriteRegStr HKLM "${Win_RegKey_Uninstall}"   HelpTelephone   "+49 6172 681988-0"
+    WriteRegStr HKLM "${Win_RegKey_Uninstall}"   HelpTelephone   "+1 408 725 7501"
     WriteRegStr HKLM "${Win_RegKey_Uninstall}"   HelpLink        "http://doc.otrs.org/"
     WriteRegStr HKLM "${Win_RegKey_Uninstall}"   URLInfoAbout    "http://${OTRS_Url}/"
     WriteRegStr HKLM "${Win_RegKey_Uninstall}"   URLUpdateInfo   "http://www.otrs.org/download/"
-    WriteRegStr HKLM "${Win_RegKey_Uninstall}"   Comments        "Open Ticket Request System"
+    WriteRegStr HKLM "${Win_RegKey_Uninstall}"   Comments        "OTRS Help Desk"
     WriteRegStr HKLM "${Win_RegKey_Uninstall}"   UninstallString $INSTDIR\uninstall.exe
     WriteRegDWORD HKLM "${Win_RegKey_Uninstall}" NoModify        1
     WriteRegDWORD HKLM "${Win_RegKey_Uninstall}" NoRepair        1
@@ -401,13 +410,11 @@ Section -InstPost
     CreateShortcut "$SMPROGRAMS\$StartMenuGroup\Tools\${OTRS_Name} Services Start.lnk"   "$INSTDIR\otrs4win\Scripts\OTRSServicesStart.bat"   "" "$INSTDIR\otrs4win\OTRSServices.ico"
     CreateShortcut "$SMPROGRAMS\$StartMenuGroup\Tools\${OTRS_Name} Services Stop.lnk"    "$INSTDIR\otrs4win\Scripts\OTRSServicesStop.bat"    "" "$INSTDIR\otrs4win\OTRSServices.ico"
     CreateShortcut "$SMPROGRAMS\$StartMenuGroup\Tools\${OTRS_Name} Services Restart.lnk" "$INSTDIR\otrs4win\Scripts\OTRSServicesRestart.bat" "" "$INSTDIR\otrs4win\OTRSServices.ico"
+    ShellLink::SetRunAsAdministrator "$SMPROGRAMS\$StartMenuGroup\Tools\Uninstall ${OTRS_Name}.lnk"
+    ShellLink::SetRunAsAdministrator "$SMPROGRAMS\$StartMenuGroup\Tools\${OTRS_Name} Services Start.lnk"
+    ShellLink::SetRunAsAdministrator "$SMPROGRAMS\$StartMenuGroup\Tools\${OTRS_Name} Services Stop.lnk" 
+    ShellLink::SetRunAsAdministrator "$SMPROGRAMS\$StartMenuGroup\Tools\${OTRS_Name} Services Restart.lnk" 
     !insertmacro MUI_STARTMENU_WRITE_END
-
-    # if InstApache is selected
-
-        # copy mod_perl.so to the apache modules directory
-        CopyFiles /SILENT /FILESONLY $INSTDIR\StrawberryPerl\perl\mod_perl.so $INSTDIR\Apache\modules\mod_perl.so 125
-    # endif
 
     # start the otrs services
     sleep 2000
@@ -444,6 +451,11 @@ Section -un.UninstOTRS
 
     DeleteRegValue HKLM "${OTRS_RegKey_Instance}" StartMenuGroup
     DeleteRegKey HKLM "${OTRS_RegKey_Instance}"
+    
+    # remove items from Path
+    ${un.EnvVarUpdate} $0 "PATH" "R" "HKLM" "$INSTDIR\StrawberryPerl\site\bin"
+    ${un.EnvVarUpdate} $0 "PATH" "R" "HKLM" "$INSTDIR\StrawberryPerl\perl\bin"
+    ${un.EnvVarUpdate} $0 "PATH" "R" "HKLM" "$INSTDIR\StrawberryPerl\c\bin"
 
     # delete the OTRS files
     RmDir /r /REBOOTOK $INSTDIR\OTRS
