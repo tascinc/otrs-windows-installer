@@ -1,0 +1,20 @@
+# --
+# CHANGES - change log of the Windows Installer
+# Copyright (C) 2001-2010 OTRS AG, http://otrs.org/
+# --
+# $Id: CHANGES-otrs4win,v 1.1 2010-11-12 16:24:10 mb Exp $
+# --
+# This software comes with ABSOLUTELY NO WARRANTY. For details, see
+# the enclosed file COPYING for license information (AGPL). If you
+# did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
+# --
+
+2.4.1 2010-11-12
+ - Init release for OTRS 3.0.
+ Changes with earlier versions:
+ * Uses StrawberryPerl 5.12.2
+ * Uses latest versions of Apache + MySQL
+ * Contains mod_perl and mod_sspi modules for speed and acceleration
+ * Adds Perl directories to %PATH% environment variable
+
+EOF
