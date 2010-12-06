@@ -2,7 +2,7 @@
 # OTRS.nsi - a script to generate the otrs4win installer
 # Copyright (C) 2001-2010 OTRS AG, http://otrs.org/
 # --
-# $Id: OTRS.nsi,v 1.41 2010-11-12 16:45:09 mb Exp $
+# $Id: OTRS.nsi,v 1.42 2010-12-06 10:11:15 mb Exp $
 # --
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU AFFERO General Public License as published by
@@ -96,14 +96,14 @@ var InstallMode
 !define MUI_ABORTWARNING
 
 # gui icons
-!define MUI_ICON   "${Installer_Home_Nsis}\Graphics\Icons\OTRSInstall.ico"
-!define MUI_UNICON "${Installer_Home_Nsis}\Graphics\Icons\OTRSUninstall.ico"
+!define MUI_ICON   "${Installer_Home_Nsis}\Graphics\Icons\OTRS.ico"
+!define MUI_UNICON "${Installer_Home_Nsis}\Graphics\Icons\OTRS.ico"
 
 # gui header images
 !define MUI_HEADERIMAGE
 !define MUI_HEADERIMAGE_RIGHT
-!define MUI_HEADERIMAGE_BITMAP   "${Installer_Home_Nsis}\Graphics\Header\OTRSInstall.bmp"
-!define MUI_HEADERIMAGE_UNBITMAP "${Installer_Home_Nsis}\Graphics\Header\OTRSUninstall.bmp"
+!define MUI_HEADERIMAGE_BITMAP   "${Installer_Home_Nsis}\Graphics\Header\OTRS.bmp"
+!define MUI_HEADERIMAGE_UNBITMAP "${Installer_Home_Nsis}\Graphics\Header\OTRS.bmp"
 
 # ------------------------------------------------------------ #
 # load required modules
@@ -123,7 +123,7 @@ var InstallMode
 # ------------------------------------------------------------ #
 
 # welcome page
-!define MUI_WELCOMEFINISHPAGE_BITMAP "${Installer_Home_Nsis}\Graphics\Wizard\OTRSInstall.bmp"
+!define MUI_WELCOMEFINISHPAGE_BITMAP "${Installer_Home_Nsis}\Graphics\Wizard\OTRS.bmp"
 !insertmacro MUI_PAGE_WELCOME
 
 # license page (AGPL)
@@ -172,7 +172,7 @@ ShowInstDetails NeverShow
 # ------------------------------------------------------------ #
 
 # welcome page
-!define MUI_UNWELCOMEFINISHPAGE_BITMAP "${Installer_Home_Nsis}\Graphics\Wizard\OTRSUninstall.bmp"
+!define MUI_UNWELCOMEFINISHPAGE_BITMAP "${Installer_Home_Nsis}\Graphics\Wizard\OTRS.bmp"
 !insertmacro MUI_UNPAGE_WELCOME
 
 # confirm page
@@ -235,8 +235,8 @@ Section -InstPre
     # install the icon files
     SetOutPath $INSTDIR\otrs4win
     File /r "${Installer_Home_Nsis}\Graphics\Icons\OTRS.ico"
-    File /r "${Installer_Home_Nsis}\Graphics\Icons\OTRSInstall.ico"
-    File /r "${Installer_Home_Nsis}\Graphics\Icons\OTRSUninstall.ico"
+    File /r "${Installer_Home_Nsis}\Graphics\Icons\OTRS.ico"
+    File /r "${Installer_Home_Nsis}\Graphics\Icons\OTRS.ico"
     File /r "${Installer_Home_Nsis}\Graphics\Icons\OTRSServices.ico"
 
     # install the helper scripts
@@ -394,7 +394,7 @@ Section -InstPost
     # add uninstaller
     WriteUninstaller $INSTDIR\uninstall.exe
     WriteRegStr HKLM "${Win_RegKey_Uninstall}"   DisplayName     "${OTRS_Name}"
-    WriteRegStr HKLM "${Win_RegKey_Uninstall}"   DisplayIcon     $INSTDIR\otrs4win\OTRSInstall.ico
+    WriteRegStr HKLM "${Win_RegKey_Uninstall}"   DisplayIcon     $INSTDIR\otrs4win\OTRS.ico
     WriteRegStr HKLM "${Win_RegKey_Uninstall}"   Publisher       "${OTRS_Company}"
     WriteRegStr HKLM "${Win_RegKey_Uninstall}"   HelpTelephone   "+1 408 725 7501"
     WriteRegStr HKLM "${Win_RegKey_Uninstall}"   HelpLink        "http://doc.otrs.org/"
