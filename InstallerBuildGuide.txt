@@ -2,7 +2,7 @@
 # InstallerBuildGuide.txt - guide to prepare components to build a win installer
 # Copyright (C) 2001-2010 OTRS AG, http://otrs.org/
 # --
-# $Id: InstallerBuildGuide.txt,v 1.20 2010-10-26 12:27:03 mb Exp $
+# $Id: InstallerBuildGuide.txt,v 1.21 2010-12-10 14:57:28 mb Exp $
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -103,6 +103,9 @@ Prepare Strawberry Perl
         cpan> install SOAP::Lite
         cpan> install GD::Text
         cpan> install GD::Graph
+
+        # Install newest Win32 module because of proper version detection; see bug#5332:
+        cpan> install Win32
 
         # Install GSSAPI for some connections to Exchange servers
         # Copy the libraries for libidn and kfw from the following url and extract the zips in the
