@@ -1,15 +1,15 @@
 # --
 # CHANGES - change log of the Windows Installer
-# Copyright (C) 2001-2010 OTRS AG, http://otrs.org/
+# Copyright (C) 2001-2011 OTRS AG, http://otrs.org/
 # --
-# $Id: CHANGES-otrs4win,v 1.2 2010-12-10 14:57:28 mb Exp $
+# $Id: CHANGES-otrs4win,v 1.3 2011-02-27 20:07:19 mb Exp $
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
 # did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
 # --
 
-2.4.1 2010-11-12
+2.4.2 2010-12-10
  - 2010-12-10 Fixed bug#5332 - Support Module reports Windows 2008R2 server as
     "Win7" by upgrading Win32 module to 0.40.
 
