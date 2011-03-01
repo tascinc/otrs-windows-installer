@@ -1,8 +1,8 @@
 # --
 # InstallerBuildGuide.txt - guide to prepare components to build a win installer
-# Copyright (C) 2001-2010 OTRS AG, http://otrs.org/
+# Copyright (C) 2001-2011 OTRS AG, http://otrs.org/
 # --
-# $Id: InstallerBuildGuide.txt,v 1.21 2010-12-10 14:57:28 mb Exp $
+# $Id: InstallerBuildGuide.txt,v 1.22 2011-03-01 14:31:44 mb Exp $
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -65,7 +65,10 @@ Prepare Strawberry Perl
         cpan> install Date::Format
         cpan> install Crypt::PasswdMD5
         cpan> install Mail::Internet
-        cpan> install MIME::Tools
+
+        # there's an issue with MIME:tools 5.501 - see https://rt.cpan.org/Public/Bug/Display.html?id=66286
+        cpan> install DONEILL/MIME-tools-5.500.tar.gz
+
         cpan> install enum
         cpan> install Net::IP
         cpan> install Win32::IPHelper
