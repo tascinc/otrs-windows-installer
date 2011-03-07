@@ -2,7 +2,7 @@
 # InstallerBuildGuide.txt - guide to prepare components to build a win installer
 # Copyright (C) 2001-2011 OTRS AG, http://otrs.org/
 # --
-# $Id: InstallerBuildGuide.txt,v 1.23 2011-03-07 18:31:23 mb Exp $
+# $Id: InstallerBuildGuide.txt,v 1.24 2011-03-07 18:39:37 mb Exp $
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -148,6 +148,11 @@ Prepare Strawberry Perl
         Install mod_perl binaries with the following commands (ref: http://strawberryperl.com/package/kmx/mod_perl/README-512.TXT)
         pip http://strawberryperl.com/package/kmx/mod_perl/5.12_x86/mod_perl-2.0.4-MSWin32-x86-multi-thread-5.12.par
         pip http://strawberryperl.com/package/kmx/mod_perl/5.12_x86/libapreq2-2.12-MSWin32-x86-multi-thread-5.12.par
+
+    6. Add DejaVu fonts (workaround for bug#7010)
+        The latest PDF::API2 no longer bundles the DejaVu fonts that we use.
+        Download the fonts from http://dejavu-fonts.org/wiki/Download
+        Copy the .ttf files from the folder 'ttf' into C:\strawberry\perl\site\lib\PDF\API2\fonts
 
     6. Delete the cpan directory to save space
         del c:\strawberry\cpan
