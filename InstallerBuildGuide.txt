@@ -2,7 +2,7 @@
 # InstallerBuildGuide.txt - guide to prepare components to build a win installer
 # Copyright (C) 2001-2011 OTRS AG, http://otrs.org/
 # --
-# $Id: InstallerBuildGuide.txt,v 1.22 2011-03-01 14:31:44 mb Exp $
+# $Id: InstallerBuildGuide.txt,v 1.23 2011-03-07 18:31:23 mb Exp $
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -25,10 +25,14 @@ Prepare Prerequisites
         -Extract the files
         -Copy ShellLink.dll to your NSIS Plugin directory (e. g. C:\Program Files\NSIS\Plugins)
 
-    4. Download and install the newest Eclipse framework from
+    4. Install the NSIS Ports plugin
+        - Download Ports.nsh from http://nsis.sourceforge.net/Check_open_ports
+        - Copy the file to your NSIS Include directory (e. g. C:\Program Files\NSIS\Include)
+
+    5. Download and install the newest Eclipse framework from
        http://www.eclipse.org/
 
-    5. Download and install the most recent EclipseNSIS plugin
+    6. Download and install the most recent EclipseNSIS plugin
         -Start Eclipse
         -Click Help > Install New Software
         -Add http://eclipsensis.sf.net/update as software location
@@ -67,15 +71,13 @@ Prepare Strawberry Perl
         cpan> install Mail::Internet
 
         # there's an issue with MIME:tools 5.501 - see https://rt.cpan.org/Public/Bug/Display.html?id=66286
-        cpan> install DONEILL/MIME-tools-5.500.tar.gz
-
+        cpan> notest install MIME::Tools
         cpan> install enum
         cpan> install Net::IP
         cpan> install Win32::IPHelper
         cpan> install Win32::Registry
         # small workaround needed for https://rt.cpan.org/Public/Bug/Display.html?id=57039
-        cpan> get Net::DNS
-        cpan> look
+        cpan> look Net::DNS
 
         now change
         Change line 2 in netdns.h from:
@@ -92,11 +94,6 @@ Prepare Strawberry Perl
 
         # cpan> install Net::DNS
 
-        # Net::Server is a prerequisite for Coro, which itself is a prerequisite for Net::IMAP::Simple.
-        # One of the Net::Server tests is broken, at least on our Perl.
-
-        cpan> notest install Net::Server
-        cpan> install Net::IMAP::Simple  # LOTS of dependencies
         cpan> install Authen::SASL
         cpan> install Net::LDAP
         cpan> install PDF::API2
@@ -106,9 +103,6 @@ Prepare Strawberry Perl
         cpan> install SOAP::Lite
         cpan> install GD::Text
         cpan> install GD::Graph
-
-        # Install newest Win32 module because of proper version detection; see bug#5332:
-        cpan> install Win32
 
         # Install GSSAPI for some connections to Exchange servers
         # Copy the libraries for libidn and kfw from the following url and extract the zips in the
@@ -137,7 +131,13 @@ Prepare Strawberry Perl
         # the last two versions of SOAP::Lite are broken so we need to install a specific version. See:
         # https://rt.cpan.org/Public/Bug/Display.html?id=58538
         # http://forums.otrs.org/viewtopic.php?f=25&t=4443
-        cpan> install MKUTTER/SOAP-Lite-0.710.10.tar.gz
+
+        download unofficial dev build from http://users.otrs.com/~mb/SOAP-Lite-0.713_01.tar.gz
+        untar
+        perl Makefile.PL
+        dmake
+        dmake test
+        dmake install
 
     4. Clean the system and quit
         cpan> reload cpan
