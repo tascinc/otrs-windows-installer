@@ -2,7 +2,7 @@
 # OTRS.nsi - a script to generate the otrs4win installer
 # Copyright (C) 2001-2011 OTRS AG, http://otrs.org/
 # --
-# $Id: OTRS.nsi,v 1.43 2011-02-27 20:07:19 mb Exp $
+# $Id: OTRS.nsi,v 1.44 2011-03-07 18:30:31 mb Exp $
 # --
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU AFFERO General Public License as published by
@@ -28,7 +28,7 @@
 !define Installer_Home_Nsis       "${Installer_Home}\otrs4win"
 !define Installer_Version_Major   2
 !define Installer_Version_Minor   4
-!define Installer_Version_Patch   2
+!define Installer_Version_Patch   3
 #!define Installer_Version_Jointer "-"
 #!define Installer_Version_Postfix "beta2"
 !define Installer_Version_Jointer ""
@@ -115,6 +115,7 @@ var InstallMode
 !include FileFunc.nsh
 !include LogicLib.nsh
 !include EnvVarUpdate.nsh
+!include Ports.nsh
 
 !insertmacro "DirState"
 
@@ -552,6 +553,8 @@ Function .onInit
 
     Call InstCheckAlreadyRunning
     Call InstCheckAlreadyInstalled
+    Call InstCheckMySQLAlreadyInstalled
+    Call InstCheckWebServerAlreadyInstalled
 
     # insert plugins
     !insertmacro MUI_LANGDLL_DISPLAY
@@ -592,6 +595,26 @@ Function InstCheckAlreadyInstalled
     Abort
 
     NotInstalled:
+
+FunctionEnd
+
+# to check if MySQL is already installed - fatal
+Function InstCheckMySQLAlreadyInstalled
+
+    ReadRegStr $R0 HKLM "${Win_RegKey_Uninstall}" "UninstallString"
+    ${If} ${TCPPortOpen} 3306
+        MessageBox MB_OK|MB_ICONSTOP "Port 3306 is already in use. MySQL is probably already installed on your machine. OTRS installs it's own MySQL instance and will need an open port 3306."
+        Abort
+    ${EndIf}
+
+FunctionEnd
+
+# to check if port 80 is available - non-fatal
+Function InstCheckWebServerAlreadyInstalled
+
+    ${If} ${TCPPortOpen} 80
+    MessageBox MB_OK "Port 80 is already in use. You probably already have a web server installed. OTRS brings it's own Apache instance and can only run on ports 80 or 443 (HTTPS). Make sure you configure your server so this causes no issues."
+    ${EndIf}
 
 FunctionEnd
 
