@@ -2,7 +2,7 @@
 # InstallerBuildGuide.txt - guide to prepare components to build a win installer
 # Copyright (C) 2001-2011 OTRS AG, http://otrs.org/
 # --
-# $Id: InstallerBuildGuide.txt,v 1.25 2011-03-22 09:39:57 mb Exp $
+# $Id: InstallerBuildGuide.txt,v 1.26 2011-03-22 10:02:52 mb Exp $
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -119,10 +119,7 @@ Prepare Strawberry Perl
         # CronW
         cpan> install Date::Manip
         cpan> install Log::Dispatch
-
-        # There's an issue with test 17 of Log::Log4perl; will be fixed in upcoming 1.31 release
-        # see https://rt.cpan.org/Public/Bug/Display.html?id=60665
-        cpan> notest install Log::Log4perl
+        cpan> install Log::Log4perl
         cpan> install Log::Dispatch::FileRotate
         cpan> install Win32::Daemon
 
