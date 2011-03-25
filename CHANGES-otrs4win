@@ -2,14 +2,14 @@
 # CHANGES - change log of the Windows Installer
 # Copyright (C) 2001-2011 OTRS AG, http://otrs.org/
 # --
-# $Id: CHANGES-otrs4win,v 1.4 2011-03-07 18:31:40 mb Exp $
+# $Id: CHANGES-otrs4win,v 1.5 2011-03-25 08:57:29 mb Exp $
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
 # did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
 # --
 
-2.4.3 2011-??-??
+2.4.3 2011-03-07
  - Added checks to make sure ports for the web server and database are available
     to the installer.
  - Bug#5467 - Added patched version for broken SOAP::Lite.

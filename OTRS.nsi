@@ -2,7 +2,7 @@
 # OTRS.nsi - a script to generate the otrs4win installer
 # Copyright (C) 2001-2011 OTRS AG, http://otrs.org/
 # --
-# $Id: OTRS.nsi,v 1.44 2011-03-07 18:30:31 mb Exp $
+# $Id: OTRS.nsi,v 1.45 2011-03-25 08:57:29 mb Exp $
 # --
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU AFFERO General Public License as published by
@@ -24,7 +24,7 @@
 # define general information
 # ------------------------------------------------------------ #
 
-!define Installer_Home            "C:\otrs34win"
+!define Installer_Home            "J:\build\otrs34win"
 !define Installer_Home_Nsis       "${Installer_Home}\otrs4win"
 !define Installer_Version_Major   2
 !define Installer_Version_Minor   4
@@ -37,7 +37,7 @@
 !define OTRS_Name            "OTRS"
 !define OTRS_Version_Major   3
 !define OTRS_Version_Minor   0
-!define OTRS_Version_Patch   6
+!define OTRS_Version_Patch   7
 #!define OTRS_Version_Jointer "-"
 #!define OTRS_Version_Postfix "beta7"
 !define OTRS_Version_Jointer ""
