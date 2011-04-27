@@ -2,7 +2,7 @@
 # InstallerBuildGuide.txt - guide to prepare components to build a win installer
 # Copyright (C) 2001-2011 OTRS AG, http://otrs.org/
 # --
-# $Id: InstallerBuildGuide.txt,v 1.27 2011-04-20 22:33:02 cr Exp $
+# $Id: InstallerBuildGuide.txt,v 1.28 2011-04-27 16:19:05 cr Exp $
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -122,6 +122,8 @@ Prepare Strawberry Perl
         cpan> install Log::Log4perl
         cpan> install Log::Dispatch::FileRotate
         cpan> install Win32::Daemon
+
+        # Scheduler
         cpan> install Win32::Service
 
         # the last two versions of SOAP::Lite are broken so we need to install a specific version. See:
