@@ -2,7 +2,7 @@
 # OTRS.nsi - a script to generate the otrs4win installer
 # Copyright (C) 2001-2011 OTRS AG, http://otrs.org/
 # --
-# $Id: OTRS.nsi,v 1.45 2011-03-25 08:57:29 mb Exp $
+# $Id: OTRS.nsi,v 1.46 2011-05-10 09:06:36 mb Exp $
 # --
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU AFFERO General Public License as published by
@@ -24,7 +24,7 @@
 # define general information
 # ------------------------------------------------------------ #
 
-!define Installer_Home            "J:\build\otrs34win"
+!define Installer_Home            "c:\otrs34win"
 !define Installer_Home_Nsis       "${Installer_Home}\otrs4win"
 !define Installer_Version_Major   2
 !define Installer_Version_Minor   4
@@ -359,14 +359,14 @@ Section -InstOTRS
     # create start menu entries
     !insertmacro MUI_STARTMENU_WRITE_BEGIN Application
     SetOutPath $SMPROGRAMS\$StartMenuGroup
-    CreateShortcut "$SMPROGRAMS\$StartMenuGroup\${OTRS_Name} Agent-Interface.lnk"     "http://localhost/otrs/index.pl"     "" "$INSTDIR\otrs4win\OTRS.ico"
-    CreateShortcut "$SMPROGRAMS\$StartMenuGroup\${OTRS_Name} Customer-Interface.lnk"  "http://localhost/otrs/customer.pl"  "" "$INSTDIR\otrs4win\OTRS.ico"
+    CreateShortcut "$SMPROGRAMS\$StartMenuGroup\${OTRS_Name} Agent Interface.lnk"     "http://localhost/otrs/index.pl"     "" "$INSTDIR\otrs4win\OTRS.ico"
+    CreateShortcut "$SMPROGRAMS\$StartMenuGroup\${OTRS_Name} Customer Interface.lnk"  "http://localhost/otrs/customer.pl"  "" "$INSTDIR\otrs4win\OTRS.ico"
     SetOutPath $SMPROGRAMS\$StartMenuGroup\Tools
-    CreateShortcut "$SMPROGRAMS\$StartMenuGroup\Tools\${OTRS_Name} Web-Installer.lnk" "http://localhost/otrs/installer.pl" "" "$INSTDIR\otrs4win\OTRS.ico"
+    CreateShortcut "$SMPROGRAMS\$StartMenuGroup\Tools\${OTRS_Name} Web Installer.lnk" "http://localhost/otrs/installer.pl" "" "$INSTDIR\otrs4win\OTRS.ico"
     !insertmacro MUI_STARTMENU_WRITE_END
 
     # create desktop shortcut
-    createShortCut "$DESKTOP\${OTRS_Name} Agent-Interface.lnk" "http://localhost/otrs/index.pl" "" "$INSTDIR\otrs4win\OTRS.ico"
+    createShortCut "$DESKTOP\${OTRS_Name} Agent Interface.lnk" "http://localhost/otrs/index.pl" "" "$INSTDIR\otrs4win\OTRS.ico"
 
     # remove the helper script
     ${If} $InstallMode != "Unittest"
@@ -445,12 +445,12 @@ SectionEnd
 Section -un.UninstOTRS
 
     # remove start menu entries
-    Delete /REBOOTOK "$SMPROGRAMS\$StartMenuGroup\${OTRS_Name} Agent-Interface.lnk"
-    Delete /REBOOTOK "$SMPROGRAMS\$StartMenuGroup\${OTRS_Name} Customer-Interface.lnk"
-    Delete /REBOOTOK "$SMPROGRAMS\$StartMenuGroup\Tools\${OTRS_Name} Web-Installer.lnk"
+    Delete /REBOOTOK "$SMPROGRAMS\$StartMenuGroup\${OTRS_Name} Agent Interface.lnk"
+    Delete /REBOOTOK "$SMPROGRAMS\$StartMenuGroup\${OTRS_Name} Customer Interface.lnk"
+    Delete /REBOOTOK "$SMPROGRAMS\$StartMenuGroup\Tools\${OTRS_Name} Web Installer.lnk"
 
     # remove desktop shortcut
-    Delete /REBOOTOK "$DESKTOP\${OTRS_Name} Agent-Interface.lnk"
+    Delete /REBOOTOK "$DESKTOP\${OTRS_Name} Agent Interface.lnk"
 
     DeleteRegValue HKLM "${OTRS_RegKey_Instance}" StartMenuGroup
     DeleteRegKey HKLM "${OTRS_RegKey_Instance}"
