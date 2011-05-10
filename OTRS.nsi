@@ -2,7 +2,7 @@
 # OTRS.nsi - a script to generate the otrs4win installer
 # Copyright (C) 2001-2011 OTRS AG, http://otrs.org/
 # --
-# $Id: OTRS.nsi,v 1.46 2011-05-10 09:06:36 mb Exp $
+# $Id: OTRS.nsi,v 1.47 2011-05-10 12:12:23 mb Exp $
 # --
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU AFFERO General Public License as published by
@@ -28,7 +28,7 @@
 !define Installer_Home_Nsis       "${Installer_Home}\otrs4win"
 !define Installer_Version_Major   2
 !define Installer_Version_Minor   4
-!define Installer_Version_Patch   3
+!define Installer_Version_Patch   4
 #!define Installer_Version_Jointer "-"
 #!define Installer_Version_Postfix "beta2"
 !define Installer_Version_Jointer ""
@@ -36,12 +36,12 @@
 
 !define OTRS_Name            "OTRS"
 !define OTRS_Version_Major   3
-!define OTRS_Version_Minor   0
-!define OTRS_Version_Patch   7
-#!define OTRS_Version_Jointer "-"
-#!define OTRS_Version_Postfix "beta7"
-!define OTRS_Version_Jointer ""
-!define OTRS_Version_Postfix ""
+!define OTRS_Version_Minor   1
+!define OTRS_Version_Patch   0
+!define OTRS_Version_Jointer "-"
+!define OTRS_Version_Postfix "cvs20110510"
+#!define OTRS_Version_Jointer ""
+#!define OTRS_Version_Postfix ""
 !define OTRS_Company         "OTRS Group"
 !define OTRS_Url             "www.otrs.com"
 !define OTRS_Instance_Number 1
@@ -349,6 +349,10 @@ Section -InstOTRS
     GetFullPathName /SHORT $InstallDirShort $INSTDIR
     ExecWait "$\"$INSTDIR\StrawberryPerl\perl\bin\perl.exe$\" $\"$INSTDIR\otrs4win\Scripts\ConfigureOTRS.pl$\" -d $\"$InstallDirShort$\""
 
+    # register Scheduler service (just for 3.1 and later)
+    IfFileExists $INSTDIR\OTRS\bin\otrs.Scheduler4winInstaller.pl 0 +2
+        ExecWait "$\"$INSTDIR\StrawberryPerl\perl\bin\perl.exe$\" $\"$INSTDIR\OTRS\bin\otrs.Scheduler4winInstaller.pl$\" -a install"
+        
     # add common otrs information
     WriteRegStr HKLM "${OTRS_RegKey_Instance}" OTRS_Version_Major   "${OTRS_Version_Major}"
     WriteRegStr HKLM "${OTRS_RegKey_Instance}" OTRS_Version_Minor   "${OTRS_Version_Minor}"
@@ -460,7 +464,10 @@ Section -un.UninstOTRS
     ${un.EnvVarUpdate} $0 "PATH" "R" "HKLM" "$INSTDIR\StrawberryPerl\perl\bin"
     ${un.EnvVarUpdate} $0 "PATH" "R" "HKLM" "$INSTDIR\StrawberryPerl\c\bin"
 
-
+    # deregister Scheduler service (just for 3.1 and later)
+    IfFileExists $INSTDIR\OTRS\bin\otrs.Scheduler4winInstaller.pl 0 +2
+        ExecWait "$\"$INSTDIR\StrawberryPerl\perl\bin\perl.exe$\" $\"$INSTDIR\OTRS\bin\otrs.Scheduler4winInstaller.pl$\" -a remove"
+    
     # delete the OTRS files
     RmDir /r /REBOOTOK $INSTDIR\OTRS
 

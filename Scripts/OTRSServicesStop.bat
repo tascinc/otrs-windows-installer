@@ -1,9 +1,9 @@
 @echo off
 REM --
 REM OTRSServicesStop.bat - a script to stop the OTRS services
-REM Copyright (C) 2001-2009 OTRS AG, http://otrs.org/
+REM Copyright (C) 2001-2011 OTRS AG, http://otrs.org/
 REM --
-REM $Id: OTRSServicesStop.bat,v 1.4 2008-11-11 03:09:22 mh Exp $
+REM $Id: OTRSServicesStop.bat,v 1.5 2011-05-10 12:15:27 mb Exp $
 REM --
 REM This program is free software; you can redistribute it and/or modify
 REM it under the terms of the GNU General Public License as published by
@@ -19,6 +19,8 @@ REM You should have received a copy of the GNU General Public License
 REM along with this program; if not, write to the Free Software
 REM Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 REM --
+
+REM ---OTRSSchedulerStopPart---
 
 REM ---CRONwStopPart---
 

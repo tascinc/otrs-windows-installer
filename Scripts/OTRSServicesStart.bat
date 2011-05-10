@@ -1,9 +1,9 @@
 @echo off
 REM --
 REM OTRSServicesStart.bat - a script to start the OTRS services
-REM Copyright (C) 2001-2009 OTRS AG, http://otrs.org/
+REM Copyright (C) 2001-2011 OTRS AG, http://otrs.org/
 REM --
-REM $Id: OTRSServicesStart.bat,v 1.4 2008-11-11 03:09:22 mh Exp $
+REM $Id: OTRSServicesStart.bat,v 1.5 2011-05-10 12:15:27 mb Exp $
 REM --
 REM This program is free software; you can redistribute it and/or modify
 REM it under the terms of the GNU General Public License as published by
@@ -25,3 +25,5 @@ REM ---MySQLStartPart---
 REM ---ApacheStartPart---
 
 REM ---CRONwStartPart---
+
+REM ---OTRSSchedulerStartPart---
