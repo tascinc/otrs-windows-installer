@@ -1,9 +1,9 @@
 #!/usr/bin/perl -w
 # --
 # ConfigureApache.pl - script to configure the apache server
-# Copyright (C) 2001-2010 OTRS AG, http://otrs.org/
+# Copyright (C) 2001-2012 OTRS AG, http://otrs.org/
 # --
-# $Id: ConfigureApache.pl,v 1.9 2010-10-25 11:46:19 mb Exp $
+# $Id: ConfigureApache.pl,v 1.10 2012-11-20 19:18:21 mh Exp $
 # --
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU AFFERO General Public License as published by
@@ -17,7 +17,7 @@
 #
 # You should have received a copy of the GNU Affero General Public License
 # along with this program; if not, write to the Free Software
-# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+# Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA
 # or see http://www.gnu.org/licenses/agpl.txt.
 # --
 
@@ -28,7 +28,7 @@ use Getopt::Std;
 use File::Find;
 
 use vars qw($VERSION);
-$VERSION = qw($Revision: 1.9 $) [1];
+$VERSION = qw($Revision: 1.10 $) [1];
 
 # get options
 my %Opts = ();
@@ -40,7 +40,7 @@ if ( !$Opts{'d'} ) {
 }
 if ( $Opts{'h'} ) {
     print STDOUT "ConfigureApache.pl <Revision $VERSION> - script to configure the apache\n";
-    print STDOUT "Copyright (C) 2001-2010 OTRS AG, http://otrs.org/\n";
+    print STDOUT "Copyright (C) 2001-2012 OTRS AG, http://otrs.org/\n";
     print STDOUT "usage: ConfigureApache.pl -d <install directory>\n\n";
     exit 1;
 }
