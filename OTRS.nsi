@@ -2,7 +2,7 @@
 # OTRS.nsi - a script to generate the otrs4win installer
 # Copyright (C) 2001-2012 OTRS AG, http://otrs.org/
 # --
-# $Id: OTRS.nsi,v 1.49 2012-11-20 19:18:18 mh Exp $
+# $Id: OTRS.nsi,v 1.50 2012-12-18 11:57:09 mb Exp $
 # --
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU AFFERO General Public License as published by
@@ -401,7 +401,7 @@ Section -InstPost
     WriteRegStr HKLM "${Win_RegKey_Uninstall}"   DisplayName     "${OTRS_Name}"
     WriteRegStr HKLM "${Win_RegKey_Uninstall}"   DisplayIcon     $INSTDIR\otrs4win\OTRS.ico
     WriteRegStr HKLM "${Win_RegKey_Uninstall}"   Publisher       "${OTRS_Company}"
-    WriteRegStr HKLM "${Win_RegKey_Uninstall}"   HelpTelephone   "+1 408 725 7501"
+    WriteRegStr HKLM "${Win_RegKey_Uninstall}"   HelpTelephone   " +1 (415) 3660178"
     WriteRegStr HKLM "${Win_RegKey_Uninstall}"   HelpLink        "http://doc.otrs.org/"
     WriteRegStr HKLM "${Win_RegKey_Uninstall}"   URLInfoAbout    "http://${OTRS_Url}/"
     WriteRegStr HKLM "${Win_RegKey_Uninstall}"   URLUpdateInfo   "http://www.otrs.org/download/"
