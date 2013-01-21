@@ -1,8 +1,8 @@
 # --
 # InstallerBuildGuide.txt - guide to prepare components to build a win installer
-# Copyright (C) 2001-2011 OTRS AG, http://otrs.org/
+# Copyright (C) 2001-2013 OTRS AG, http://otrs.org/
 # --
-# $Id: InstallerBuildGuide.txt,v 1.29 2011-05-10 12:16:44 mb Exp $
+# $Id: InstallerBuildGuide.txt,v 1.30 2013-01-21 16:40:40 mb Exp $
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -64,96 +64,20 @@ Prepare Strawberry Perl
 
     3. Install CPAN modules using the CPAN shell
 
-        # OTRS modules
-        cpan> install Date::Pcalc
-        cpan> install Date::Format
-        cpan> install Crypt::PasswdMD5
-        cpan> install Mail::Internet
-        cpan> install MIME::Tools
-        cpan> install enum
-        cpan> install Net::IP
-        cpan> install Win32::IPHelper
-        cpan> install Win32::Registry
-        # small workaround needed for https://rt.cpan.org/Public/Bug/Display.html?id=57039
-        cpan> look Net::DNS
+        > cpan Task::Win32::OTRS
 
-        now change
-        Change line 2 in netdns.h from:
-
-        #if defined(_MSC_VER) || defined(__MINGW32_VERSION)
-            to
-        #if defined(_MSC_VER) || defined(__MINGW32__)
-
-        perl Makefile.PL
-        dmake
-        dmake test
-        dmake install
-        exit
-
-        # cpan> install Net::DNS
-
-        cpan> install Authen::SASL
-        cpan> install Net::LDAP
-        cpan> install PDF::API2
-        cpan> install Text::CSV_XS
-        cpan> install Apache::DBI
-        cpan> install Encode::HanExtra
-        cpan> install SOAP::Lite
-        cpan> install GD::Text
-        cpan> install GD::Graph
-
-        # Install GSSAPI for some connections to Exchange servers
-        # Copy the libraries for libidn and kfw from the following url and extract the zips in the
-        # strawberry dir: http://strawberryperl.com/package/kmx/32_libs/
-        cpan> install Net::LibIDN
-        # GSSAPI needs a build flag
-        cpan> get GSSAPI
-        cpan> look GSSAPI
-
-        perl Makefile.PL --gssapi_libs=-lgssapi32 --gssapi_inc=-DSSIZE_T_DEFINED
-        dmake
-        dmake test
-        dmake install
-        exit
-
-        # CronW
-        cpan> install Date::Manip
-        cpan> install Log::Dispatch
-        cpan> install Log::Log4perl
-        cpan> install Log::Dispatch::FileRotate
-        cpan> install Win32::Daemon
-
-        # Scheduler
-        cpan> install Win32::Service
-
-        # the last two versions of SOAP::Lite are broken so we need to install a specific version. See:
-        # https://rt.cpan.org/Public/Bug/Display.html?id=58538
-        # http://forums.otrs.org/viewtopic.php?f=25&t=4443
-
-        download unofficial dev build from http://users.otrs.com/~mb/SOAP-Lite-0.713_01.tar.gz
-        untar
-        perl Makefile.PL
-        dmake
-        dmake test
-        dmake install
-
-    4. Clean the system and quit
-        cpan> reload cpan
-        cpan> clean
-        cpan> quit
-
-    5. Add mod_perl
+    4. Add mod_perl
         Install mod_perl binaries with the following commands (ref: http://strawberryperl.com/package/kmx/mod_perl/README-512.TXT)
         pip http://strawberryperl.com/package/kmx/mod_perl/5.12_x86/mod_perl-2.0.4-MSWin32-x86-multi-thread-5.12.par
         pip http://strawberryperl.com/package/kmx/mod_perl/5.12_x86/libapreq2-2.12-MSWin32-x86-multi-thread-5.12.par
 
-    6. Delete the cpan directory to save space
+    5. Delete the cpan directory to save space
         del c:\strawberry\cpan
 
-    7. Delete the temp directory
+    6. Delete the temp directory
         del c:\strawberry\temp
 
-    8. Copy the strawberry perl files to C:\otrs4win\StrawberryPerl\
+    7. Copy the strawberry perl files to C:\otrs4win\StrawberryPerl\
 
 
 Prepare Apache
