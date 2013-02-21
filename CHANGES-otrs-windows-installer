@@ -1,0 +1,28 @@
+3.0.0 2013-02-08
+ - Moved to git, changed name to otrs-windows-installer.
+ - New upgradable installer.
+ - Support for configuring Internet Information Server and ActiveState Perl.
+
+2.4.4 2011-05-23
+- Added support for OTRS Scheduler service (if bundled with 3.1).
+- Upgraded Apache to 2.2.19.
+
+2.4.3 2011-03-07
+ - Added checks to make sure ports for the web server and database are available
+    to the installer.
+ - Bug#5467 - Added patched version for broken SOAP::Lite.
+ - Upgraded Perl to 5.12.3.
+
+2.4.2 2010-12-10
+ - 2010-12-10 Fixed bug#5332 - Support Module reports Windows 2008R2 server as
+    "Win7" by upgrading Win32 module to 0.40.
+
+2.4.1 2010-11-12
+ - Init release for OTRS 3.0.
+     Changes with earlier versions:
+     * Uses StrawberryPerl 5.12.2
+     * Uses latest versions of Apache + MySQL
+     * Contains mod_perl and mod_sspi modules for speed and acceleration
+     * Adds Perl directories to %PATH% environment variable
+
+EOF

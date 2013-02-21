@@ -1,8 +1,6 @@
 # --
-# OTRS.nsi - a script to generate the otrs4win installer
+# OTRS.nsi - a script to generate the OTRS Windows installer
 # Copyright (C) 2001-2013 OTRS AG, http://otrs.org/
-# --
-# $Id: OTRS.nsi,v 1.51 2013-02-21 10:13:21 mb Exp $
 # --
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU AFFERO General Public License as published by

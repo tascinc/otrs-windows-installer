@@ -1,13 +1,6 @@
-# --
-# InstallerBuildGuide.txt - guide to prepare components to build a win installer
-# Copyright (C) 2001-2013 OTRS AG, http://otrs.org/
-# --
-# $Id: InstallerBuildGuide.txt,v 1.31 2013-02-21 10:13:21 mb Exp $
-# --
-# This software comes with ABSOLUTELY NO WARRANTY. For details, see
-# the enclosed file COPYING for license information (AGPL). If you
-# did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
-# --
+|====================================|
+| OTRS WINDOWS INSTALLER BUILD GUIDE |
+|====================================|
 
 Prepare Prerequisites
 =====================
