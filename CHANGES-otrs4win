@@ -1,13 +1,17 @@
 # --
 # CHANGES - change log of the Windows Installer
-# Copyright (C) 2001-2011 OTRS AG, http://otrs.org/
+# Copyright (C) 2001-2013 OTRS AG, http://otrs.org/
 # --
-# $Id: CHANGES-otrs4win,v 1.6 2011-05-23 14:43:43 mb Exp $
+# $Id: CHANGES-otrs4win,v 1.7 2013-02-21 10:13:21 mb Exp $
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
 # did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
 # --
+
+3.0.0 2013-02-08
+ - New upgradable installer
+ - Support for configuring Internet Information Server and ActiveState Perl
 
 2.4.4 2011-05-23
 - Added support for OTRS Scheduler service (if bundled with 3.1).

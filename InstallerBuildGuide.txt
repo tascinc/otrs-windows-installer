@@ -2,7 +2,7 @@
 # InstallerBuildGuide.txt - guide to prepare components to build a win installer
 # Copyright (C) 2001-2013 OTRS AG, http://otrs.org/
 # --
-# $Id: InstallerBuildGuide.txt,v 1.30 2013-01-21 16:40:40 mb Exp $
+# $Id: InstallerBuildGuide.txt,v 1.31 2013-02-21 10:13:21 mb Exp $
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
@@ -104,6 +104,9 @@ Prepare Apache
         http://strawberryperl.com/package/kmx/mod_perl/5.12_x86/mod_perl.so
         http://strawberryperl.com/package/kmx/mod_perl/5.12_x86/mod_apreq2.so
         http://strawberryperl.com/package/kmx/mod_perl/5.12_x86/libapreq2.dll
+
+    6. Download mod_auth_sspi, extract it and put it in C:\otrs4win\Apache\Modules
+        - this is an optional module people can configure for easy SSO on Windows
 
 Prepare MySQL
 =============
