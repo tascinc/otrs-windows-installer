@@ -1,9 +1,7 @@
-#!/usr/bin/perl -w
+#!/usr/bin/perl
 # --
 # ConfigureMySQL.pl - script to configure MySQL
-# Copyright (C) 2001-2013 OTRS AG, http://otrs.org/
-# --
-# $Id: ConfigureMySQL.pl,v 1.8 2013-02-08 16:03:52 mb Exp $
+# Copyright (C) 2001-2013 OTRS AG, http://otrs.com/
 # --
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU AFFERO General Public License as published by
@@ -28,9 +26,6 @@ use Getopt::Std;
 use File::Copy;
 use File::Find;
 
-use vars qw($VERSION);
-$VERSION = qw($Revision: 1.8 $) [1];
-
 # get options
 my %Opts = ();
 getopt( 'd', \%Opts );
@@ -40,8 +35,8 @@ if ( !$Opts{'d'} ) {
     $Opts{'h'} = 1;
 }
 if ( $Opts{'h'} ) {
-    print STDOUT "ConfigureMySQL.pl <Revision $VERSION> - script to configure MySQL\n";
-    print STDOUT "Copyright (C) 2001-2013 OTRS AG, http://otrs.org/\n";
+    print STDOUT "ConfigureMySQL.pl <Revision - script to configure MySQL\n";
+    print STDOUT "Copyright (C) 2001-2013 OTRS AG, http://otrs.com/\n";
     print STDOUT "usage: ConfigureMySQL.pl -d <install directory>\n\n";
     exit 1;
 }

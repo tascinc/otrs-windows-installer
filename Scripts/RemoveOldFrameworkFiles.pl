@@ -1,9 +1,7 @@
 #!/usr/bin/perl
 # --
 # RemoveOldFrameworkFiles.pl - script to identify and remove old framework files
-# Copyright (C) 2001-2013 OTRS AG, http://otrs.org/
-# --
-# $Id: RemoveOldFrameworkFiles.pl,v 1.1 2013-02-08 15:52:20 mb Exp $
+# Copyright (C) 2001-2013 OTRS AG, http://otrs.com/
 # --
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU AFFERO General Public License as published by
@@ -26,9 +24,6 @@ use warnings;
 
 use Getopt::Std;
 use File::Spec;
-
-use vars qw($VERSION);
-$VERSION = qw($Revision: 1.1 $) [1];
 
 my $Action = 'show';
 my %Compare;
@@ -104,8 +99,8 @@ exit;
 # Internal
 sub _help {
     print STDOUT
-        "RemoveOldFrameworkFiles.pl <Revision $VERSION> - script to identify and remove old framework files\n";
-    print STDOUT "Copyright (C) 2001-2013 OTRS AG, http://otrs.org/\n";
+        "RemoveOldFrameworkFiles.pl <Revision - script to identify and remove old framework files\n";
+    print STDOUT "Copyright (C) 2001-2013 OTRS AG, http://otrs.com/\n";
     print STDOUT "usage: $0 -a [show|remove] -o OldARCHIVE -n ARCHIVE [ -d <install directory>]\n";
     print STDOUT " ( -d is required for remove action )\n\n";
     exit 1;

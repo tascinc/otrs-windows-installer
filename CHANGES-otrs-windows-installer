@@ -1,11 +1,17 @@
-3.0.0 2013-02-08
+3.0.0 2013-??-??
  - Moved to git, changed name to otrs-windows-installer.
  - New upgradable installer.
  - Support for configuring Internet Information Server and ActiveState Perl.
+ - Added quotes around LogModule so it still works with Config.pm of OTRS
+   3.2.3 and later.
+
+2.4.5 2013-03-14
+ - Added quotes around LogModule so it still works with Config.pm of OTRS
+   3.2.3 and later.
 
 2.4.4 2011-05-23
-- Added support for OTRS Scheduler service (if bundled with 3.1).
-- Upgraded Apache to 2.2.19.
+ - Added support for OTRS Scheduler service (if bundled with 3.1).
+ - Upgraded Apache to 2.2.19.
 
 2.4.3 2011-03-07
  - Added checks to make sure ports for the web server and database are available

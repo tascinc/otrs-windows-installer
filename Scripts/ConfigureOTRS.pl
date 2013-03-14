@@ -1,9 +1,7 @@
-#!/usr/bin/perl -w
+#!/usr/bin/perl
 # --
 # ConfigureOTRS.pl - script to configure OTRS
-# Copyright (C) 2001-2013 OTRS AG, http://otrs.org/
-# --
-# $Id: ConfigureOTRS.pl,v 1.13 2013-02-08 16:04:25 mb Exp $
+# Copyright (C) 2001-2013 OTRS AG, http://otrs.com/
 # --
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU AFFERO General Public License as published by
@@ -28,9 +26,6 @@ use Getopt::Std;
 use File::Copy;
 use File::Find;
 
-use vars qw($VERSION);
-$VERSION = qw($Revision: 1.13 $) [1];
-
 # get options
 my %Opts = ();
 getopt( 'd', \%Opts );
@@ -40,8 +35,8 @@ if ( !$Opts{'d'} ) {
     $Opts{'h'} = 1;
 }
 if ( $Opts{'h'} ) {
-    print STDOUT "ConfigureOTRS.pl <Revision $VERSION> - script to configure OTRS\n";
-    print STDOUT "Copyright (C) 2001-2013 OTRS AG, http://otrs.org/\n";
+    print STDOUT "ConfigureOTRS.pl - script to configure OTRS\n";
+    print STDOUT "Copyright (C) 2001-2013 OTRS AG, http://otrs.com/\n";
     print STDOUT "usage: ConfigureOTRS.pl -d <install directory>\n\n";
     exit 1;
 }
