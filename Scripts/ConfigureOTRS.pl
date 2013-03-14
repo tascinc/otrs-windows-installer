@@ -191,8 +191,8 @@ sub PrepareConfigPm {
     my $NewString = $OrgString;
 
     my $Configuration = "
-    \$Self->{LogModule}          = 'Kernel::System::Log::File';
-    \$Self->{LogModule::LogFile} = '$OTRSDirQuoted/var/log/otrs.log';
+    \$Self->{'LogModule'}          = 'Kernel::System::Log::File';
+    \$Self->{'LogModule::LogFile'} = '$OTRSDirQuoted/var/log/otrs.log';
     # \$DIBI\$
 ";
 
