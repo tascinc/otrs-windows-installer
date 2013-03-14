@@ -1,13 +1,15 @@
 # --
 # CHANGES - change log of the Windows Installer
-# Copyright (C) 2001-2011 OTRS AG, http://otrs.org/
-# --
-# $Id: CHANGES-otrs4win,v 1.6 2011-05-23 14:43:43 mb Exp $
+# Copyright (C) 2001-2013 OTRS AG, http://otrs.com/
 # --
 # This software comes with ABSOLUTELY NO WARRANTY. For details, see
 # the enclosed file COPYING for license information (AGPL). If you
 # did not receive this file, see http://www.gnu.org/licenses/agpl.txt.
 # --
+
+2.4.5 2013-03-14
+- Added quotes around LogModule so it still works with Config.pm of OTRS
+  3.2.3 and later.
 
 2.4.4 2011-05-23
 - Added support for OTRS Scheduler service (if bundled with 3.1).
