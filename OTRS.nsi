@@ -24,11 +24,11 @@
 # define general information
 # ------------------------------------------------------------ #
 
-!define Installer_Home            "c:\otrs34win"
+!define Installer_Home            "d:\otrs34win"
 !define Installer_Home_Nsis       "${Installer_Home}\otrs4win"
 !define Installer_Version_Major   2
 !define Installer_Version_Minor   4
-!define Installer_Version_Patch   4
+!define Installer_Version_Patch   5
 #!define Installer_Version_Jointer "-"
 #!define Installer_Version_Postfix "beta2"
 !define Installer_Version_Jointer ""
@@ -36,8 +36,8 @@
 
 !define OTRS_Name            "OTRS"
 !define OTRS_Version_Major   3
-!define OTRS_Version_Minor   1
-!define OTRS_Version_Patch   0
+!define OTRS_Version_Minor   2
+!define OTRS_Version_Patch   4
 !define OTRS_Version_Jointer "."
 !define OTRS_Version_Postfix "beta2"
 #!define OTRS_Version_Jointer ""
