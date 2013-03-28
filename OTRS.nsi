@@ -28,7 +28,7 @@
 !define Installer_Home_Nsis       "${Installer_Home}\otrs4win"
 !define Installer_Version_Major   2
 !define Installer_Version_Minor   4
-!define Installer_Version_Patch   5
+!define Installer_Version_Patch   7
 #!define Installer_Version_Jointer "-"
 #!define Installer_Version_Postfix "beta2"
 !define Installer_Version_Jointer ""
