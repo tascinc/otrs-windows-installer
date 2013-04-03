@@ -35,7 +35,7 @@
 !define OTRS_Name            "OTRS"
 !define OTRS_Version_Major   3
 !define OTRS_Version_Minor   2
-!define OTRS_Version_Patch   2
+!define OTRS_Version_Patch   4
 #!define OTRS_Version_Jointer "."
 #!define OTRS_Version_Postfix "rc1"
 !define OTRS_Version_Jointer ""
@@ -792,14 +792,14 @@ Function InstStartWeb
 # after completion launch the web installer for a new install
 # or the agent interface for upgrade (possibly even package manager?)    
 
-    ${If} $Upgrade == "no"
-
+    ${If} $Upgrade == "no"	
+	
         # write a .json file to indicate we already had the License page
-        FileOpen $9 var\tmp\installer.json w ;Opens a Empty File an fills it
+        FileOpen $9 OTRS\var\tmp\installer.json w ;Opens a Empty File an fills it
         FileWrite $9 "{\"SkipLicense\":1}$\n"
         FileClose $9 ;Closes the filled file
         
-        # now open web installer
+		# open the web installer
         ExecShell "open" "http://localhost/otrs/installer.pl"
     ${Else}
         ExecShell "open" "http://localhost/otrs/index.pl"
