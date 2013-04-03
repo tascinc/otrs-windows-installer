@@ -603,7 +603,7 @@ Function .onInit
     # insert plugins
     !insertmacro MULTIUSER_INIT
 
-    # activate optional installater sections
+    # activate optional installer sections
     !insertmacro SelectSection ${InstMySQL}
     !insertmacro SelectSection ${InstApache}
 
@@ -793,10 +793,25 @@ Function InstStartWeb
 # or the agent interface for upgrade (possibly even package manager?)    
 
     ${If} $Upgrade == "no"
+
+        # write a .json file to indicate we already had the License page
+        FileOpen $9 var\tmp\installer.json w ;Opens a Empty File an fills it
+        FileWrite $9 "{\"SkipLicense\":1}$\n"
+        FileClose $9 ;Closes the filled file
+        
+        # now open web installer
         ExecShell "open" "http://localhost/otrs/installer.pl"
     ${Else}
         ExecShell "open" "http://localhost/otrs/index.pl"
     ${EndIf}
+
+FunctionEnd
+
+Function CancelAndLaunchSite
+
+    # Cancel was pressed, the user wants to go to ActiveState to download ActivePerl
+    # this opens http://www.activestate.com/activeperl/downloads but I can change the URL if needed
+    ExecShell "open" "http://j.mp/12g32nt"
 
 FunctionEnd
 
