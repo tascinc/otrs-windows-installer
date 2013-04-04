@@ -123,7 +123,7 @@ sub OTRSApacheConfigAdd {
 
     my $HttpdConf = $ApacheDir . '/conf/httpd.conf';
 
-    # check if http.con exists
+    # check if httpd.conf exists
     return if !-e $HttpdConf;
 
     # check if file is writeable
