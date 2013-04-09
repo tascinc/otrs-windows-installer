@@ -44,12 +44,12 @@
 !define OTRS_Url             "www.otrs.com"
 !define OTRS_Instance_Number 1
 
-!define OTRS_Version         "${OTRS_Version_Major}.${OTRS_Version_Minor}.${OTRS_Version_Patch}"
+!define OTRS_Version         "${OTRS_Version_Major}.${OTRS_Version_Minor}.${OTRS_Version_Patch}${OTRS_Version_Jointer}${OTRS_Version_Postfix}"
 !define OTRS_Instance        "Instance-${OTRS_Instance_Number}"
 !define OTRS_RegKey          "SOFTWARE\${OTRS_Name}"
 !define OTRS_RegKey_Instance "${OTRS_RegKey}\${OTRS_Instance}"
 
-!define Installer_Version "${Installer_Version_Major}.${Installer_Version_Minor}.${Installer_Version_Patch}"
+!define Installer_Version "${Installer_Version_Major}.${Installer_Version_Minor}.${Installer_Version_Patch}${Installer_Version_Jointer}${Installer_Version_Postfix}"
 !define Win_RegKey_Uninstall "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\${OTRS_Name}"
 
 var ActiveStatePerl
@@ -81,9 +81,9 @@ SetCompressor         /SOLID lzma
 SetCompressorDictSize 4
 SetDatablockOptimize  On
 
-Name         "${OTRS_Name} ${OTRS_Version} ${OTRS_Version_Postfix}"
-OutFile      "${Installer_Home}\otrs-${OTRS_Version}${OTRS_Version_Jointer}${OTRS_Version_Postfix}-win-installer-${Installer_Version}${Installer_Version_Jointer}${Installer_Version_Postfix}.exe"
-BrandingText "otrs4win installer - version ${Installer_Version} ${Installer_Version_Postfix}"
+Name         "${OTRS_Name} ${OTRS_Version}"
+OutFile      "${Installer_Home}\otrs-${OTRS_Version}-win-installer-${Installer_Version}.exe"
+BrandingText "otrs4win installer - version ${Installer_Version}"
 
 InstallDir $PROGRAMFILES32\${OTRS_Name}
 InstallDirRegKey HKLM "${OTRS_RegKey_Instance}" Path
