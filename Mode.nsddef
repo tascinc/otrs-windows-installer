@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!--
+This file was created by NSISDialogDesigner 1.1.2.0
+http://coolsoft.altervista.org/nsisdialogdesigner
+Do not edit manually!
+-->
+<Dialog Name="Mode" Style="none" ExStyle="none">
+  <Label Name="AdviseText" Location="22, 48" Size="394, 92" Text="For production environments, we recommend downloading and installing ActiveState ActivePerl (x86) before running the installer. If you continue, the installer will set up its own version of perl.&#xD;&#xA;&#xD;&#xA;This is perfectly fine for testing and evaluating OTRS but it has known stability issues." TabIndex="0" Style="none" ExStyle="none" />
+  <Label Name="Advise" Location="22, 25" Size="241, 23" Text="Advise:" Font="Microsoft Sans Serif, 8.25pt, style=Bold" TabIndex="0" Style="none" ExStyle="none" />
+  <Button Name="Continue" Location="228, 161" Size="200, 40" Text="Continue with installer" TabIndex="1" Style="none" ExStyle="none" />
+  <Button Name="Cancel" Location="22, 161" Size="200, 40" Text="Cancel and download Active Perl" TabIndex="1" Style="none" ExStyle="none" onClick="CancelAndLaunchSite" />
+</Dialog>

@@ -28,7 +28,7 @@
 !define Installer_Version_Minor   0
 !define Installer_Version_Patch   0
 !define Installer_Version_Jointer "-"
-!define Installer_Version_Postfix "beta2"
+!define Installer_Version_Postfix "beta3"
 #!define Installer_Version_Jointer ""
 #!define Installer_Version_Postfix ""
 
@@ -130,6 +130,7 @@ InstallDirRegKey HKLM "${OTRS_RegKey_Instance}" Path
 !include Sections.nsh
 !include WordFunc.nsh
 !include x64.nsh
+!include "Mode.nsdinc"
 
 !insertmacro "DirState"
 
@@ -140,6 +141,7 @@ InstallDirRegKey HKLM "${OTRS_RegKey_Instance}" Path
 # welcome page
 !define MUI_WELCOMEFINISHPAGE_BITMAP "${Installer_Home_Nsis}\Graphics\Wizard\OTRS.bmp"
 !insertmacro MUI_PAGE_WELCOME
+Page custom fnc_Mode_Show
 
 # license page (AGPL)
 !define MUI_LICENSEPAGE_RADIOBUTTONS
@@ -796,7 +798,7 @@ Function InstStartWeb
 	
         # write a .json file to indicate we already had the License page
         FileOpen $9 OTRS\var\tmp\installer.json w ;Opens a Empty File an fills it
-        FileWrite $9 "{\"SkipLicense\":1}$\n"
+        FileWrite $9 "{'SkipLicense':1}$\n"
         FileClose $9 ;Closes the filled file
         
 		# open the web installer
