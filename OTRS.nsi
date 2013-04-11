@@ -28,14 +28,14 @@
 !define Installer_Version_Minor   0
 !define Installer_Version_Patch   0
 !define Installer_Version_Jointer "-"
-!define Installer_Version_Postfix "beta3"
+!define Installer_Version_Postfix "beta1"
 #!define Installer_Version_Jointer ""
 #!define Installer_Version_Postfix ""
 
 !define OTRS_Name            "OTRS"
 !define OTRS_Version_Major   3
 !define OTRS_Version_Minor   2
-!define OTRS_Version_Patch   4
+!define OTRS_Version_Patch   5
 #!define OTRS_Version_Jointer "."
 #!define OTRS_Version_Postfix "rc1"
 !define OTRS_Version_Jointer ""
@@ -67,6 +67,8 @@ var Installed_OTRS_Version
 var InstallDirShort
 var InstallMode
 var Upgrade
+var hCtl_btn_OTRSLink
+var hCtl_label_Questions
 
 # ------------------------------------------------------------ #
 # define installer information
@@ -139,7 +141,11 @@ InstallDirRegKey HKLM "${OTRS_RegKey_Instance}" Path
 # ------------------------------------------------------------ #
 
 # welcome page
+!define MUI_WELCOMEPAGE_TEXT "This wizard will guide you through the installation of ${OTRS_Name}. $\r$\n$\r$\n\
+If you want to avoid rebooting your system after setup please close all other applications before starting the installation.$\r$\n$\r$\n\
+Click Install to start the installation."
 !define MUI_WELCOMEFINISHPAGE_BITMAP "${Installer_Home_Nsis}\Graphics\Wizard\OTRS.bmp"
+!define MUI_PAGE_CUSTOMFUNCTION_SHOW Questions
 !insertmacro MUI_PAGE_WELCOME
 Page custom fnc_Mode_Show
 
@@ -166,11 +172,10 @@ ShowInstDetails Hide
 !insertmacro MUI_PAGE_INSTFILES
 
 # finish page
-!define MUI_FINISHPAGE_RUN
-!define MUI_FINISHPAGE_RUN_FUNCTION  InstStartWeb
-!define MUI_FINISHPAGE_RUN_TEXT      $(mui_finishpage_run_text)
-!define MUI_FINISHPAGE_LINK          "powered by ${OTRS_Company}"
-!define MUI_FINISHPAGE_LINK_LOCATION "http://${OTRS_Url}"
+!define MUI_PAGE_CUSTOMFUNCTION_LEAVE InstStartWeb
+!define MUI_PAGE_CUSTOMFUNCTION_SHOW  Questions
+!define MUI_FINISHPAGE_TEXT           "Installation of all needed services to run ${OTRS_Name} finished successfully."
+!define MUI_FINISHPAGE_BUTTON         "Continue with Web Installer"
 !insertmacro MUI_PAGE_FINISH
 
 # ------------------------------------------------------------ #
@@ -189,8 +194,6 @@ ShowUninstDetails NeverShow
 !insertmacro MUI_UNPAGE_INSTFILES
 
 # finish page
-!define MUI_UNFINISHPAGE_LINK          "powered by ${OTRS_Company}"
-!define MUI_UNFINISHPAGE_LINK_LOCATION "http://${OTRS_Url}"
 !insertmacro MUI_UNPAGE_FINISH
 
 # ------------------------------------------------------------ #
@@ -761,6 +764,27 @@ Function InstCheckWebServerAlreadyInstalled
 
 FunctionEnd
 
+Function Questions
+
+    ${NSD_CreateLabel} 120u 180u 75u 12u "Questions? Need help?"
+    Pop $hCtl_label_Questions
+    SetCtlColors $hCtl_label_Questions "" "${MUI_BGCOLOR}"
+
+    ${NSD_CreateLink} 195u 180u 66u 12u "www.otrs.com"
+    Pop $hCtl_btn_OTRSLink
+    ${NSD_AddStyle} $hCtl_btn_OTRSLink ${WS_VISIBLE}
+    SetCtlColors $hCtl_btn_OTRSLink "0x31596B" "${MUI_BGCOLOR}"
+    ${NSD_OnClick} $hCtl_btn_OTRSLink onClickOTRSLink  
+
+FunctionEnd
+
+Function onClickOTRSLink
+
+    Pop $0
+    ExecShell "open" "http://www.otrs.com"
+
+	FunctionEnd
+
 Function DirectoryHide
 
     ${If} $Upgrade != "no"
@@ -798,7 +822,7 @@ Function InstStartWeb
 	
         # write a .json file to indicate we already had the License page
         FileOpen $9 OTRS\var\tmp\installer.json w ;Opens a Empty File an fills it
-        FileWrite $9 "{'SkipLicense':1}$\n"
+        FileWrite $9 "{'SkipLicense':1;'SkipLog':1}$\n"
         FileClose $9 ;Closes the filled file
         
 		# open the web installer
@@ -814,6 +838,7 @@ Function CancelAndLaunchSite
     # Cancel was pressed, the user wants to go to ActiveState to download ActivePerl
     # this opens http://www.activestate.com/activeperl/downloads but I can change the URL if needed
     ExecShell "open" "http://j.mp/12g32nt"
+	Quit
 
 FunctionEnd
 
