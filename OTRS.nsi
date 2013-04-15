@@ -143,7 +143,7 @@ InstallDirRegKey HKLM "${OTRS_RegKey_Instance}" Path
 # welcome page
 !define MUI_WELCOMEPAGE_TEXT "This wizard will guide you through the installation of ${OTRS_Name}. $\r$\n$\r$\n\
 If you want to avoid rebooting your system after setup please close all other applications before starting the installation.$\r$\n$\r$\n\
-Click Install to start the installation."
+Click Next to start the installation."
 !define MUI_WELCOMEFINISHPAGE_BITMAP "${Installer_Home_Nsis}\Graphics\Wizard\OTRS.bmp"
 !define MUI_PAGE_CUSTOMFUNCTION_SHOW Questions
 !insertmacro MUI_PAGE_WELCOME
@@ -174,8 +174,8 @@ ShowInstDetails Hide
 # finish page
 !define MUI_PAGE_CUSTOMFUNCTION_LEAVE InstStartWeb
 !define MUI_PAGE_CUSTOMFUNCTION_SHOW  Questions
-!define MUI_FINISHPAGE_TEXT           "Installation of all needed services to run ${OTRS_Name} finished successfully."
-!define MUI_FINISHPAGE_BUTTON         "Continue with Web Installer"
+!define MUI_FINISHPAGE_TEXT           "Installation of all needed services to run ${OTRS_Name} finished successfully.$\r$\n$\r$\n\If you click Launch you'll start the Web Installer to configure ${OTRS_Name}."
+!define MUI_FINISHPAGE_BUTTON         "Launch"
 !insertmacro MUI_PAGE_FINISH
 
 # ------------------------------------------------------------ #
@@ -361,13 +361,13 @@ Section /o -InstApache InstApache
        ${EnableX64FSRedirection}
 
        # now configure a web site, and setup perlex with its own application pool    
-       NSExec::ExecToLog '"$0\system32\inetsrv\appcmd.exe" add apppool /name:$\"OTRS$\"'
-       NSExec::ExecToLog '"$0\system32\inetsrv\appcmd.exe" set config /section:applicationPools -[name=$\'OTRS$\'].managedPipelineMode:Integrated'
-       NSExec::ExecToLog '"$0\system32\inetsrv\appcmd.exe" set config /section:applicationPools -[name=$\'OTRS$\'].enable32BitAppOnWin64:$\"True$\" /commit:apphost'
-       NSExec::ExecToLog '"$0\system32\inetsrv\appcmd.exe" set config /section:handlers /+[name=$\'PerlEx$\',path=$\'*.pl$\',verb=$\'*$\',modules=$\'IsapiModule$\',scriptProcessor=$\'c:\Perl\bin\PerlEx30.dll$\']'
-       NSExec::ExecToLog '"$0\system32\inetsrv\appcmd.exe" set config /section:system.webServer/security/isapiCgiRestriction /+[path=$\'$PerlEx$\',allowed=$\'True$\'] /commit:apphost'
-       NSExec::ExecToLog '"$0\system32\inetsrv\appcmd.exe" add vdir /app.name:$\"Default Web Site/$\" /path:/otrs-web /physicalPath:$INSTDIR\OTRS\var\httpd\htdocs'
-       NSExec::ExecToLog '"$0\system32\inetsrv\appcmd.exe" add app /site.name:$\"Default Web Site$\" /path:/otrs /physicalPath:$INSTDIR\OTRS\bin\cgi-bin -applicationPool:OTRS'
+       NSExec::ExecToLog '"$WINDIR\system32\inetsrv\appcmd.exe" add apppool /name:$\"OTRS$\"'
+       NSExec::ExecToLog '"$WINDIR\system32\inetsrv\appcmd.exe" set config /section:applicationPools -[name=$\'OTRS$\'].managedPipelineMode:Integrated'
+       NSExec::ExecToLog '"$WINDIR\system32\inetsrv\appcmd.exe" set config /section:applicationPools -[name=$\'OTRS$\'].enable32BitAppOnWin64:$\"True$\" /commit:apphost'
+       NSExec::ExecToLog '"$WINDIR\system32\inetsrv\appcmd.exe" set config /section:handlers /+[name=$\'PerlEx$\',path=$\'*.pl$\',verb=$\'*$\',modules=$\'IsapiModule$\',scriptProcessor=$\'c:\Perl\bin\PerlEx30.dll$\']'
+       NSExec::ExecToLog '"$WINDIR\system32\inetsrv\appcmd.exe" set config /section:system.webServer/security/isapiCgiRestriction /+[path=$\'$PerlEx$\',allowed=$\'True$\'] /commit:apphost'
+       NSExec::ExecToLog '"$WINDIR\system32\inetsrv\appcmd.exe" add vdir /app.name:$\"Default Web Site/$\" /path:/otrs-web /physicalPath:$INSTDIR\OTRS\var\httpd\htdocs'
+       NSExec::ExecToLog '"$WINDIR\system32\inetsrv\appcmd.exe" add app /site.name:$\"Default Web Site$\" /path:/otrs /physicalPath:$INSTDIR\OTRS\bin\cgi-bin -applicationPool:OTRS'
        
    ${EndIf}
 
@@ -821,8 +821,8 @@ Function InstStartWeb
     ${If} $Upgrade == "no"	
 	
         # write a .json file to indicate we already had the License page
-        FileOpen $9 OTRS\var\tmp\installer.json w ;Opens a Empty File an fills it
-        FileWrite $9 "{'SkipLicense':1;'SkipLog':1}$\n"
+        FileOpen $9 "$INSTDIR\OTRS\var\tmp\installer.json" w ;Opens a Empty File an fills it
+        FileWrite $9 "{$\"SkipLicense$\":1,$\"SkipLog$\":1}$\n"
         FileClose $9 ;Closes the filled file
         
 		# open the web installer

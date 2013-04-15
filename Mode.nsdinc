@@ -9,7 +9,16 @@ Var hCtl_Mode_Font1
 
 ; dialog create function
 Function fnc_Mode_Create
-  
+    ${If} $Upgrade != "no"
+         # don't show warning screen if we're upgrading
+         Abort
+    ${EndIf}
+	
+	${If} ${FileExists} "$ActiveStatePerl"
+         # don't show warning screen if ActiveState Perl is already installed
+         Abort
+    ${EndIf}
+
   ; custom font definitions
   CreateFont $hCtl_Mode_Font1 "Microsoft Sans Serif" "8.25" "700"
   
@@ -22,15 +31,15 @@ Function fnc_Mode_Create
   !insertmacro MUI_HEADER_TEXT "" "" 
   
   ; === AdviseText (type: Label) ===
-  ${NSD_CreateLabel} 14u 27u 259u 52u "For production environments downloading and installing Active State ActivePerl (x86) is higly recommended before running this installer.$\r$\n$\r$\nThis is perfectly fine for testing and evaluating OTRS but it has known stability issues."
+  ${NSD_CreateLabel} 14u 27u 259u 30u "For production environments downloading and installing Active State ActivePerl (x86) is higly recommended before running this installer."
   Pop $hCtl_Mode_AdviseText
   
   ; === Cancel (type: Button) ===
-  ${NSD_CreateButton} 14u 91u 131u 23u "Cancel and download Active Perl"
+  ${NSD_CreateButton} 14u 61u 131u 23u "Cancel and download Active Perl"
   Pop $hCtl_Mode_Cancel
   ${NSD_OnClick} $hCtl_Mode_Cancel CancelAndLaunchSite
 
-  ${NSD_CreateLabel} 14u 120u 259u 52u "If you click next, the installer will set up its own version of perl. Due to known stablility issues with mod_perl we recommend this only for testing or evaluating OTRS."
+  ${NSD_CreateLabel} 14u 90u 259u 52u "If you click Next, the installer will set up its own version of perl. Due to known stablility issues with mod_perl we recommend this only for testing or evaluating OTRS."
   Pop $hCtl_Mode_AdviseText2
     
 FunctionEnd
