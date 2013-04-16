@@ -174,7 +174,7 @@ ShowInstDetails Hide
 # finish page
 !define MUI_PAGE_CUSTOMFUNCTION_LEAVE InstStartWeb
 !define MUI_PAGE_CUSTOMFUNCTION_SHOW  Questions
-!define MUI_FINISHPAGE_TEXT           "Installation of all needed services to run ${OTRS_Name} finished successfully.$\r$\n$\r$\n\If you click Launch you'll start the Web Installer to configure ${OTRS_Name}."
+!define MUI_FINISHPAGE_TEXT           "Installation of all needed services to run ${OTRS_Name} finished successfully.$\r$\n$\r$\nIf you click 'Launch' you'll start the Web Installer to configure ${OTRS_Name}."
 !define MUI_FINISHPAGE_BUTTON         "Launch"
 !insertmacro MUI_PAGE_FINISH
 
