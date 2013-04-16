@@ -668,7 +668,7 @@ Function InstCheckAlreadyInstalled
                 Abort
         ${EndIf}        
 
-        ${If} $R0 = 1
+        ${If} $R0 = 2
             # we can only do patch level upgrades or upgrades that differ one minor
             ${If} $Installed_OTRS_Major < ${OTRS_Version_Major}
                 MessageBox MB_OK|MB_ICONSTOP "You have installed $Installed_OTRS_Version. Please don't skip minor levels when upgrading."
