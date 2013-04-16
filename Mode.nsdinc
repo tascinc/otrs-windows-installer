@@ -31,15 +31,15 @@ Function fnc_Mode_Create
   !insertmacro MUI_HEADER_TEXT "" "" 
   
   ; === AdviseText (type: Label) ===
-  ${NSD_CreateLabel} 14u 27u 259u 30u "For production environments downloading and installing Active State ActivePerl (x86) is higly recommended before running this installer."
+  ${NSD_CreateLabel} 14u 27u 259u 30u $(perl_advise_text_part1)
   Pop $hCtl_Mode_AdviseText
   
   ; === Cancel (type: Button) ===
-  ${NSD_CreateButton} 14u 61u 131u 23u "Cancel and download Active Perl"
+  ${NSD_CreateButton} 14u 61u 131u 23u $(perl_cancel_button)
   Pop $hCtl_Mode_Cancel
   ${NSD_OnClick} $hCtl_Mode_Cancel CancelAndLaunchSite
 
-  ${NSD_CreateLabel} 14u 90u 259u 52u "If you click Next, the installer will set up its own version of perl. Due to known stablility issues with mod_perl we recommend this only for testing or evaluating OTRS."
+  ${NSD_CreateLabel} 14u 90u 259u 52u $(perl_advise_text_part2)
   Pop $hCtl_Mode_AdviseText2
     
 FunctionEnd

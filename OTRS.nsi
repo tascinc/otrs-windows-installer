@@ -141,9 +141,7 @@ InstallDirRegKey HKLM "${OTRS_RegKey_Instance}" Path
 # ------------------------------------------------------------ #
 
 # welcome page
-!define MUI_WELCOMEPAGE_TEXT "This wizard will guide you through the installation of ${OTRS_Name}. $\r$\n$\r$\n\
-If you want to avoid rebooting your system after setup please close all other applications before starting the installation.$\r$\n$\r$\n\
-Click Next to start the installation."
+!define MUI_WELCOMEPAGE_TEXT $(mui_welcomepage_text)
 !define MUI_WELCOMEFINISHPAGE_BITMAP "${Installer_Home_Nsis}\Graphics\Wizard\OTRS.bmp"
 !define MUI_PAGE_CUSTOMFUNCTION_SHOW Questions
 !insertmacro MUI_PAGE_WELCOME
@@ -174,8 +172,8 @@ ShowInstDetails Hide
 # finish page
 !define MUI_PAGE_CUSTOMFUNCTION_LEAVE InstStartWeb
 !define MUI_PAGE_CUSTOMFUNCTION_SHOW  Questions
-!define MUI_FINISHPAGE_TEXT           "Installation of all needed services to run ${OTRS_Name} finished successfully.$\r$\n$\r$\nIf you click 'Launch' you'll start the Web Installer to configure ${OTRS_Name}."
-!define MUI_FINISHPAGE_BUTTON         "Launch"
+!define MUI_FINISHPAGE_TEXT           $(mui_finishpage_text)
+!define MUI_FINISHPAGE_BUTTON         $(mui_finishpage_button)
 !insertmacro MUI_PAGE_FINISH
 
 # ------------------------------------------------------------ #
@@ -200,9 +198,51 @@ ShowUninstDetails NeverShow
 # load languages
 # ------------------------------------------------------------ #
 
-# english strings
+# enable different languages
 !insertmacro MUI_LANGUAGE English
-LangString mui_finishpage_run_text ${LANG_ENGLISH} "Continue with Web Installer"
+!insertmacro MUI_LANGUAGE German
+!insertmacro MUI_LANGUAGE Spanish
+!insertmacro MUI_LANGUAGE Dutch
+
+# English strings
+LangString mui_welcomepage_text   ${LANG_ENGLISH} "This wizard will guide you through the installation of ${OTRS_Name}. $\r$\n$\r$\n\
+If you want to avoid rebooting your system after setup please close all other applications before starting the installation.$\r$\n$\r$\n\
+Click Next to start the installation."
+LangString perl_advise_text_part1 ${LANG_ENGLISH} "For production environments downloading and installing Active State ActivePerl (x86) is higly recommended before running this installer."
+LangString perl_cancel_button     ${LANG_ENGLISH} "Cancel and download Active Perl"
+LangString perl_advise_text_part2 ${LANG_ENGLISH} "If you click Next, the installer will set up its own version of perl. Due to known stablility issues with mod_perl we recommend this only for testing or evaluating OTRS."
+LangString mui_finishpage_text    ${LANG_ENGLISH} "Installation of all needed services to run ${OTRS_Name} finished successfully.$\r$\n$\r$\nIf you click 'Launch' you'll start the Web Installer to configure ${OTRS_Name}."
+LangString mui_finishpage_button  ${LANG_ENGLISH} "Launch"
+
+# German strings
+LangString mui_welcomepage_text   ${LANG_GERMAN} "This wizard will guide you through the installation of ${OTRS_Name}. $\r$\n$\r$\n\
+If you want to avoid rebooting your system after setup please close all other applications before starting the installation.$\r$\n$\r$\n\
+Click Next to start the installation."
+LangString perl_advise_text_part1 ${LANG_GERMAN} "For production environments downloading and installing Active State ActivePerl (x86) is higly recommended before running this installer."
+LangString perl_cancel_button     ${LANG_GERMAN} "Cancel and download Active Perl"
+LangString perl_advise_text_part2 ${LANG_GERMAN} "If you click Next, the installer will set up its own version of perl. Due to known stablility issues with mod_perl we recommend this only for testing or evaluating OTRS."
+LangString mui_finishpage_text    ${LANG_GERMAN} "Installation of all needed services to run ${OTRS_Name} finished successfully.$\r$\n$\r$\nIf you click 'Launch' you'll start the Web Installer to configure ${OTRS_Name}."
+LangString mui_finishpage_button  ${LANG_GERMAN} "Launch"
+
+# Spanish strings
+LangString mui_welcomepage_text   ${LANG_SPANISH} "This wizard will guide you through the installation of ${OTRS_Name}. $\r$\n$\r$\n\
+If you want to avoid rebooting your system after setup please close all other applications before starting the installation.$\r$\n$\r$\n\
+Click Next to start the installation."
+LangString perl_advise_text_part1 ${LANG_SPANISH} "For production environments downloading and installing Active State ActivePerl (x86) is higly recommended before running this installer."
+LangString perl_cancel_button     ${LANG_SPANISH} "Cancel and download Active Perl"
+LangString perl_advise_text_part2 ${LANG_SPANISH} "If you click Next, the installer will set up its own version of perl. Due to known stablility issues with mod_perl we recommend this only for testing or evaluating OTRS."
+LangString mui_finishpage_text    ${LANG_SPANISH} "Installation of all needed services to run ${OTRS_Name} finished successfully.$\r$\n$\r$\nIf you click 'Launch' you'll start the Web Installer to configure ${OTRS_Name}."
+LangString mui_finishpage_button  ${LANG_SPANISH} "Launch"
+
+# Dutch strings
+LangString mui_welcomepage_text   ${LANG_DUTCH} "Dit is de installatieprocedure voor ${OTRS_Name}. $\r$\n$\r$\n\
+als u een herstart wilt voorkomen kunt u het beste alle andere applicaties afsluiten voordat u deze installatie start.$\r$\n$\r$\n\
+Klik Volgende om de installatie te starten."
+LangString perl_advise_text_part1 ${LANG_DUTCH} "Voor gebruik in productie-omgevingen raden we aan om Active State ActivePerl (x86) te downloaden en installeren alvorens de OTRS installatie te starten."
+LangString perl_cancel_button     ${LANG_DUTCH} "Annuleer en download Active Perl"
+LangString perl_advise_text_part2 ${LANG_DUTCH} "Als u op Volgende klikt zal de installatieprocedure een gebundelde perl-versie installeren. Vanwege bekende stabiliteitsproblemen met mod_perl raden we aan dit alleen voor het testen of evalueren van OTRS te gebruiken."
+LangString mui_finishpage_text    ${LANG_DUTCH} "Installatie van alle services nodig voor ${OTRS_Name} is afgerond.$\r$\n$\r$\nZodra u op 'Start' klikt begint de Web Installer die u gebruikt voor het configureren van ${OTRS_Name}."
+LangString mui_finishpage_button  ${LANG_DUTCH} "Start"
 
 # ------------------------------------------------------------ #
 # install sections
