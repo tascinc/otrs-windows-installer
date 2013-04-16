@@ -211,9 +211,9 @@ Click Next to start the installation."
 LangString perl_header            ${LANG_ENGLISH} "Production or test environment?"
 LangString perl_subheader         ${LANG_ENGLISH} "Please install ActiveState Perl for production use"
 LangString perl_title             ${LANG_ENGLISH} "ActiveState Perl not found!"
-LangString perl_advise_text_part1 ${LANG_ENGLISH} "For production environments downloading and installing ActiveState ActivePerl (x86) is higly recommended before running this installer."
+LangString perl_advise_text_part1 ${LANG_ENGLISH} "For production environments downloading and installing ActiveState ActivePerl (x86) is highly recommended before running this installer."
 LangString perl_cancel_button     ${LANG_ENGLISH} "Cancel and download ActivePerl"
-LangString perl_advise_text_part2 ${LANG_ENGLISH} "If you click Next, the installer will set up its own version of perl. Due to known stablility issues with mod_perl we recommend this only for testing or evaluating ${OTRS_Name}."
+LangString perl_advise_text_part2 ${LANG_ENGLISH} "If you click Next, the installer will set up its own version of perl. Due to known stability issues with mod_perl we recommend this only for testing or evaluating ${OTRS_Name}."
 LangString mui_finishpage_text    ${LANG_ENGLISH} "Installation of all needed services to run ${OTRS_Name} finished successfully.$\r$\n$\r$\nIf you click 'Launch' you'll start the Web Installer to configure ${OTRS_Name}."
 LangString mui_finishpage_button  ${LANG_ENGLISH} "Launch"
 
@@ -231,17 +231,17 @@ LangString mui_finishpage_text    ${LANG_GERMAN} "Die Installation aller benöti
 LangString mui_finishpage_button  ${LANG_GERMAN} "Start"
 
 # Spanish strings
-LangString mui_welcomepage_text   ${LANG_SPANISH} "This wizard will guide you through the installation of ${OTRS_Name}. $\r$\n$\r$\n\
-If you want to avoid rebooting your system after setup please close all other applications before starting the installation.$\r$\n$\r$\n\
-Click Next to start the installation."
-LangString perl_header            ${LANG_SPANISH} "Production or test environment?"
-LangString perl_subheader         ${LANG_SPANISH} "Please install ActiveState Perl for production use"
-LangString perl_title             ${LANG_SPANISH} "ActiveState Perl not found!"
-LangString perl_advise_text_part1 ${LANG_SPANISH} "For production environments downloading and installing ActiveState ActivePerl (x86) is higly recommended before running this installer."
-LangString perl_cancel_button     ${LANG_SPANISH} "Cancel and download ActivePerl"
-LangString perl_advise_text_part2 ${LANG_SPANISH} "If you click Next, the installer will set up its own version of perl. Due to known stablility issues with mod_perl we recommend this only for testing or evaluating ${OTRS_Name}."
-LangString mui_finishpage_text    ${LANG_SPANISH} "Installation of all needed services to run ${OTRS_Name} finished successfully.$\r$\n$\r$\nIf you click 'Launch' you'll start the Web Installer to configure ${OTRS_Name}."
-LangString mui_finishpage_button  ${LANG_SPANISH} "Launch"
+LangString mui_welcomepage_text   ${LANG_SPANISH} "Este asistente le guiará a través de la instalación de ${OTRS_Name}. $\r$\n$\r$\n\
+Si usted desea evitar el reiniciar su sistema después de la instalación, por favor cierre cualquier otra aplicación antes de iniciar la instalación.$\r$\n$\r$\n\
+Haga clic en Siguiente para iniciar la instalación."
+LangString perl_header            ${LANG_SPANISH} "¿En producción o entorno de prueba?"
+LangString perl_subheader         ${LANG_SPANISH} "Por favor instale ActiveState Perl si será usado en producción"
+LangString perl_title             ${LANG_SPANISH} "!No se encontró ActiveState Perl!"
+LangString perl_advise_text_part1 ${LANG_SPANISH} "Para entornos de producción, la descarga e instalación de ActiveState ActivePerl (x86) es altamente recomendable antes de ejecutar este programa de instalación."
+LangString perl_cancel_button     ${LANG_SPANISH} "Cancelar y descargar ActivePerl"
+LangString perl_advise_text_part2 ${LANG_SPANISH} "Si hace clic en Siguiente, el programa de instalación colocará su propia versión de Perl. Debido a problemas de estabilidad conocidos con mod_perl recomendamos esto sólo para probar o evaluar ${OTRS_Name}."
+LangString mui_finishpage_text    ${LANG_SPANISH} "La instalación de todos los servicios necesarios para ejecutar ${OTRS_Name} finalizó con éxito.$\r$\n$\r$\nSi hace clic en 'Iniciar', podrá comenzar el instalador Web para configurar ${OTRS_Name}."
+LangString mui_finishpage_button  ${LANG_SPANISH} "Iniciar"
 
 # Dutch strings
 LangString mui_welcomepage_text   ${LANG_DUTCH} "Dit is de installatieprocedure voor ${OTRS_Name}. $\r$\n$\r$\n\
