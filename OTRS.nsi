@@ -208,6 +208,9 @@ ShowUninstDetails NeverShow
 LangString mui_welcomepage_text   ${LANG_ENGLISH} "This wizard will guide you through the installation of ${OTRS_Name}. $\r$\n$\r$\n\
 If you want to avoid rebooting your system after setup please close all other applications before starting the installation.$\r$\n$\r$\n\
 Click Next to start the installation."
+LangString perl_header            ${LANG_ENGLISH} "Production or test environment?"
+LangString perl_subheader         ${LANG_ENGLISH} "Please install ActiveState Perl for production use"
+LangString perl_title             ${LANG_ENGLISH} "Active State perl not found!"
 LangString perl_advise_text_part1 ${LANG_ENGLISH} "For production environments downloading and installing Active State ActivePerl (x86) is higly recommended before running this installer."
 LangString perl_cancel_button     ${LANG_ENGLISH} "Cancel and download Active Perl"
 LangString perl_advise_text_part2 ${LANG_ENGLISH} "If you click Next, the installer will set up its own version of perl. Due to known stablility issues with mod_perl we recommend this only for testing or evaluating OTRS."
@@ -218,6 +221,9 @@ LangString mui_finishpage_button  ${LANG_ENGLISH} "Launch"
 LangString mui_welcomepage_text   ${LANG_GERMAN} "This wizard will guide you through the installation of ${OTRS_Name}. $\r$\n$\r$\n\
 If you want to avoid rebooting your system after setup please close all other applications before starting the installation.$\r$\n$\r$\n\
 Click Next to start the installation."
+LangString perl_header            ${LANG_GERMAN} "Production or test environment?"
+LangString perl_subheader         ${LANG_GERMAN} "Please install ActiveState Perl for production use"
+LangString perl_title             ${LANG_GERMAN} "Active State perl not found!"
 LangString perl_advise_text_part1 ${LANG_GERMAN} "For production environments downloading and installing Active State ActivePerl (x86) is higly recommended before running this installer."
 LangString perl_cancel_button     ${LANG_GERMAN} "Cancel and download Active Perl"
 LangString perl_advise_text_part2 ${LANG_GERMAN} "If you click Next, the installer will set up its own version of perl. Due to known stablility issues with mod_perl we recommend this only for testing or evaluating OTRS."
@@ -228,6 +234,9 @@ LangString mui_finishpage_button  ${LANG_GERMAN} "Launch"
 LangString mui_welcomepage_text   ${LANG_SPANISH} "This wizard will guide you through the installation of ${OTRS_Name}. $\r$\n$\r$\n\
 If you want to avoid rebooting your system after setup please close all other applications before starting the installation.$\r$\n$\r$\n\
 Click Next to start the installation."
+LangString perl_header            ${LANG_SPANISH} "Production or test environment?"
+LangString perl_subheader         ${LANG_SPANISH} "Please install ActiveState Perl for production use"
+LangString perl_title             ${LANG_SPANISH} "Active State perl not found!"
 LangString perl_advise_text_part1 ${LANG_SPANISH} "For production environments downloading and installing Active State ActivePerl (x86) is higly recommended before running this installer."
 LangString perl_cancel_button     ${LANG_SPANISH} "Cancel and download Active Perl"
 LangString perl_advise_text_part2 ${LANG_SPANISH} "If you click Next, the installer will set up its own version of perl. Due to known stablility issues with mod_perl we recommend this only for testing or evaluating OTRS."
@@ -238,6 +247,9 @@ LangString mui_finishpage_button  ${LANG_SPANISH} "Launch"
 LangString mui_welcomepage_text   ${LANG_DUTCH} "Dit is de installatieprocedure voor ${OTRS_Name}. $\r$\n$\r$\n\
 als u een herstart wilt voorkomen kunt u het beste alle andere applicaties afsluiten voordat u deze installatie start.$\r$\n$\r$\n\
 Klik Volgende om de installatie te starten."
+LangString perl_header            ${LANG_DUTCH} "Productie- of testomgeving?"
+LangString perl_subheader         ${LANG_DUTCH} "Installeer ActiveState perl op productie-omgevingen"
+LangString perl_title             ${LANG_DUTCH} "Geen Active State perl gevonden!"
 LangString perl_advise_text_part1 ${LANG_DUTCH} "Voor gebruik in productie-omgevingen raden we aan om Active State ActivePerl (x86) te downloaden en installeren alvorens de OTRS installatie te starten."
 LangString perl_cancel_button     ${LANG_DUTCH} "Annuleer en download Active Perl"
 LangString perl_advise_text_part2 ${LANG_DUTCH} "Als u op Volgende klikt zal de installatieprocedure een gebundelde perl-versie installeren. Vanwege bekende stabiliteitsproblemen met mod_perl raden we aan dit alleen voor het testen of evalueren van OTRS te gebruiken."
