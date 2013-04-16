@@ -569,7 +569,7 @@ SectionEnd
 # uninstall CRONw section
 Section -un.UninstCRONw
 
-    # register CRONw as service
+    # deregister CRONw as service
     NSExec::ExecToLog "$\"$PerlExe$\" $\"$INSTDIR\CRONw\cronHelper.pl$\" --remove"
 
     # delete the CRONw files
@@ -873,7 +873,7 @@ Function InstStartWeb
     ${If} $Upgrade == "no"	
 	
         # write a .json file to indicate we already had the License page
-        FileOpen $9 "$INSTDIR\OTRS\var\tmp\installer.json" w ;Opens a Empty File an fills it
+        FileOpen $9 "$INSTDIR\OTRS\var\tmp\installer.json" w ;Opens an empty file for writing
         FileWrite $9 "{$\"SkipLicense$\":1,$\"SkipLog$\":1}$\n"
         FileClose $9 ;Closes the filled file
         
