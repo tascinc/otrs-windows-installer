@@ -40,7 +40,7 @@ Function fnc_Mode_Create
   Pop $hCtl_Mode_AdviseText
   
   ; === Cancel (type: Button) ===
-  ${NSD_CreateButton} 14u 61u 131u 23u $(perl_cancel_button)
+  ${NSD_CreateButton} 14u 57u 131u 23u $(perl_cancel_button)
   Pop $hCtl_Mode_Cancel
   ${NSD_OnClick} $hCtl_Mode_Cancel CancelAndLaunchSite
 

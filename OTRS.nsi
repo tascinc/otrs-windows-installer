@@ -208,6 +208,7 @@ ShowUninstDetails NeverShow
 LangString mui_welcomepage_text   ${LANG_ENGLISH} "This wizard will guide you through the installation of ${OTRS_Name}. $\r$\n$\r$\n\
 If you want to avoid rebooting your system after setup please close all other applications before starting the installation.$\r$\n$\r$\n\
 Click Next to start the installation."
+LangString questions              ${LANG_ENGLISH} "Questions? Need help?"
 LangString perl_header            ${LANG_ENGLISH} "Production or test environment?"
 LangString perl_subheader         ${LANG_ENGLISH} "Please install ActiveState Perl for production use"
 LangString perl_title             ${LANG_ENGLISH} "ActiveState Perl not found!"
@@ -221,6 +222,7 @@ LangString mui_finishpage_button  ${LANG_ENGLISH} "Launch"
 LangString mui_welcomepage_text   ${LANG_GERMAN} "Dieser Assistent wird Sie durch den Installationsprozess von ${OTRS_Name} führen. $\r$\n$\r$\n\
 Um einen Neustart nach Abschluss der Installation zu vermeiden, schließen Sie bitte alle laufenden Programme bevor Sie die Installation starten.$\r$\n$\r$\n\
 Fortfahren um die Installation zu starten."
+LangString questions              ${LANG_GERMAN} "Fragen? Benötigen Sie Hilfe?"
 LangString perl_header            ${LANG_GERMAN} "Produktiv- oder Testumgebung?"
 LangString perl_subheader         ${LANG_GERMAN} "Bei produktiven Einsatz bitte ActiveState Perl benutzen"
 LangString perl_title             ${LANG_GERMAN} "ActiveState Perl nicht gefunden!"
@@ -234,6 +236,7 @@ LangString mui_finishpage_button  ${LANG_GERMAN} "Start"
 LangString mui_welcomepage_text   ${LANG_SPANISH} "Este asistente le guiará a través de la instalación de ${OTRS_Name}. $\r$\n$\r$\n\
 Si usted desea evitar el reiniciar su sistema después de la instalación, por favor cierre cualquier otra aplicación antes de iniciar la instalación.$\r$\n$\r$\n\
 Haga clic en Siguiente para iniciar la instalación."
+LangString questions              ${LANG_SPANISH} "Questions? Need help?"
 LangString perl_header            ${LANG_SPANISH} "¿En producción o entorno de prueba?"
 LangString perl_subheader         ${LANG_SPANISH} "Por favor instale ActiveState Perl si será usado en producción"
 LangString perl_title             ${LANG_SPANISH} "!No se encontró ActiveState Perl!"
@@ -247,6 +250,7 @@ LangString mui_finishpage_button  ${LANG_SPANISH} "Iniciar"
 LangString mui_welcomepage_text   ${LANG_DUTCH} "Dit is de installatieprocedure voor ${OTRS_Name}. $\r$\n$\r$\n\
 als u een herstart wilt voorkomen kunt u het beste alle andere applicaties afsluiten voordat u deze installatie start.$\r$\n$\r$\n\
 Klik Volgende om de installatie te starten."
+LangString questions              ${LANG_DUTCH} "Vragen? Hulp nodig?"
 LangString perl_header            ${LANG_DUTCH} "Productie- of testomgeving?"
 LangString perl_subheader         ${LANG_DUTCH} "Installeer ActiveState perl op productie-omgevingen"
 LangString perl_title             ${LANG_DUTCH} "Geen ActiveState Perl gevonden!"
@@ -821,7 +825,7 @@ FunctionEnd
 
 Function Questions
 
-    ${NSD_CreateLabel} 120u 180u 75u 12u "Questions? Need help?"
+    ${NSD_CreateLabel} 120u 180u 75u 12u $(questions)
     Pop $hCtl_label_Questions
     SetCtlColors $hCtl_label_Questions "" "${MUI_BGCOLOR}"
 
