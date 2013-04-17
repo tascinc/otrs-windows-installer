@@ -218,29 +218,29 @@ LangString mui_finishpage_text    ${LANG_ENGLISH} "Installation of all needed se
 LangString mui_finishpage_button  ${LANG_ENGLISH} "Launch"
 
 # German strings
-LangString mui_welcomepage_text   ${LANG_GERMAN} "Dieser Assistent wird Sie durch den Installationsprozess von ${OTRS_Name} fÃ¼hren. $\r$\n$\r$\n\
-Um einen Neustart nach Abschluss der Installation zu vermeiden, schlieÃŸen Sie bitte alle laufenden Programme bevor Sie die Installation starten.$\r$\n$\r$\n\
+LangString mui_welcomepage_text   ${LANG_GERMAN} "Dieser Assistent wird Sie durch den Installationsprozess von ${OTRS_Name} führen. $\r$\n$\r$\n\
+Um einen Neustart nach Abschluss der Installation zu vermeiden, schließen Sie bitte alle laufenden Programme bevor Sie die Installation starten.$\r$\n$\r$\n\
 Fortfahren um die Installation zu starten."
 LangString perl_header            ${LANG_GERMAN} "Produktiv- oder Testumgebung?"
 LangString perl_subheader         ${LANG_GERMAN} "Bei produktiven Einsatz bitte ActiveState Perl benutzen"
 LangString perl_title             ${LANG_GERMAN} "ActiveState Perl nicht gefunden!"
-LangString perl_advise_text_part1 ${LANG_GERMAN} "FÃ¼r produktive Umgebungen wird dringend empfohlen, ActiveState ActivePerl (x86) herunterzuladen und zu installieren, bevor dieser Installer gestartet wird."
+LangString perl_advise_text_part1 ${LANG_GERMAN} "Für produktive Umgebungen wird dringend empfohlen, ActiveState ActivePerl (x86) herunterzuladen und zu installieren, bevor dieser Installer gestartet wird."
 LangString perl_cancel_button     ${LANG_GERMAN} "Abbrechen und ActivePerl downloaden"
-LangString perl_advise_text_part2 ${LANG_GERMAN} "Wenn Sie fortfahren, wird eine integrierte Perl-Version verwendet. Wegen bekannter StabilitÃ¤tsprobleme von mod_perl wird dies nur empfohlen um ${OTRS_Name} zu evaluieren oder zu testen."
-LangString mui_finishpage_text    ${LANG_GERMAN} "Die Installation aller benÃ¶tigten Dienste um ${OTRS_Name} zu betreiben wurde erfolgreich abgeschlossen.$\r$\n$\r$\nBitte 'Start' klicken um ${OTRS_Name} mit Hilfe des WebInstallers zu konfigurieren."
+LangString perl_advise_text_part2 ${LANG_GERMAN} "Wenn Sie fortfahren, wird eine integrierte Perl-Version verwendet. Wegen bekannter Stabilitätsprobleme von mod_perl wird dies nur empfohlen um ${OTRS_Name} zu evaluieren oder zu testen."
+LangString mui_finishpage_text    ${LANG_GERMAN} "Die Installation aller benötigten Dienste um ${OTRS_Name} zu betreiben wurde erfolgreich abgeschlossen.$\r$\n$\r$\nBitte 'Start' klicken um ${OTRS_Name} mit Hilfe des WebInstallers zu konfigurieren."
 LangString mui_finishpage_button  ${LANG_GERMAN} "Start"
 
 # Spanish strings
-LangString mui_welcomepage_text   ${LANG_SPANISH} "Este asistente le guiarÃ¡ a travÃ©s de la instalaciÃ³n de ${OTRS_Name}. $\r$\n$\r$\n\
-Si usted desea evitar el reiniciar su sistema despuÃ©s de la instalaciÃ³n, por favor cierre cualquier otra aplicaciÃ³n antes de iniciar la instalaciÃ³n.$\r$\n$\r$\n\
-Haga clic en Siguiente para iniciar la instalaciÃ³n."
-LangString perl_header            ${LANG_SPANISH} "Â¿En producciÃ³n o entorno de prueba?"
-LangString perl_subheader         ${LANG_SPANISH} "Por favor instale ActiveState Perl si serÃ¡ usado en producciÃ³n"
-LangString perl_title             ${LANG_SPANISH} "!No se encontrÃ³ ActiveState Perl!"
-LangString perl_advise_text_part1 ${LANG_SPANISH} "Para entornos de producciÃ³n, la descarga e instalaciÃ³n de ActiveState ActivePerl (x86) es altamente recomendable antes de ejecutar este programa de instalaciÃ³n."
+LangString mui_welcomepage_text   ${LANG_SPANISH} "Este asistente le guiará a través de la instalación de ${OTRS_Name}. $\r$\n$\r$\n\
+Si usted desea evitar el reiniciar su sistema después de la instalación, por favor cierre cualquier otra aplicación antes de iniciar la instalación.$\r$\n$\r$\n\
+Haga clic en Siguiente para iniciar la instalación."
+LangString perl_header            ${LANG_SPANISH} "¿En producción o entorno de prueba?"
+LangString perl_subheader         ${LANG_SPANISH} "Por favor instale ActiveState Perl si será usado en producción"
+LangString perl_title             ${LANG_SPANISH} "!No se encontró ActiveState Perl!"
+LangString perl_advise_text_part1 ${LANG_SPANISH} "Para entornos de producción, la descarga e instalación de ActiveState ActivePerl (x86) es altamente recomendable antes de ejecutar este programa de instalación."
 LangString perl_cancel_button     ${LANG_SPANISH} "Cancelar y descargar ActivePerl"
-LangString perl_advise_text_part2 ${LANG_SPANISH} "Si hace clic en Siguiente, el programa de instalaciÃ³n colocarÃ¡ su propia versiÃ³n de Perl. Debido a problemas de estabilidad conocidos con mod_perl recomendamos esto sÃ³lo para probar o evaluar ${OTRS_Name}."
-LangString mui_finishpage_text    ${LANG_SPANISH} "La instalaciÃ³n de todos los servicios necesarios para ejecutar ${OTRS_Name} finalizÃ³ con Ã©xito.$\r$\n$\r$\nSi hace clic en 'Iniciar', podrÃ¡ comenzar el instalador Web para configurar ${OTRS_Name}."
+LangString perl_advise_text_part2 ${LANG_SPANISH} "Si hace clic en Siguiente, el programa de instalación colocará su propia versión de Perl. Debido a problemas de estabilidad conocidos con mod_perl recomendamos esto sólo para probar o evaluar ${OTRS_Name}."
+LangString mui_finishpage_text    ${LANG_SPANISH} "La instalación de todos los servicios necesarios para ejecutar ${OTRS_Name} finalizó con éxito.$\r$\n$\r$\nSi hace clic en 'Iniciar', podrá comenzar el instalador Web para configurar ${OTRS_Name}."
 LangString mui_finishpage_button  ${LANG_SPANISH} "Iniciar"
 
 # Dutch strings
@@ -420,10 +420,10 @@ Section /o -InstApache InstApache
        NSExec::ExecToLog '"$WINDIR\system32\inetsrv\appcmd.exe" set config /section:system.webServer/security/isapiCgiRestriction /+[path=$\'$PerlEx$\',allowed=$\'True$\'] /commit:apphost'
        NSExec::ExecToLog '"$WINDIR\system32\inetsrv\appcmd.exe" add vdir /app.name:$\"Default Web Site/$\" /path:/otrs-web /physicalPath:$INSTDIR\OTRS\var\httpd\htdocs'
        NSExec::ExecToLog '"$WINDIR\system32\inetsrv\appcmd.exe" add app /site.name:$\"Default Web Site$\" /path:/otrs /physicalPath:$INSTDIR\OTRS\bin\cgi-bin -applicationPool:OTRS'
-	   
-	   # write permission on OTRS sub folder for IIS
+       
+       # write permission on OTRS sub folder for IIS
        AccessControl::GrantOnFile "$INSTDIR\OTRS" "(S-1-5-32-545)" "FullAccess"
-	   
+       
    ${EndIf}
 
 SectionEnd
@@ -447,7 +447,7 @@ Section -InstOTRS
     # register Scheduler service (just for 3.1 and later)
     IfFileExists $INSTDIR\OTRS\bin\otrs.Scheduler4winInstaller.pl 0 +2
         NSExec::ExecToLog "$\"$PerlExe$\" $\"$INSTDIR\OTRS\bin\otrs.Scheduler4winInstaller.pl$\" -a install"
-	${EndIf}
+    ${EndIf}
         
     # add common otrs information
     WriteRegStr HKLM "${OTRS_RegKey_Instance}" OTRS_Version_Major   "${OTRS_Version_Major}"
@@ -838,7 +838,7 @@ Function onClickOTRSLink
     Pop $0
     ExecShell "open" "http://www.otrs.com"
 
-	FunctionEnd
+    FunctionEnd
 
 Function DirectoryHide
 
@@ -873,14 +873,14 @@ Function InstStartWeb
 # after completion launch the web installer for a new install
 # or the agent interface for upgrade (possibly even package manager?)    
 
-    ${If} $Upgrade == "no"	
-	
+    ${If} $Upgrade == "no"  
+    
         # write a .json file to indicate we already had the License page
         FileOpen $9 "$INSTDIR\OTRS\var\tmp\installer.json" w ;Opens an empty file for writing
         FileWrite $9 "{$\"SkipLicense$\":1,$\"SkipLog$\":1}$\n"
         FileClose $9 ;Closes the filled file
         
-		# open the web installer
+        # open the web installer
         ExecShell "open" "http://localhost/otrs/installer.pl"
     ${Else}
         ExecShell "open" "http://localhost/otrs/index.pl"
@@ -893,7 +893,7 @@ Function CancelAndLaunchSite
     # Cancel was pressed, the user wants to go to ActiveState to download ActivePerl
     # this opens http://www.activestate.com/activeperl/downloads but I can change the URL if needed
     ExecShell "open" "http://j.mp/12g32nt"
-	Quit
+    Quit
 
 FunctionEnd
 
