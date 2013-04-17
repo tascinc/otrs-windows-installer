@@ -420,7 +420,10 @@ Section /o -InstApache InstApache
        NSExec::ExecToLog '"$WINDIR\system32\inetsrv\appcmd.exe" set config /section:system.webServer/security/isapiCgiRestriction /+[path=$\'$PerlEx$\',allowed=$\'True$\'] /commit:apphost'
        NSExec::ExecToLog '"$WINDIR\system32\inetsrv\appcmd.exe" add vdir /app.name:$\"Default Web Site/$\" /path:/otrs-web /physicalPath:$INSTDIR\OTRS\var\httpd\htdocs'
        NSExec::ExecToLog '"$WINDIR\system32\inetsrv\appcmd.exe" add app /site.name:$\"Default Web Site$\" /path:/otrs /physicalPath:$INSTDIR\OTRS\bin\cgi-bin -applicationPool:OTRS'
-       
+	   
+	   # write permission on OTRS sub folder for IIS
+       AccessControl::GrantOnFile "$INSTDIR\OTRS" "(S-1-5-32-545)" "FullAccess"
+	   
    ${EndIf}
 
 SectionEnd
@@ -435,16 +438,16 @@ Section -InstOTRS
         
     File /r "${Installer_Home}\OTRS"
 
+    # configure OTRS
+    GetFullPathName /SHORT $InstallDirShort $INSTDIR
+    NSExec::ExecToLog "$\"$PerlExe$\" $\"$INSTDIR\otrs4win\Scripts\ConfigureOTRS.pl$\" -d $\"$InstallDirShort$\""
+
     ${If} $Upgrade == "no"
 
-    # configure OTRS
-        GetFullPathName /SHORT $InstallDirShort $INSTDIR
-        NSExec::ExecToLog "$\"$PerlExe$\" $\"$INSTDIR\otrs4win\Scripts\ConfigureOTRS.pl$\" -d $\"$InstallDirShort$\""
-
-        # register Scheduler service (just for 3.1 and later)
-        IfFileExists $INSTDIR\OTRS\bin\otrs.Scheduler4winInstaller.pl 0 +2
-            NSExec::ExecToLog "$\"$PerlExe$\" $\"$INSTDIR\OTRS\bin\otrs.Scheduler4winInstaller.pl$\" -a install"
-    ${EndIf}
+    # register Scheduler service (just for 3.1 and later)
+    IfFileExists $INSTDIR\OTRS\bin\otrs.Scheduler4winInstaller.pl 0 +2
+        NSExec::ExecToLog "$\"$PerlExe$\" $\"$INSTDIR\OTRS\bin\otrs.Scheduler4winInstaller.pl$\" -a install"
+	${EndIf}
         
     # add common otrs information
     WriteRegStr HKLM "${OTRS_RegKey_Instance}" OTRS_Version_Major   "${OTRS_Version_Major}"
