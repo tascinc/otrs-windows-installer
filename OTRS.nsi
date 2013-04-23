@@ -830,7 +830,7 @@ Function Questions
     Pop $hCtl_label_Questions
     SetCtlColors $hCtl_label_Questions "" "${MUI_BGCOLOR}"
 
-    ${NSD_CreateLink} 195u 180u 66u 12u "www.otrs.com"
+    ${NSD_CreateLink} 235u 180u 66u 12u "www.otrs.com"
     Pop $hCtl_btn_OTRSLink
     ${NSD_AddStyle} $hCtl_btn_OTRSLink ${WS_VISIBLE}
     SetCtlColors $hCtl_btn_OTRSLink "0x31596B" "${MUI_BGCOLOR}"
