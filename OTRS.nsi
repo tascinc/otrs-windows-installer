@@ -665,6 +665,7 @@ Function .onInit
     Call InstCheckWebServerAlreadyInstalled
 
     # insert plugins
+	!insertmacro MUI_LANGDLL_DISPLAY
     !insertmacro MULTIUSER_INIT
 
     # activate optional installer sections
