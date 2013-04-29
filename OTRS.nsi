@@ -56,7 +56,6 @@ var PerlMajor
 var PerlMinor
 var PerlExe
 var MySQLInstalled
-var MyDirectory
 var Installed_OTRS_Major
 var Installed_OTRS_Minor
 var Installed_OTRS_Patch
