@@ -71,6 +71,36 @@ die if !-d $ExtractedDirectory;
 rename $ExtractedDirectory, File::Spec->catfile( $Path, 'OTRS' );
 print "Done.\n\n";
 
+# patch files from master - for web installer
+my $RootURL = 'https://raw.github.com/OTRS/otrs/master';
+
+print "Dowloading files from 'master' to patch web installer...\n";
+for my $File (
+    qw (
+    Kernel/Modules/Installer.pm
+    Kernel/Output/HTML/Standard/Installer.dtl
+    Kernel/Output/HTML/Standard/InstallerConfigureMail.dtl
+    Kernel/Output/HTML/Standard/InstallerDBResult.dtl
+    Kernel/Output/HTML/Standard/InstallerDBStart.dtl
+    Kernel/Output/HTML/Standard/InstallerFinish.dtl
+    Kernel/Output/HTML/Standard/InstallerLicense.dtl
+    Kernel/Output/HTML/Standard/InstallerLicenseText.dtl
+    Kernel/Output/HTML/Standard/InstallerRegistration.dtl
+    Kernel/Output/HTML/Standard/InstallerSystem.dtl
+    var/httpd/htdocs/js/Core.Installer.js
+    var/httpd/htdocs/skins/Agent/default/css/Core.Installer.css
+    )
+    )
+{
+    print "\tGetting $File...\n";
+    my $URL          = "$RootURL/$File";
+    my $FileName     = File::Spec->catfile( $Path, 'OTRS', $File );
+    my $ResponseCode = getstore( $URL, $FileName );
+    die "Problem from downloading '$URL', response code $ResponseCode!\n" if $ResponseCode ne '200';
+    print ""
+}
+print "Done.\n\n";
+
 # update nsis installer file with current version
 print "Updating NSIS installer file...\n";
 my $Product = basename( $URL, '.zip' );
