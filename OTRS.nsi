@@ -33,11 +33,9 @@
 #!define Installer_Version_Postfix ""
 
 !define OTRS_Name            "OTRS"
-!define OTRS_Version_Major   3
-!define OTRS_Version_Minor   2
-!define OTRS_Version_Patch   6
-#!define OTRS_Version_Jointer "."
-#!define OTRS_Version_Postfix "rc1"
+!define OTRS_Version_Major "3"
+!define OTRS_Version_Minor "2"
+!define OTRS_Version_Patch "6"
 !define OTRS_Version_Jointer ""
 !define OTRS_Version_Postfix ""
 !define OTRS_Company         "OTRS Group"
@@ -826,11 +824,11 @@ FunctionEnd
 
 Function Questions
 
-    ${NSD_CreateLabel} 120u 180u 75u 12u $(questions)
+    ${NSD_CreateLabel} 120u 171u 95u 9u $(questions)
     Pop $hCtl_label_Questions
     SetCtlColors $hCtl_label_Questions "" "${MUI_BGCOLOR}"
 
-    ${NSD_CreateLink} 235u 180u 66u 12u "www.otrs.com"
+    ${NSD_CreateLink} 120u 180u 66u 12u "www.otrs.com"
     Pop $hCtl_btn_OTRSLink
     ${NSD_AddStyle} $hCtl_btn_OTRSLink ${WS_VISIBLE}
     SetCtlColors $hCtl_btn_OTRSLink "0x31596B" "${MUI_BGCOLOR}"
