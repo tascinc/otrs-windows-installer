@@ -28,7 +28,7 @@
 !define Installer_Version_Minor   0
 !define Installer_Version_Patch   0
 !define Installer_Version_Jointer "-"
-!define Installer_Version_Postfix "beta2"
+!define Installer_Version_Postfix "rc1"
 #!define Installer_Version_Jointer ""
 #!define Installer_Version_Postfix ""
 
