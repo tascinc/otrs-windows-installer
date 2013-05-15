@@ -82,6 +82,9 @@ for my $File (
     Kernel/Output/HTML/Standard/InstallerConfigureMail.dtl
     Kernel/Output/HTML/Standard/InstallerDBResult.dtl
     Kernel/Output/HTML/Standard/InstallerDBStart.dtl
+	Kernel/Output/HTML/Standard/InstallerDBmssql.dtl
+	Kernel/Output/HTML/Standard/InstallerDBmysql.dtl
+	Kernel/Output/HTML/Standard/InstallerDBpostgresql.dtl
     Kernel/Output/HTML/Standard/InstallerFinish.dtl
     Kernel/Output/HTML/Standard/InstallerLicense.dtl
     Kernel/Output/HTML/Standard/InstallerLicenseText.dtl
