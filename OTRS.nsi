@@ -878,6 +878,7 @@ Function InstStartWeb
     ${If} $Upgrade == "no"  
     
         # write a .json file to indicate we already had the License page
+		CreateDirectory $INSTDIR\OTRS\var\tmp
         FileOpen $9 "$INSTDIR\OTRS\var\tmp\installer.json" w ;Opens an empty file for writing
         FileWrite $9 "{$\"SkipLicense$\":1,$\"SkipLog$\":1}$\n"
         FileClose $9 ;Closes the filled file
