@@ -33,7 +33,7 @@ Function fnc_Mode_Create
   ; === Title (type: Label ===
   ${NSD_CreateLabel} 14u 15u 259u 12u $(perl_title)
   pop $hCtl_Mode_Title
-  SendMessage $hCtl_Mode_Advise ${WM_SETFONT} $hCtl_Mode_Font1 0
+  SendMessage $hCtl_Mode_Title ${WM_SETFONT} $hCtl_Mode_Font1 0
   
   ; === AdviseText (type: Label) ===
   ${NSD_CreateLabel} 14u 27u 259u 30u $(perl_advise_text_part1)
