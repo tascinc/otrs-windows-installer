@@ -1,0 +1,63 @@
+; handle variables
+Var hCtl_DatabaseSelection
+Var hCtl_DatabaseSelection_Label1
+Var hCtl_DatabaseSelection_Bundled
+Var hCtl_DatabaseSelection_NoMySQL
+Var hCtl_DatabaseSelection_Font1
+Var BundledMySQL
+
+Var hwnd
+
+
+; dialog create function
+Function fnc_DatabaseSelection_Create
+    ${If} $Upgrade != "no"
+         # don't show warning screen if we're upgrading
+         Abort
+    ${EndIf}
+
+  ; custom font definitions
+  CreateFont $hCtl_DatabaseSelection_Font1 "Microsoft Sans Serif" "8.25" "700"
+  
+  ; === DatabaseSelection (type: Dialog) ===
+  nsDialogs::Create 1018
+  Pop $hCtl_DatabaseSelection
+  ${If} $hCtl_DatabaseSelection == error
+    Abort
+  ${EndIf}
+  !insertmacro MUI_HEADER_TEXT "Select database for use" ""
+  
+  ; === Label1 (type: Label) ===
+  ${NSD_CreateLabel} 18u 14u 243u 13u "Options"
+  Pop $hCtl_DatabaseSelection_Label1
+  SendMessage $hCtl_DatabaseSelection_Label1 ${WM_SETFONT} $hCtl_DatabaseSelection_Font1 0
+  
+  ; === Bundled (type: RadioButton) ===
+  ${NSD_CreateRadioButton} 27u 39u 242u 14u "Install Bundled MySQL"
+        Pop $hCtl_DatabaseSelection_Bundled
+        ${NSD_AddStyle} $hCtl_DatabaseSelection_Bundled ${WS_GROUP}
+        ${NSD_Check} $hCtl_DatabaseSelection_Bundled
+        ${NSD_OnClick} $hCtl_DatabaseSelection_Bundled RadioClick
+        
+  ; === NoMySQL (type: RadioButton) ===
+  ${NSD_CreateRadioButton} 27u 56u 234u 14u "I have installed my own database"
+  Pop $hCtl_DatabaseSelection_NoMySQL
+  ${NSD_OnClick} $hCtl_DatabaseSelection_NoMySQL RadioClick
+  
+FunctionEnd
+
+
+; dialog show function
+Function fnc_DatabaseSelection_Show
+  Call fnc_DatabaseSelection_Create
+  nsDialogs::Show $hCtl_DatabaseSelection
+FunctionEnd
+
+Function RadioClick
+    Pop $hwnd
+    ${If} $hwnd == $hCtl_DatabaseSelection_Bundled
+        StrCpy $BundledMySQL "true"
+    ${ElseIf} $hwnd == $hCtl_DatabaseSelection_NoMySQL
+        StrCpy $BundledMySQL "false"
+    ${EndIf}
+FunctionEnd

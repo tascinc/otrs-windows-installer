@@ -130,6 +130,7 @@ InstallDirRegKey HKLM "${OTRS_RegKey_Instance}" Path
 !include WordFunc.nsh
 !include x64.nsh
 !include "Mode.nsdinc"
+!include "DatabaseSelection.nsdinc"
 
 !insertmacro "DirState"
 
@@ -152,6 +153,9 @@ Page custom fnc_Mode_Show
 !define MUI_PAGE_CUSTOMFUNCTION_LEAVE InstInstallationDirValidate
 !define MUI_PAGE_CUSTOMFUNCTION_PRE DirectoryHide
 !insertmacro MUI_PAGE_DIRECTORY
+
+# database selection
+Page custom fnc_DatabaseSelection_Show
 
 # start menu page
 Var StartMenuGroup
@@ -216,7 +220,7 @@ LangString mui_finishpage_text    ${LANG_ENGLISH} "Installation of all needed se
 LangString mui_finishpage_button  ${LANG_ENGLISH} "Launch"
 
 # German strings
-LangString mui_welcomepage_text   ${LANG_GERMAN} "Dieser Assistent wird Sie durch den Installationsprozess von ${OTRS_Name} führen. $\r$\n$\r$\n\
+LangString mui_welcomepage_text   ${LANG_GERMAN} "Dieser Assistent wird Sie durch den Installationsprozess von ${OTRS_Name} führen.. $\r$\n$\r$\n\
 Um einen Neustart nach Abschluss der Installation zu vermeiden, schließen Sie bitte alle laufenden Programme bevor Sie die Installation starten.$\r$\n$\r$\n\
 Fortfahren um die Installation zu starten."
 LangString questions              ${LANG_GERMAN} "Fragen? Benötigen Sie Hilfe?"
@@ -355,20 +359,24 @@ Section /o -InstMySQL InstMySQL
 
     ${If} $MySQLInstalled <> 1
 
-        # install MySQL files
-        SetOutPath $INSTDIR
-        File /r "${Installer_Home}\MySQL"
+        ${If} $BundledMySQL == "true"
 
-        # configure the mysql server
-        GetFullPathName /SHORT $InstallDirShort $INSTDIR
-        NSExec::ExecToLog "$\"$PerlExe$\" $\"$INSTDIR\otrs4win\Scripts\ConfigureMySQL.pl$\" -d $\"$InstallDirShort$\""
+            # install MySQL files
+            SetOutPath $INSTDIR
+            File /r "${Installer_Home}\MySQL"
 
-        # register mysql as service
-        NSExec::ExecToLog '"$INSTDIR\MySQL\bin\mysqld.exe" --install MySQL --defaults-file="$INSTDIR\MySQL\my.ini"'
+            # configure the mysql server
+            GetFullPathName /SHORT $InstallDirShort $INSTDIR
+            NSExec::ExecToLog "$\"$PerlExe$\" $\"$INSTDIR\otrs4win\Scripts\ConfigureMySQL.pl$\" -d $\"$InstallDirShort$\""
 
-        # remove the helper script
-        sleep 1000  # sleep one second to give the OS time to unlock the file
-        Delete /REBOOTOK "$INSTDIR\otrs4win\Scripts\ConfigureMySQL.pl"
+            # register mysql as service
+            NSExec::ExecToLog '"$INSTDIR\MySQL\bin\mysqld.exe" --install MySQL --defaults-file="$INSTDIR\MySQL\my.ini"'
+
+            # remove the helper script
+            sleep 1000  # sleep one second to give the OS time to unlock the file
+            Delete /REBOOTOK "$INSTDIR\otrs4win\Scripts\ConfigureMySQL.pl"
+
+        ${EndIf}
 
     ${EndIf}
 
