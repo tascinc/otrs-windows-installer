@@ -28,14 +28,14 @@
 !define Installer_Version_Minor   0
 !define Installer_Version_Patch   0
 !define Installer_Version_Jointer "-"
-!define Installer_Version_Postfix "rc1"
+!define Installer_Version_Postfix "beta3"
 #!define Installer_Version_Jointer ""
 #!define Installer_Version_Postfix ""
 
 !define OTRS_Name            "OTRS"
 !define OTRS_Version_Major "3"
 !define OTRS_Version_Minor "2"
-!define OTRS_Version_Patch "6"
+!define OTRS_Version_Patch "7"
 !define OTRS_Version_Jointer ""
 !define OTRS_Version_Postfix ""
 !define OTRS_Company         "OTRS Group"
