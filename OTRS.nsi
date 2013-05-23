@@ -218,6 +218,10 @@ LangString perl_cancel_button     ${LANG_ENGLISH} "Cancel and download ActivePer
 LangString perl_advise_text_part2 ${LANG_ENGLISH} "If you click Next, the installer will set up its own version of perl. Due to known stability issues with mod_perl we recommend this only for testing or evaluating ${OTRS_Name}."
 LangString mui_finishpage_text    ${LANG_ENGLISH} "Installation of all needed services to run ${OTRS_Name} finished successfully.$\r$\n$\r$\nIf you click 'Launch' you'll start the Web Installer to configure ${OTRS_Name}."
 LangString mui_finishpage_button  ${LANG_ENGLISH} "Launch"
+LangString database_header        ${LANG_ENGLISH} "Select database for ${OTRS_Name}"
+LangString database_options       ${LANG_ENGLISH} "Options"
+LangString database_bundled       ${LANG_ENGLISH} "Install the bundled MySQL database"
+LangString database_own           ${LANG_ENGLISH} "Use an already installed database (MySQL, PostgreSQL, Oracle, SQL Server)" 
 
 # German strings
 LangString mui_welcomepage_text   ${LANG_GERMAN} "Dieser Assistent wird Sie durch den Installationsprozess von ${OTRS_Name} führen.. $\r$\n$\r$\n\
@@ -232,6 +236,10 @@ LangString perl_cancel_button     ${LANG_GERMAN} "Abbrechen und ActivePerl downl
 LangString perl_advise_text_part2 ${LANG_GERMAN} "Wenn Sie fortfahren, wird eine integrierte Perl-Version verwendet. Wegen bekannter Stabilitätsprobleme von mod_perl wird dies nur empfohlen um ${OTRS_Name} zu evaluieren oder zu testen."
 LangString mui_finishpage_text    ${LANG_GERMAN} "Die Installation aller benötigten Dienste um ${OTRS_Name} zu betreiben wurde erfolgreich abgeschlossen.$\r$\n$\r$\nBitte 'Start' klicken um ${OTRS_Name} mit Hilfe des WebInstallers zu konfigurieren."
 LangString mui_finishpage_button  ${LANG_GERMAN} "Start"
+LangString database_header        ${LANG_GERMAN} "Select database for ${OTRS_Name}"
+LangString database_options       ${LANG_GERMAN} "Options"
+LangString database_bundled       ${LANG_GERMAN} "Install the bundled MySQL database"
+LangString database_own           ${LANG_GERMAN} "Use an already installed database (MySQL, PostgreSQL, Oracle, SQL Server)" 
 
 # Spanish strings
 LangString mui_welcomepage_text   ${LANG_SPANISH} "Este asistente le guiará a través de la instalación de ${OTRS_Name}. $\r$\n$\r$\n\
@@ -246,6 +254,10 @@ LangString perl_cancel_button     ${LANG_SPANISH} "Cancelar y descargar ActivePe
 LangString perl_advise_text_part2 ${LANG_SPANISH} "Si hace clic en Siguiente, el programa de instalación colocará su propia versión de Perl. Debido a problemas de estabilidad conocidos con mod_perl recomendamos esto sólo para probar o evaluar ${OTRS_Name}."
 LangString mui_finishpage_text    ${LANG_SPANISH} "La instalación de todos los servicios necesarios para ejecutar ${OTRS_Name} finalizó con éxito.$\r$\n$\r$\nSi hace clic en 'Iniciar', podrá comenzar el instalador Web para configurar ${OTRS_Name}."
 LangString mui_finishpage_button  ${LANG_SPANISH} "Iniciar"
+LangString database_header        ${LANG_SPANISH} "Select database for ${OTRS_Name}"
+LangString database_options       ${LANG_SPANISH} "Options"
+LangString database_bundled       ${LANG_SPANISH} "Install the bundled MySQL database"
+LangString database_own           ${LANG_SPANISH} "Use an already installed database (MySQL, PostgreSQL, Oracle, SQL Server)" 
 
 # Dutch strings
 LangString mui_welcomepage_text   ${LANG_DUTCH} "Dit is de installatieprocedure voor ${OTRS_Name}. $\r$\n$\r$\n\
@@ -260,6 +272,10 @@ LangString perl_cancel_button     ${LANG_DUTCH} "Annuleer en download ActivePerl
 LangString perl_advise_text_part2 ${LANG_DUTCH} "Als u op Volgende klikt zal de installatieprocedure een gebundelde perl-versie installeren. Vanwege bekende stabiliteitsproblemen met mod_perl raden we aan dit alleen voor het testen of evalueren van ${OTRS_Name} te gebruiken."
 LangString mui_finishpage_text    ${LANG_DUTCH} "Installatie van alle services nodig voor ${OTRS_Name} is afgerond.$\r$\n$\r$\nZodra u op 'Start' klikt begint de Web Installer die u gebruikt voor het configureren van ${OTRS_Name}."
 LangString mui_finishpage_button  ${LANG_DUTCH} "Start"
+LangString database_header        ${LANG_DUTCH} "Kies database voor ${OTRS_Name}"
+LangString database_options       ${LANG_DUTCH} "Opties"
+LangString database_bundled       ${LANG_DUTCH} "Installeer de gebundelde MySQL database"
+LangString database_own           ${LANG_DUTCH} "Gebruik een al geïnstalleerde database (MySQL, PostgreSQL, Oracle, SQL Server)" 
 
 # ------------------------------------------------------------ #
 # install sections

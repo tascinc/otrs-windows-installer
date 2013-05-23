@@ -25,22 +25,22 @@ Function fnc_DatabaseSelection_Create
   ${If} $hCtl_DatabaseSelection == error
     Abort
   ${EndIf}
-  !insertmacro MUI_HEADER_TEXT "Select database for use" ""
+  !insertmacro MUI_HEADER_TEXT $(database_header) ""
   
   ; === Label1 (type: Label) ===
-  ${NSD_CreateLabel} 18u 14u 243u 13u "Options"
+  ${NSD_CreateLabel} 18u 14u 243u 13u $(database_options)
   Pop $hCtl_DatabaseSelection_Label1
   SendMessage $hCtl_DatabaseSelection_Label1 ${WM_SETFONT} $hCtl_DatabaseSelection_Font1 0
   
   ; === Bundled (type: RadioButton) ===
-  ${NSD_CreateRadioButton} 27u 39u 242u 14u "Install Bundled MySQL"
+  ${NSD_CreateRadioButton} 27u 39u 242u 14u $(database_bundled)
         Pop $hCtl_DatabaseSelection_Bundled
         ${NSD_AddStyle} $hCtl_DatabaseSelection_Bundled ${WS_GROUP}
         ${NSD_Check} $hCtl_DatabaseSelection_Bundled
         ${NSD_OnClick} $hCtl_DatabaseSelection_Bundled RadioClick
         
   ; === NoMySQL (type: RadioButton) ===
-  ${NSD_CreateRadioButton} 27u 56u 234u 14u "I have installed my own database"
+  ${NSD_CreateRadioButton} 27u 56u 234u 14u $(database_own)
   Pop $hCtl_DatabaseSelection_NoMySQL
   ${NSD_OnClick} $hCtl_DatabaseSelection_NoMySQL RadioClick
   
