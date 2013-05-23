@@ -224,7 +224,7 @@ LangString database_bundled       ${LANG_ENGLISH} "Install the bundled MySQL dat
 LangString database_own           ${LANG_ENGLISH} "Use an already installed database (MySQL, PostgreSQL, Oracle, SQL Server)" 
 
 # German strings
-LangString mui_welcomepage_text   ${LANG_GERMAN} "Dieser Assistent wird Sie durch den Installationsprozess von ${OTRS_Name} führen.. $\r$\n$\r$\n\
+LangString mui_welcomepage_text   ${LANG_GERMAN} "Dieser Assistent wird Sie durch den Installationsprozess von ${OTRS_Name} führen. $\r$\n$\r$\n\
 Um einen Neustart nach Abschluss der Installation zu vermeiden, schließen Sie bitte alle laufenden Programme bevor Sie die Installation starten.$\r$\n$\r$\n\
 Fortfahren um die Installation zu starten."
 LangString questions              ${LANG_GERMAN} "Fragen? Benötigen Sie Hilfe?"
