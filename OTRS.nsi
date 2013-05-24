@@ -236,10 +236,10 @@ LangString perl_cancel_button     ${LANG_GERMAN} "Abbrechen und ActivePerl downl
 LangString perl_advise_text_part2 ${LANG_GERMAN} "Wenn Sie fortfahren, wird eine integrierte Perl-Version verwendet. Wegen bekannter Stabilitätsprobleme von mod_perl wird dies nur empfohlen um ${OTRS_Name} zu evaluieren oder zu testen."
 LangString mui_finishpage_text    ${LANG_GERMAN} "Die Installation aller benötigten Dienste um ${OTRS_Name} zu betreiben wurde erfolgreich abgeschlossen.$\r$\n$\r$\nBitte 'Start' klicken um ${OTRS_Name} mit Hilfe des WebInstallers zu konfigurieren."
 LangString mui_finishpage_button  ${LANG_GERMAN} "Start"
-LangString database_header        ${LANG_GERMAN} "Datenbank für ${OTRS_Name} auswählen"
-LangString database_options       ${LANG_GERMAN} "Optionen"
-LangString database_bundled       ${LANG_GERMAN} "Die mitgelieferte MySQL-Datenbank installieren"
-LangString database_own           ${LANG_GERMAN} "Eine bereits installierte Datenbank verwenden (MySQL, PostgreSQL, Oracle, SQL Server)" 
+LangString database_header        ${LANG_GERMAN} "Datenbank für ${OTRS_Name} auswählen"
+LangString database_options       ${LANG_GERMAN} "Optionen"
+LangString database_bundled       ${LANG_GERMAN} "Die mitgelieferte MySQL-Datenbank installieren"
+LangString database_own           ${LANG_GERMAN} "Eine bereits installierte Datenbank verwenden (MySQL, PostgreSQL, Oracle, SQL Server)" 
 
 # Spanish strings
 LangString mui_welcomepage_text   ${LANG_SPANISH} "Este asistente le guiará a través de la instalación de ${OTRS_Name}. $\r$\n$\r$\n\
@@ -375,7 +375,7 @@ Section /o -InstMySQL InstMySQL
 
     ${If} $MySQLInstalled <> 1
 
-        ${If} $BundledMySQL == "true"
+        ${IfNot} $BundledMySQL == "false"
 
             # install MySQL files
             SetOutPath $INSTDIR
