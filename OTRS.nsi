@@ -296,7 +296,7 @@ Section -InstPre
     sleep 1000  # sleep one second to give the OS time to unlock the directory
     RmDir /r /REBOOTOK $INSTDIR\otrs4win\Scripts\CVS
 
-    ${If} $Upgrade != 'no'
+    ${If} $Upgrade != "no"
         DetailPrint "Stopping services"
         nsExec::Exec "$\"$PerlExe$\" $\"$INSTDIR\OTRS\bin\otrs.Scheduler4win.pl$\" -a stop"
         nsExec::Exec "NET STOP $\"Cron Service (CRONw)$\""
@@ -338,7 +338,13 @@ Section -InstPerl
         # StrawberryPerl is pre-configured with all modules we need
         # we only need to copy the files
         DetailPrint "Installing Strawberry Perl"
-        SetOutPath $INSTDIR
+        
+		# remove old perls - but only if it is a 5.12 perl
+		${If} ${FileExists} "$INSTDIR\StrawberryPerl\perl\bin\perl512.dll"
+			RMDir /r "$INSTDIR\StrawberryPerl"
+		${EndIf}
+		
+		SetOutPath $INSTDIR
         File /r "${Installer_Home}\StrawberryPerl"
         
         # set perlexe
