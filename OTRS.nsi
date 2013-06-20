@@ -22,20 +22,20 @@
 # define general information
 # ------------------------------------------------------------ #
 
-!define Installer_Home            "D:\otrs4winNG"
+!define Installer_Home            "C:\Installer"
 !define Installer_Home_Nsis       "${Installer_Home}\otrs4win"
 !define Installer_Version_Major   3
 !define Installer_Version_Minor   0
 !define Installer_Version_Patch   0
 !define Installer_Version_Jointer "-"
-!define Installer_Version_Postfix "beta3"
+!define Installer_Version_Postfix "rc1"
 #!define Installer_Version_Jointer ""
 #!define Installer_Version_Postfix ""
 
 !define OTRS_Name            "OTRS"
 !define OTRS_Version_Major "3"
 !define OTRS_Version_Minor "2"
-!define OTRS_Version_Patch "7"
+!define OTRS_Version_Patch "8"
 !define OTRS_Version_Jointer ""
 !define OTRS_Version_Postfix ""
 !define OTRS_Company         "OTRS Group"
@@ -339,12 +339,12 @@ Section -InstPerl
         # we only need to copy the files
         DetailPrint "Installing Strawberry Perl"
         
-		# remove old perls - but only if it is a 5.12 perl
-		${If} ${FileExists} "$INSTDIR\StrawberryPerl\perl\bin\perl512.dll"
-			RMDir /r "$INSTDIR\StrawberryPerl"
-		${EndIf}
-		
-		SetOutPath $INSTDIR
+        # remove old perls - but only if it is a 5.16 perl
+        ${If} ${FileExists} "$INSTDIR\StrawberryPerl\perl\bin\perl516.dll"
+            RMDir /r "$INSTDIR\StrawberryPerl"
+        ${EndIf}
+        
+        SetOutPath $INSTDIR
         File /r "${Installer_Home}\StrawberryPerl"
         
         # set perlexe
@@ -692,7 +692,7 @@ Function .onInit
     Call InstCheckWebServerAlreadyInstalled
 
     # insert plugins
-	!insertmacro MUI_LANGDLL_DISPLAY
+    !insertmacro MUI_LANGDLL_DISPLAY
     !insertmacro MULTIUSER_INIT
 
     # activate optional installer sections
@@ -908,7 +908,7 @@ Function InstStartWeb
     ${If} $Upgrade == "no"  
     
         # write a .json file to indicate we already had the License page
-		CreateDirectory $INSTDIR\OTRS\var\tmp
+        CreateDirectory $INSTDIR\OTRS\var\tmp
         FileOpen $9 "$INSTDIR\OTRS\var\tmp\installer.json" w ;Opens an empty file for writing
         FileWrite $9 "{$\"SkipLicense$\":1,$\"SkipLog$\":1}$\n"
         FileClose $9 ;Closes the filled file

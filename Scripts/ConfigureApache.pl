@@ -138,7 +138,7 @@ sub OTRSApacheConfigAdd {
 LoadModule deflate_module modules/mod_deflate.so
 LoadModule headers_module modules/mod_headers.so
 
-LoadFile '$InstallDirQuoted/StrawberryPerl/perl/bin/perl516.dll'
+LoadFile '$InstallDirQuoted/StrawberryPerl/perl/bin/perl512.dll'
 LoadModule perl_module modules/mod_perl.so
 LoadModule apreq_module modules/mod_apreq2.so
 
