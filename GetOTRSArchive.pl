@@ -91,6 +91,7 @@ for my $File (
     Kernel/Output/HTML/Standard/InstallerLicenseText.dtl
     Kernel/Output/HTML/Standard/InstallerRegistration.dtl
     Kernel/Output/HTML/Standard/InstallerSystem.dtl
+    Kernel/System/Main.pm
     var/httpd/htdocs/js/Core.Installer.js
     var/httpd/htdocs/skins/Agent/default/css/Core.Installer.css
     )
