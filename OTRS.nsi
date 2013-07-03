@@ -318,6 +318,7 @@ Section -InstPerl
         NSExec::ExecToLog '"$0" /C "ppm install Crypt::SSLeay"'
         NSExec::ExecToLog '"$0" /C "ppm install Date::Format"'
         NSExec::ExecToLog '"$0" /C "ppm install Date::Manip"'
+        NSExec::ExecToLog '"$0" /C "ppm install File::Find::Rule"'
         NSExec::ExecToLog '"$0" /C "ppm install JSON::XS"'
         NSExec::ExecToLog '"$0" /C "ppm install Log::Dispatch"'
         NSExec::ExecToLog '"$0" /C "ppm install Log::Dispatch::FileRotate"'

@@ -1,4 +1,7 @@
-3.0.0 2013-??-??
+3.0.2 2013-07-??
+ - Fixed bug#9569 - CRONw will not start with ActiveState Perl.
+
+3.0.1 2013-07-01
  - Moved to git, changed name to otrs-windows-installer.
  - New upgradable installer.
  - Support for configuring Internet Information Server and ActiveState Perl.
