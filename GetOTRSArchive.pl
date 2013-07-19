@@ -27,12 +27,14 @@ use Cwd;
 use File::Basename;
 use File::Path qw(remove_tree);
 use File::Spec;
-use File::Temp qw(tempfile);
 use LWP::Simple;
 
 my $URL = shift @ARGV || die "Usage: $0 [url] i.e. $0 http://example.com/otrs-3.x.x.zip\n";
 
 die "URL $URL does not end in .zip!\n" if $URL !~ /\.zip$/;
+
+# extract otrs-3.x.x.zip from URL to use as file name
+my $FileName = basename( $URL );
 
 # checking if NSIS file is in place
 my $Path = getcwd;
@@ -51,10 +53,18 @@ if ( -d $OTRSDir ) {
 
 # download zip archive
 print "Downloading from $URL...\n";
-my ( $FileHandle, $FileName ) = tempfile( TEMPLATE => 'otrsXXXXXXXXX', SUFFIX => '.zip' );
-my $ResponseCode = getstore( $URL, $FileName );
-die "Problem from downloading '$URL', response code $ResponseCode!\n" if $ResponseCode ne '200';
-close $FileHandle;
+my $ResponseCode = mirror( $URL, $FileName );
+
+# die if download was not successful
+if ( $ResponseCode eq '200' ) {
+    print "File downloaded OK.\n";
+}
+elsif ( $ResponseCode eq '304' ) {
+    print "File was already present and not modified on server.\n";
+}
+else {
+    die "Problem downloading '$URL', response code $ResponseCode!\n" ;
+}
 print "Done.\n\n";
 
 # extract archive
