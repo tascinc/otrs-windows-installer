@@ -25,6 +25,7 @@ use warnings;
 use Getopt::Std;
 use File::Find;
 use File::Spec;
+use Win32;
 
 # get options
 my %Opts = ();
@@ -69,7 +70,57 @@ find( \&ReplaceApacheDir, ($ApacheDir) );
 # add OTRS configuration to the http.conf
 OTRSApacheConfigAdd();
 
+# modify shebang line of files in cgi-bin
+my $PerlBin = Win32::GetShortPathName($^X);
+my $CGIBin = File::Spec->catdir( $InstallDir, 'OTRS\bin\cgi-bin' );
+find ( \&UpdateShebang, ($CGIBin) );
+
 1;
+
+sub UpdateShebang {
+
+    # get filename
+
+    my $File = $File::Find::name;
+
+    # next file if no .conf file
+    return if $File !~ m{ .+ \.pl \z }xms;
+
+    # check if file exists
+    return if !-e $File;
+
+    # check if file is a directory
+    return if -d $File;
+
+    # check if file is writeable
+    return if !-w $File;
+
+    # check if file is a link
+    return if -l $File;
+
+    # read file
+    return if !open my $FH1, '<', $File;
+    my $OrgString = do { local $/; <$FH1> };
+    close $FH1;
+
+    # copy the string
+    my $NewString = $OrgString;
+
+    # find and replace all /usr/bin/perl occurrences
+    $NewString =~ s{ /usr/bin/perl }{$PerlBin}xmsg;
+
+    # next file if no changes
+    return 1 if $OrgString eq $NewString;
+
+    # write new file
+    return if !open my $FH2, '>', $File;
+    print $FH2 $NewString;
+    close $FH2;
+
+    print STDERR "Replaced shebang in $File\n";
+
+    return 1;
+}
 
 sub ReplaceApacheDir {
 
@@ -138,9 +189,9 @@ sub OTRSApacheConfigAdd {
 LoadModule deflate_module modules/mod_deflate.so
 LoadModule headers_module modules/mod_headers.so
 
-LoadFile '$InstallDirQuoted/StrawberryPerl/perl/bin/perl512.dll'
-LoadModule perl_module modules/mod_perl.so
-LoadModule apreq_module modules/mod_apreq2.so
+#LoadFile '$InstallDirQuoted/StrawberryPerl/perl/bin/perl512.dll'
+#LoadModule perl_module modules/mod_perl.so
+#LoadModule apreq_module modules/mod_apreq2.so
 
 # include the OTRS configuration
 Include '$InstallDirQuoted/OTRS/scripts/apache2-httpd.include.conf'
