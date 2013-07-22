@@ -423,7 +423,7 @@ Section /o -InstApache InstApache
        # register apache as service
        NSExec::ExecToLog '"$INSTDIR\Apache\bin\httpd.exe" -k install'
 
-       # add the apache service to the firewall exeption list
+       # add the apache service to the firewall exception list
        SimpleFC::AddApplication "Apache HTTP Server" "$INSTDIR\Apache\bin\httpd.exe" 0 2 "" 1
        Pop $0
 
