@@ -215,7 +215,7 @@ LangString perl_subheader         ${LANG_ENGLISH} "Please install ActiveState Pe
 LangString perl_title             ${LANG_ENGLISH} "ActiveState Perl not found!"
 LangString perl_advise_text_part1 ${LANG_ENGLISH} "For production environments downloading and installing ActiveState ActivePerl (x86) is highly recommended before running this installer."
 LangString perl_cancel_button     ${LANG_ENGLISH} "Cancel and download ActivePerl"
-LangString perl_advise_text_part2 ${LANG_ENGLISH} "If you click Next, the installer will set up its own version of perl. Due to known stability issues with mod_perl we recommend this only for testing or evaluating ${OTRS_Name}."
+LangString perl_advise_text_part2 ${LANG_ENGLISH} "If you click Next, the installer will set up its own version of perl. This will configure Apache in CGI mode and will be relatively slow. Please only use this for testing or evaluating ${OTRS_Name}."
 LangString mui_finishpage_text    ${LANG_ENGLISH} "Installation of all needed services to run ${OTRS_Name} finished successfully.$\r$\n$\r$\nIf you click 'Launch' you'll start the Web Installer to configure ${OTRS_Name}."
 LangString mui_finishpage_button  ${LANG_ENGLISH} "Launch"
 LangString database_header        ${LANG_ENGLISH} "Select database for ${OTRS_Name}"
@@ -269,7 +269,8 @@ LangString perl_subheader         ${LANG_DUTCH} "Installeer ActiveState perl op 
 LangString perl_title             ${LANG_DUTCH} "Geen ActiveState Perl gevonden!"
 LangString perl_advise_text_part1 ${LANG_DUTCH} "Voor gebruik in productie-omgevingen raden we aan om ActiveState ActivePerl (x86) te downloaden en installeren alvorens de OTRS installatie te starten."
 LangString perl_cancel_button     ${LANG_DUTCH} "Annuleer en download ActivePerl"
-LangString perl_advise_text_part2 ${LANG_DUTCH} "Als u op Volgende klikt zal de installatieprocedure een gebundelde perl-versie installeren. Vanwege bekende stabiliteitsproblemen met mod_perl raden we aan dit alleen voor het testen of evalueren van ${OTRS_Name} te gebruiken."
+LangString perl_advise_text_part2 ${LANG_DUTCH} "Als u op Volgende klikt zal de installatieprocedure een gebundelde perl-versie installeren.
+Dit configureert Apache in CGI mode en is relatief langzaam. We raden u aan dit alleen voor het testen of evalueren van ${OTRS_Name} te gebruiken."
 LangString mui_finishpage_text    ${LANG_DUTCH} "Installatie van alle services nodig voor ${OTRS_Name} is afgerond.$\r$\n$\r$\nZodra u op 'Start' klikt begint de Web Installer die u gebruikt voor het configureren van ${OTRS_Name}."
 LangString mui_finishpage_button  ${LANG_DUTCH} "Start"
 LangString database_header        ${LANG_DUTCH} "Kies database voor ${OTRS_Name}"
