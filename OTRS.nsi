@@ -472,7 +472,13 @@ Section -InstOTRS
 
     # configure OTRS
     GetFullPathName /SHORT $InstallDirShort $INSTDIR
-    NSExec::ExecToLog "$\"$PerlExe$\" $\"$INSTDIR\otrs4win\Scripts\ConfigureOTRS.pl$\" -d $\"$InstallDirShort$\""
+
+    # if we're on Strawberry (i.e. no PerlEx) update shebang line for CGI mode
+    ${If} ${FileExists} "$INSTDIR\StrawberryPerl\perl\bin\perl.exe"
+        NSExec::ExecToLog "$\"$PerlExe$\" $\"$INSTDIR\otrs4win\Scripts\ConfigureOTRS.pl$\" -s -d $\"$InstallDirShort$\""
+    ${Else}
+        NSExec::ExecToLog "$\"$PerlExe$\" $\"$INSTDIR\otrs4win\Scripts\ConfigureOTRS.pl$\" -d $\"$InstallDirShort$\""
+    ${EndIf}
 
     ${If} $Upgrade == "no"
 

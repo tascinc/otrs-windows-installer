@@ -25,19 +25,21 @@ use warnings;
 use Getopt::Std;
 use File::Copy;
 use File::Find;
+use Win32;
 
 # get options
 my %Opts = ();
-getopt( 'd', \%Opts );
+getopts( 'sd:', \%Opts );
 
 # check arguments
 if ( !$Opts{'d'} ) {
     $Opts{'h'} = 1;
 }
 if ( $Opts{'h'} ) {
-    print STDOUT "ConfigureOTRS.pl - script to configure OTRS\n";
-    print STDOUT "Copyright (C) 2001-2013 OTRS AG, http://otrs.com/\n";
-    print STDOUT "usage: ConfigureOTRS.pl -d <install directory>\n\n";
+    print "ConfigureOTRS.pl - script to configure OTRS\n";
+    print "Copyright (C) 2001-2013 OTRS AG, http://otrs.com/\n";
+    print "usage: ConfigureOTRS.pl -d <install directory> -s\n\n";
+    print " -s will update shebang line in cgi-bin scripts\n\n";
     exit 1;
 }
 
@@ -77,6 +79,12 @@ PrepareConfigPm();
 
 # config the Cron4Win32.pl
 ConfigCron4Win32Pl();
+
+if ( $Opts{s} ) {
+    # modify shebang line of files in cgi-bin
+    my $CGIBin = File::Spec->catdir( $InstallDir, 'OTRS\bin\cgi-bin' );
+    find ( \&UpdateShebang, ($CGIBin) );
+}
 
 1;
 
@@ -252,6 +260,53 @@ sub ConfigCron4Win32Pl {
     return if !open my $FH2, '>', $File;
     print $FH2 $NewString;
     close $FH2;
+
+    return 1;
+}
+
+sub UpdateShebang {
+
+    # get filename
+
+    my $File = $File::Find::name;
+
+    # next file if no .conf file
+    return if $File !~ m{ .+ \.pl \z }xms;
+
+    # check if file exists
+    return if !-e $File;
+
+    # check if file is a directory
+    return if -d $File;
+
+    # check if file is writeable
+    return if !-w $File;
+
+    # check if file is a link
+    return if -l $File;
+
+    # read file
+    return if !open my $FH1, '<', $File;
+    my $OrgString = do { local $/; <$FH1> };
+    close $FH1;
+
+    # copy the string
+    my $NewString = $OrgString;
+
+    my $PerlBin = Win32::GetShortPathName($^X);
+
+    # find and replace all /usr/bin/perl occurrences
+    $NewString =~ s{ /usr/bin/perl }{$PerlBin}xmsg;
+
+    # next file if no changes
+    return 1 if $OrgString eq $NewString;
+
+    # write new file
+    return if !open my $FH2, '>', $File;
+    print $FH2 $NewString;
+    close $FH2;
+
+    print STDERR "Replaced shebang in $File\n";
 
     return 1;
 }
