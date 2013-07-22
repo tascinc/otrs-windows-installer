@@ -251,7 +251,7 @@ LangString perl_subheader         ${LANG_SPANISH} "Por favor instale ActiveState
 LangString perl_title             ${LANG_SPANISH} "!No se encontró ActiveState Perl!"
 LangString perl_advise_text_part1 ${LANG_SPANISH} "Para entornos de producción, la descarga e instalación de ActiveState ActivePerl (x86) es altamente recomendable antes de ejecutar este programa de instalación."
 LangString perl_cancel_button     ${LANG_SPANISH} "Cancelar y descargar ActivePerl"
-LangString perl_advise_text_part2 ${LANG_SPANISH} "Si hace clic en Siguiente, el programa de instalación colocará su propia versión de Perl. Debido a problemas de estabilidad conocidos con mod_perl recomendamos esto sólo para probar o evaluar ${OTRS_Name}."
+LangString perl_advise_text_part2 ${LANG_SPANISH} "Si hace clic en Siguiente, el instalador configurará su propia versión de perl. Esto a su vez configurará Apache en modo CGI y esto hará que el sistema sea relativamente lento. Por favor use esta configuración solo para pruebas y evaluación de ${OTRS_Name}."s
 LangString mui_finishpage_text    ${LANG_SPANISH} "La instalación de todos los servicios necesarios para ejecutar ${OTRS_Name} finalizó con éxito.$\r$\n$\r$\nSi hace clic en 'Iniciar', podrá comenzar el instalador Web para configurar ${OTRS_Name}."
 LangString mui_finishpage_button  ${LANG_SPANISH} "Iniciar"
 LangString database_header        ${LANG_SPANISH} "Select database for ${OTRS_Name}"
