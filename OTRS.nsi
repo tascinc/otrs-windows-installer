@@ -26,7 +26,7 @@
 !define Installer_Home_Nsis       "${Installer_Home}\otrs4win"
 !define Installer_Version_Major   3
 !define Installer_Version_Minor   0
-!define Installer_Version_Patch   1
+!define Installer_Version_Patch   2
 #!define Installer_Version_Jointer "-"
 #!define Installer_Version_Postfix "rc1"
 !define Installer_Version_Jointer ""
@@ -35,7 +35,7 @@
 !define OTRS_Name            "OTRS"
 !define OTRS_Version_Major "3"
 !define OTRS_Version_Minor "2"
-!define OTRS_Version_Patch "8"
+!define OTRS_Version_Patch "9"
 !define OTRS_Version_Jointer ""
 !define OTRS_Version_Postfix ""
 !define OTRS_Company         "OTRS Group"
