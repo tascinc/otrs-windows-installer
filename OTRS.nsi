@@ -221,7 +221,7 @@ LangString mui_finishpage_button  ${LANG_ENGLISH} "Launch"
 LangString database_header        ${LANG_ENGLISH} "Select database for ${OTRS_Name}"
 LangString database_options       ${LANG_ENGLISH} "Options"
 LangString database_bundled       ${LANG_ENGLISH} "Install the bundled MySQL database"
-LangString database_own           ${LANG_ENGLISH} "Use an already installed database (MySQL, PostgreSQL, Oracle, SQL Server)" 
+LangString database_own           ${LANG_ENGLISH} "Use an already installed database (MySQL, PostgreSQL, Oracle, SQL Server)"
 
 # German strings
 LangString mui_welcomepage_text   ${LANG_GERMAN} "Dieser Assistent wird Sie durch den Installationsprozess von ${OTRS_Name} führen. $\r$\n$\r$\n\
@@ -233,13 +233,13 @@ LangString perl_subheader         ${LANG_GERMAN} "Bei produktiven Einsatz bitte 
 LangString perl_title             ${LANG_GERMAN} "ActiveState Perl nicht gefunden!"
 LangString perl_advise_text_part1 ${LANG_GERMAN} "Für produktive Umgebungen wird dringend empfohlen, ActiveState ActivePerl (x86) herunterzuladen und zu installieren, bevor dieser Installer gestartet wird."
 LangString perl_cancel_button     ${LANG_GERMAN} "Abbrechen und ActivePerl downloaden"
-LangString perl_advise_text_part2 ${LANG_GERMAN} "Wenn Sie fortfahren, wird eine integrierte Perl-Version verwendet. Wegen bekannter Stabilitätsprobleme von mod_perl wird dies nur empfohlen um ${OTRS_Name} zu evaluieren oder zu testen."
+LangString perl_advise_text_part2 ${LANG_GERMAN} "Wenn Sie fortfahren, wird eine integrierte Perl-Version verwendet und Apache im CGI Modus konfiguriert. Da dieses Setup relativ langsam sein wird, wird dies nur empfohlen um ${OTRS_Name} zu evaluieren oder zu testen."
 LangString mui_finishpage_text    ${LANG_GERMAN} "Die Installation aller benötigten Dienste um ${OTRS_Name} zu betreiben wurde erfolgreich abgeschlossen.$\r$\n$\r$\nBitte 'Start' klicken um ${OTRS_Name} mit Hilfe des WebInstallers zu konfigurieren."
 LangString mui_finishpage_button  ${LANG_GERMAN} "Start"
 LangString database_header        ${LANG_GERMAN} "Datenbank für ${OTRS_Name} auswählen"
 LangString database_options       ${LANG_GERMAN} "Optionen"
 LangString database_bundled       ${LANG_GERMAN} "Die mitgelieferte MySQL-Datenbank installieren"
-LangString database_own           ${LANG_GERMAN} "Eine bereits installierte Datenbank verwenden (MySQL, PostgreSQL, Oracle, SQL Server)" 
+LangString database_own           ${LANG_GERMAN} "Eine bereits installierte Datenbank verwenden (MySQL, PostgreSQL, Oracle, SQL Server)"
 
 # Spanish strings
 LangString mui_welcomepage_text   ${LANG_SPANISH} "Este asistente le guiará a través de la instalación de ${OTRS_Name}. $\r$\n$\r$\n\
@@ -257,7 +257,7 @@ LangString mui_finishpage_button  ${LANG_SPANISH} "Iniciar"
 LangString database_header        ${LANG_SPANISH} "Select database for ${OTRS_Name}"
 LangString database_options       ${LANG_SPANISH} "Options"
 LangString database_bundled       ${LANG_SPANISH} "Install the bundled MySQL database"
-LangString database_own           ${LANG_SPANISH} "Use an already installed database (MySQL, PostgreSQL, Oracle, SQL Server)" 
+LangString database_own           ${LANG_SPANISH} "Use an already installed database (MySQL, PostgreSQL, Oracle, SQL Server)"
 
 # Dutch strings
 LangString mui_welcomepage_text   ${LANG_DUTCH} "Dit is de installatieprocedure voor ${OTRS_Name}. $\r$\n$\r$\n\
@@ -275,7 +275,7 @@ LangString mui_finishpage_button  ${LANG_DUTCH} "Start"
 LangString database_header        ${LANG_DUTCH} "Kies database voor ${OTRS_Name}"
 LangString database_options       ${LANG_DUTCH} "Opties"
 LangString database_bundled       ${LANG_DUTCH} "Installeer de gebundelde MySQL database"
-LangString database_own           ${LANG_DUTCH} "Gebruik een al geïnstalleerde database (MySQL, PostgreSQL, Oracle, SQL Server)" 
+LangString database_own           ${LANG_DUTCH} "Gebruik een al geïnstalleerde database (MySQL, PostgreSQL, Oracle, SQL Server)"
 
 # ------------------------------------------------------------ #
 # install sections
@@ -309,7 +309,7 @@ SectionEnd
 Section -InstPerl
     ${If} ${FileExists} "$ActiveStatePerl"
         # For ActiveState perl, we prefer to install any modules
-        # via PPM. We'll also install MinGW so we can install 
+        # via PPM. We'll also install MinGW so we can install
         # whatever else via cpan.
         ExpandEnvStrings $0 %COMSPEC%
         DetailPrint "Configuring ActiveState Perl. Warning: this can take a very long time..."
@@ -327,30 +327,30 @@ Section -InstPerl
         NSExec::ExecToLog '"$0" /C "ppm install Net::DNS"'
         NSExec::ExecToLog '"$0" /C "ppm install Net::LDAP"'
         NSExec::ExecToLog '"$0" /C "ppm install PDF::API2"'
-        NSExec::ExecToLog '"$0" /C "ppm install Win32::Console::ANSI"'        
-        NSExec::ExecToLog '"$0" /C "ppm install Win32::Daemon"'        
+        NSExec::ExecToLog '"$0" /C "ppm install Win32::Console::ANSI"'
+        NSExec::ExecToLog '"$0" /C "ppm install Win32::Daemon"'
         NSExec::ExecToLog '"$0" /C "ppm install MinGW"'
         NSExec::ExecToLog '"$0" /C "cpan Encode::HanExtra"'
-        
+
         # set perlexe
         StrCpy $PerlExe $ActiveStatePerl
         DetailPrint "ActivePerl configured."
-    ${Else}    
+    ${Else}
         # StrawberryPerl is pre-configured with all modules we need
         # we only need to copy the files
         DetailPrint "Installing Strawberry Perl"
-        
+
         # remove old perls - but only if it is a 5.16 perl
         ${If} ${FileExists} "$INSTDIR\StrawberryPerl\perl\bin\perl516.dll"
             RMDir /r "$INSTDIR\StrawberryPerl"
         ${EndIf}
-        
+
         SetOutPath $INSTDIR
         File /r "${Installer_Home}\StrawberryPerl"
-        
+
         # set perlexe
         StrCpy $PerlExe "$INSTDIR\StrawberryPerl\perl\bin\perl.exe"
-        DetailPrint "StrawberryPerl installed."        
+        DetailPrint "StrawberryPerl installed."
     ${EndIf}
 
 SectionEnd
@@ -410,8 +410,8 @@ Section /o -InstApache InstApache
 
    ${If} ${FileExists} "$INSTDIR\StrawberryPerl\perl\bin\perl.exe"
 
-        DetailPrint "Installing/upgrading Apache" 
-        nsExec::Exec "NET STOP Apache2.2"    
+        DetailPrint "Installing/upgrading Apache"
+        nsExec::Exec "NET STOP Apache2.2"
         # install Apache files
         SetOutPath $INSTDIR
         File /r "${Installer_Home}\Apache"
@@ -434,17 +434,17 @@ Section /o -InstApache InstApache
        ${EndIf}
    ${Else}
        DetailPrint "Configuring Microsoft IIS"
-       
+
        # locate PerlEx dll based on perl.exe
        ${WordReplace} $ActiveStatePerl 'perl.exe' 'PerlEx30.dll' "-1" $PerlEx
        ExpandEnvStrings $0 %COMSPEC%
-       
+
        # first make sure Microsoft IIS is installed
        ${DisableX64FSRedirection}
-       NSExec::ExecToLog '"$0" /c $WINDIR\system32\dism.exe /online /norestart /enable-feature /ignorecheck /featurename:$\"IIS-WebServerRole$\" /featurename:$\"IIS-ManagementConsole$\" /featurename:$\"IIS-ISAPIExtensions$\" /featurename:$\"IIS-ISAPIFilter$\"' 
+       NSExec::ExecToLog '"$0" /c $WINDIR\system32\dism.exe /online /norestart /enable-feature /ignorecheck /featurename:$\"IIS-WebServerRole$\" /featurename:$\"IIS-ManagementConsole$\" /featurename:$\"IIS-ISAPIExtensions$\" /featurename:$\"IIS-ISAPIFilter$\"'
        ${EnableX64FSRedirection}
 
-       # now configure a web site, and setup perlex with its own application pool    
+       # now configure a web site, and setup perlex with its own application pool
        NSExec::ExecToLog '"$WINDIR\system32\inetsrv\appcmd.exe" add apppool /name:$\"OTRS$\"'
        NSExec::ExecToLog '"$WINDIR\system32\inetsrv\appcmd.exe" set config /section:applicationPools -[name=$\'OTRS$\'].managedPipelineMode:Integrated'
        NSExec::ExecToLog '"$WINDIR\system32\inetsrv\appcmd.exe" set config /section:applicationPools -[name=$\'OTRS$\'].enable32BitAppOnWin64:$\"True$\" /commit:apphost'
@@ -452,10 +452,10 @@ Section /o -InstApache InstApache
        NSExec::ExecToLog '"$WINDIR\system32\inetsrv\appcmd.exe" set config /section:system.webServer/security/isapiCgiRestriction /+[path=$\'$PerlEx$\',allowed=$\'True$\'] /commit:apphost'
        NSExec::ExecToLog '"$WINDIR\system32\inetsrv\appcmd.exe" add vdir /app.name:$\"Default Web Site/$\" /path:/otrs-web /physicalPath:$INSTDIR\OTRS\var\httpd\htdocs'
        NSExec::ExecToLog '"$WINDIR\system32\inetsrv\appcmd.exe" add app /site.name:$\"Default Web Site$\" /path:/otrs /physicalPath:$INSTDIR\OTRS\bin\cgi-bin -applicationPool:OTRS'
-       
+
        # write permission on OTRS sub folder for IIS
        AccessControl::GrantOnFile "$INSTDIR\OTRS" "(S-1-5-32-545)" "FullAccess"
-       
+
    ${EndIf}
 
 SectionEnd
@@ -467,7 +467,7 @@ Section -InstOTRS
     SetOutPath $INSTDIR
     IfFileExists $INSTDIR\OTRS\ARCHIVE 0 +2
        CopyFiles $INSTDIR\OTRS\ARCHIVE $INSTDIR\OTRS\ARCHIVE_OLD
-        
+
     File /r "${Installer_Home}\OTRS"
 
     # configure OTRS
@@ -486,7 +486,7 @@ Section -InstOTRS
     IfFileExists $INSTDIR\OTRS\bin\otrs.Scheduler4winInstaller.pl 0 +2
         NSExec::ExecToLog "$\"$PerlExe$\" $\"$INSTDIR\OTRS\bin\otrs.Scheduler4winInstaller.pl$\" -a install"
     ${EndIf}
-        
+
     # add common otrs information
     WriteRegStr HKLM "${OTRS_RegKey_Instance}" OTRS_Version_Major   "${OTRS_Version_Major}"
     WriteRegStr HKLM "${OTRS_RegKey_Instance}" OTRS_Version_Minor   "${OTRS_Version_Minor}"
@@ -554,7 +554,7 @@ Section -InstPost
     nsExec::Exec "NET START $\"Cron Service (CRONw)$\""
     nsExec::Exec "$\"$PerlExe$\" $\"$INSTDIR\OTRS\bin\otrs.Scheduler4win.pl$\" -a start"
     nsExec::Exec "NET START Apache2.2"
-    
+
     # refresh the windows desktop (required for Vista's desktop)
     System::Call 'Shell32::SHChangeNotify(i 0x8000000, i 0, i 0, i 0)'
 
@@ -591,7 +591,7 @@ Section -un.UninstOTRS
 
     DeleteRegValue HKLM "${OTRS_RegKey_Instance}" StartMenuGroup
     DeleteRegKey HKLM "${OTRS_RegKey_Instance}"
-    
+
     # remove items from Path
     GetFullPathName /SHORT $InstallDirShort $INSTDIR
     ${un.EnvVarUpdate} $0 "PATH" "R" "HKLM" "$InstallDirShort\StrawberryPerl\site\bin"
@@ -601,7 +601,7 @@ Section -un.UninstOTRS
     # deregister Scheduler service (just for 3.1 and later)
     IfFileExists $INSTDIR\OTRS\bin\otrs.Scheduler4winInstaller.pl 0 +2
         NSExec::ExecToLog "$\"$PerlExe$\" $\"$INSTDIR\OTRS\bin\otrs.Scheduler4winInstaller.pl$\" -a remove"
-    
+
     # delete the OTRS files
     RmDir /r /REBOOTOK $INSTDIR\OTRS
 
@@ -737,17 +737,17 @@ Function InstCheckAlreadyInstalled
     ${If} ${FileExists} $R0
 
         # read version from history
-        ReadRegStr $Installed_OTRS_Major   HKLM "${OTRS_RegKey_Instance}" OTRS_Version_Major   
-        ReadRegStr $Installed_OTRS_Minor   HKLM "${OTRS_RegKey_Instance}" OTRS_Version_Minor   
-        ReadRegStr $Installed_OTRS_Patch   HKLM "${OTRS_RegKey_Instance}" OTRS_Version_Patch   
+        ReadRegStr $Installed_OTRS_Major   HKLM "${OTRS_RegKey_Instance}" OTRS_Version_Major
+        ReadRegStr $Installed_OTRS_Minor   HKLM "${OTRS_RegKey_Instance}" OTRS_Version_Minor
+        ReadRegStr $Installed_OTRS_Patch   HKLM "${OTRS_RegKey_Instance}" OTRS_Version_Patch
         ReadRegStr $Installed_OTRS_Postfix HKLM "${OTRS_RegKey_Instance}" OTRS_Version_Postfix
 
         # combine to one string
         StrCpy $Installed_OTRS_Version "$Installed_OTRS_Major.$Installed_OTRS_Minor.$Installed_OTRS_Patch.$Installed_OTRS_Postfix"
 
-        # convert to numbers so 'beta' and 'rc' will be no problem    
+        # convert to numbers so 'beta' and 'rc' will be no problem
         ${VersionConvert} $Installed_OTRS_Version "" $R0
-        ${VersionConvert} ${OTRS_Version} "" $R1    
+        ${VersionConvert} ${OTRS_Version} "" $R1
 
         # comparison: 0 = equal, 1 = installed is newer, 2 = we are newer
         ${VersionCompare} $R0 $R1 $R0
@@ -755,12 +755,12 @@ Function InstCheckAlreadyInstalled
         ${If} $R0 = 0
                 MessageBox MB_OK|MB_ICONSTOP "You have already installed OTRS $Installed_OTRS_Version."
                 Abort
-        ${EndIf}        
+        ${EndIf}
 
         ${If} $R0 = 1
                 MessageBox MB_OK|MB_ICONSTOP "You have installed $Installed_OTRS_Version, which is newer than ${OTRS_Version}."
                 Abort
-        ${EndIf}        
+        ${EndIf}
 
         ${If} $R0 = 2
             # we can only do patch level upgrades or upgrades that differ one minor
@@ -774,13 +774,13 @@ Function InstCheckAlreadyInstalled
                    Abort
                 ${EndIf}
                 ${If} $Installed_OTRS_Minor == 1
-                    StrCpy $Upgrade "minor" 
+                    StrCpy $Upgrade "minor"
                 ${EndIf}
                 ${If} $Installed_OTRS_Minor == ${OTRS_Version_Minor}
-                    StrCpy $Upgrade "patch" 
-                ${EndIf}                
-            ${EndIf}        
-        ${EndIf}        
+                    StrCpy $Upgrade "patch"
+                ${EndIf}
+            ${EndIf}
+        ${EndIf}
     ${Else}
         StrCpy $Upgrade "no"
     ${EndIf}
@@ -791,7 +791,7 @@ Function InstCheckActiveStatePerl
 
     # check if 64-bit Perl is installed, we need 32-bit because of PerlEx
     # we need to use SetRegView64 on 64-bit OS otherwise we can not find
-    # the correct regkey because the installer is a 32-bit 
+    # the correct regkey because the installer is a 32-bit
     # application itself
     ${If} ${FileExists} $WINDIR\SYSWOW64\*.*
         SetRegView 64
@@ -799,17 +799,17 @@ Function InstCheckActiveStatePerl
         SetRegView 32
         ${If} ${FileExists} "$ActiveStatePerl"
                 MessageBox MB_OK|MB_ICONSTOP "You have installed ActiveState Perl 64-bit. Please uninstall the 64-bit version and install the x86 version before continuing setup."
-                ExecShell "open" "http://www.activestate.com/activeperl/downloads"            
+                ExecShell "open" "http://www.activestate.com/activeperl/downloads"
                 Abort
         ${EndIf}
     ${EndIf}
-    
-    # check if ActiveState is installed 
+
+    # check if ActiveState is installed
     ReadRegStr $ActiveStatePerl HKLM Software\Perl BinDir
-        
+
     # if we have ActiveState, test its properties
     ${If} ${FileExists} "$ActiveStatePerl"
-        
+
         # check if ActiveState Perl is correct version
         # we need 5.16 because of apache mod_perl libs
         nsExec::ExecToStack '"$ActiveStatePerl" -MConfig -e $\"print $Config{api_revision}$\"'
@@ -819,19 +819,19 @@ Function InstCheckActiveStatePerl
         nsExec::ExecToStack '"$ActiveStatePerl" -MConfig -e $\"print $Config{api_version}$\"'
         Pop $0
         Pop $PerlMinor
-        
+
         ${If} $PerlMajor = 5
             ${If} $PerlMinor <> 16
                 MessageBox MB_OK|MB_ICONSTOP "Please install ActivePerl 5.16 for x86. I found version $perlmajor.$perlminor."
-                ExecShell "open" "http://www.activestate.com/activeperl/downloads"            
+                ExecShell "open" "http://www.activestate.com/activeperl/downloads"
                 Abort
             ${EndIf}
         ${Else}
             # different major version than 5? Really?
             MessageBox MB_OK|MB_ICONSTOP "Please install ActivePerl 5.16 for x86. I found version $perlmajor.$perlminor."
-            ExecShell "open" "http://www.activestate.com/activeperl/downloads"            
+            ExecShell "open" "http://www.activestate.com/activeperl/downloads"
             Abort
-        ${EndIf}        
+        ${EndIf}
 
 
     ${Else}
@@ -868,7 +868,7 @@ Function Questions
     Pop $hCtl_btn_OTRSLink
     ${NSD_AddStyle} $hCtl_btn_OTRSLink ${WS_VISIBLE}
     SetCtlColors $hCtl_btn_OTRSLink "0x31596B" "${MUI_BGCOLOR}"
-    ${NSD_OnClick} $hCtl_btn_OTRSLink onClickOTRSLink  
+    ${NSD_OnClick} $hCtl_btn_OTRSLink onClickOTRSLink
 
 FunctionEnd
 
@@ -886,8 +886,8 @@ Function DirectoryHide
          ReadRegStr $INSTDIR HKLM "${OTRS_RegKey_Instance}" "Path"
          Abort
     ${EndIf}
- 
-FunctionEnd 
+
+FunctionEnd
 
 # to check if install directory is empty
 Function InstInstallationDirValidate
@@ -910,16 +910,16 @@ FunctionEnd
 
 Function InstStartWeb
 # after completion launch the web installer for a new install
-# or the agent interface for upgrade (possibly even package manager?)    
+# or the agent interface for upgrade (possibly even package manager?)
 
-    ${If} $Upgrade == "no"  
-    
+    ${If} $Upgrade == "no"
+
         # write a .json file to indicate we already had the License page
         CreateDirectory $INSTDIR\OTRS\var\tmp
         FileOpen $9 "$INSTDIR\OTRS\var\tmp\installer.json" w ;Opens an empty file for writing
         FileWrite $9 "{$\"SkipLicense$\":1,$\"SkipLog$\":1}$\n"
         FileClose $9 ;Closes the filled file
-        
+
         # open the web installer
         ExecShell "open" "http://localhost/otrs/installer.pl"
     ${Else}
