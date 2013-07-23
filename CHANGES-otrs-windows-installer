@@ -1,4 +1,9 @@
-3.0.2 2013-07-??
+3.0.2 2013-07-26
+ - Fixed bug#9499 - Windows Installer will not setup IIS correctly if installed
+    in Program Files.
+ - Fixed bug#9572 - Installer tries to create a database when 'Use existing
+    database' is chosen.
+ - Fixed bug#9490 - mod_perl crashes -> by running OTRS in CGI mode.
  - Fixed bug#9569 - CRONw will not start with ActiveState Perl.
 
 3.0.1 2013-07-01
