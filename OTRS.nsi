@@ -55,6 +55,7 @@ var PerlEx
 var PerlMajor
 var PerlMinor
 var PerlExe
+var ToInstallDir
 var MySQLInstalled
 var Installed_OTRS_Major
 var Installed_OTRS_Minor
@@ -152,6 +153,7 @@ Page custom fnc_Mode_Show
 # directory page
 !define MUI_PAGE_CUSTOMFUNCTION_LEAVE InstInstallationDirValidate
 !define MUI_PAGE_CUSTOMFUNCTION_PRE DirectoryHide
+!define MUI_DIRECTORYPAGE_VARIABLE $ToInstallDir
 !insertmacro MUI_PAGE_DIRECTORY
 
 # database selection
@@ -698,6 +700,11 @@ Function .onInit
     Call InstCheckMySQLAlreadyInstalled
     Call InstCheckWebServerAlreadyInstalled
 
+    # base path for OTRS installation
+    # take root of program files directory
+    ${GetRoot} $PROGRAMFILES $R0
+    StrCpy $ToInstallDir "$R0\otrs\"
+
     # insert plugins
     !insertmacro MUI_LANGDLL_DISPLAY
     !insertmacro MULTIUSER_INIT
@@ -889,11 +896,12 @@ Function DirectoryHide
 
 FunctionEnd
 
-# to check if install directory is empty
+# to check if install directory is OK
 Function InstInstallationDirValidate
 
     ${If} $Upgrade == "no"
-        #make sure $INSTDIR path is either empty or does not exist.
+
+        # make sure $INSTDIR path is either empty or does not exist.
         Push $0
         ${DirState} "$INSTDIR" $0
 
@@ -903,6 +911,29 @@ Function InstInstallationDirValidate
         ${EndIf}
 
         Pop $0
+
+        # Check if path is not in Program Files, ActiveState perl gets in trouble there.
+        # Also, it is difficult to for instance modify Config.pm there.
+        ${If} ${FileExists} $WINDIR\SYSWOW64\*.*
+            # On 64-bit systems check both directories
+            ${StrStr} $1 "$INSTDIR" "$PROGRAMFILES32"
+            ${StrStr} $2 "$INSTDIR" "$PROGRAMFILES64"
+        ${Else}
+            # On 32-bit systems check just Program Files
+            ${StrStr} $3 "$INSTDIR" "$PROGRAMFILES"
+        ${EndIf}
+
+        # StrStr returns an empty string if there was no match
+        ${If} $1 != ''
+        ${OrIf} $2 != ''
+        ${OrIf} $3 != ''
+            MessageBox MB_OK|MB_ICONEXCLAMATION "Don't install OTRS in Program Files directory! Please select another directory."
+            Abort
+        ${EndIf}
+        Pop $1
+        Pop $2
+        Pop $3
+
     ${EndIf}
 
 FunctionEnd
