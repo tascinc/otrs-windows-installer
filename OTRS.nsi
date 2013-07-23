@@ -289,7 +289,6 @@ Section -InstPre
     # install the icon files
     SetOutPath $INSTDIR\otrs4win
     File /r "${Installer_Home_Nsis}\Graphics\Icons\OTRS.ico"
-    File /r "${Installer_Home_Nsis}\Graphics\Icons\OTRSServices.ico"
 
     # install the helper scripts
     File /r "${Installer_Home_Nsis}\Scripts"
