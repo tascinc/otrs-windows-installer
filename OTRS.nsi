@@ -899,6 +899,8 @@ FunctionEnd
 Function InstInstallationDirValidate
 
     ${If} $Upgrade == "no"
+    
+        StrCpy $INSTDIR $ToInstallDir
 
         # make sure $INSTDIR path is either empty or does not exist.
         Push $0
@@ -919,19 +921,18 @@ Function InstInstallationDirValidate
             ${StrStr} $2 "$INSTDIR" "$PROGRAMFILES64"
         ${Else}
             # On 32-bit systems check just Program Files
-            ${StrStr} $3 "$INSTDIR" "$PROGRAMFILES"
+            ${StrStr} $1 "$INSTDIR" "$PROGRAMFILES"
+            StrCpy $3 ''
         ${EndIf}
 
         # StrStr returns an empty string if there was no match
         ${If} $1 != ''
         ${OrIf} $2 != ''
-        ${OrIf} $3 != ''
             MessageBox MB_OK|MB_ICONEXCLAMATION "Don't install OTRS in Program Files directory! Please select another directory."
             Abort
         ${EndIf}
         Pop $1
         Pop $2
-        Pop $3
 
     ${EndIf}
 
