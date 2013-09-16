@@ -34,7 +34,7 @@ my $URL = shift @ARGV || die "Usage: $0 [url] i.e. $0 http://example.com/otrs-3.
 die "URL $URL does not end in .zip!\n" if $URL !~ /\.zip$/;
 
 # extract otrs-3.x.x.zip from URL to use as file name
-my $FileName = basename( $URL );
+my $FileName = basename($URL);
 
 # checking if NSIS file is in place
 my $Path = getcwd;
@@ -63,7 +63,7 @@ elsif ( $ResponseCode eq '304' ) {
     print "File was already present and not modified on server.\n";
 }
 else {
-    die "Problem downloading '$URL', response code $ResponseCode!\n" ;
+    die "Problem downloading '$URL', response code $ResponseCode!\n";
 }
 print "Done.\n\n";
 
@@ -135,7 +135,7 @@ my $OrgString = do { local $/; <$NSISInFile> };
 close $NSISInFile;
 
 # replace values
-for my $Value ( keys %V ) {
+for my $Value ( sort keys %V ) {
     $OrgString =~ s{define OTRS_Version_$Value (.*)}{define OTRS_Version_$Value "$V{$Value}"};
 }
 
