@@ -123,6 +123,12 @@ my %V;
 ( $V{Major}, $V{Minor}, $V{Patch}, $V{Jointer}, $V{Postfix} )
     = ( $Product =~ /-(\d*)\.(\d*)\.(\d*)\.?(beta|rc|)(\d*)/ );
 
+# if there is a version postfix, like 'beta' or 'rc', it should be prefixed with a dot
+# this is important for processing the download statistics
+if ( $V{Jointer} ) {
+    $V{Jointer} = '.' . $V{Jointer};
+}
+
 # read in nsi file
 open my $NSISInFile, '<', $NSISFile || die "Can't open $NSISFile: $@";    ## no critic
 my $OrgString = do { local $/; <$NSISInFile> };
