@@ -81,41 +81,6 @@ die if !-d $ExtractedDirectory;
 rename $ExtractedDirectory, File::Spec->catfile( $Path, 'OTRS' );
 print "Done.\n\n";
 
-# patch files from master - for web installer
-my $RootURL = 'https://raw.github.com/OTRS/otrs/master';
-
-print "Dowloading files from 'master' to patch web installer...\n";
-for my $File (
-    qw (
-    Kernel/Modules/Installer.pm
-    Kernel/Output/HTML/Standard/Installer.dtl
-    Kernel/Output/HTML/Standard/InstallerConfigureMail.dtl
-    Kernel/Output/HTML/Standard/InstallerDBResult.dtl
-    Kernel/Output/HTML/Standard/InstallerDBStart.dtl
-    Kernel/Output/HTML/Standard/InstallerDBmssql.dtl
-    Kernel/Output/HTML/Standard/InstallerDBmysql.dtl
-    Kernel/Output/HTML/Standard/InstallerDBoracle.dtl
-    Kernel/Output/HTML/Standard/InstallerDBpostgresql.dtl
-    Kernel/Output/HTML/Standard/InstallerFinish.dtl
-    Kernel/Output/HTML/Standard/InstallerLicense.dtl
-    Kernel/Output/HTML/Standard/InstallerLicenseText.dtl
-    Kernel/Output/HTML/Standard/InstallerRegistration.dtl
-    Kernel/Output/HTML/Standard/InstallerSystem.dtl
-    Kernel/System/Main.pm
-    var/httpd/htdocs/js/Core.Installer.js
-    var/httpd/htdocs/skins/Agent/default/css/Core.Installer.css
-    )
-    )
-{
-    print "\tGetting $File...\n";
-    my $URL          = "$RootURL/$File";
-    my $FileName     = File::Spec->catfile( $Path, 'OTRS', $File );
-    my $ResponseCode = getstore( $URL, $FileName );
-    die "Problem from downloading '$URL', response code $ResponseCode!\n" if $ResponseCode ne '200';
-    print ""
-}
-print "Done.\n\n";
-
 # update nsis installer file with current version
 print "Updating NSIS installer file...\n";
 my $Product = basename( $URL, '.zip' );
@@ -144,3 +109,46 @@ open my $NSISOutfile, '>', $NSISFile || die "Can't open $NSISFile: $@";    ## no
 print $NSISOutfile $OrgString;
 close $NSISOutfile;
 print "Done.\n\n";
+
+# patch files from master - for new web installer
+# we only do this on the 3.2.x framework
+# we 'backport' the web installer from 3.3.0-beta2; later versions
+# uses Kernel::System::Environment and there would be too much to backport
+
+if ( $V{Major} == 3 && $V{Minor} == 2 ) {
+    my $RootURL = 'https://raw.github.com/OTRS/otrs/rel-3_3_0_beta2';
+
+    print "Dowloading files from 'master' to patch web installer...\n";
+    for my $File (
+        qw (
+        Kernel/Modules/Installer.pm
+        Kernel/Output/HTML/Standard/Installer.dtl
+        Kernel/Output/HTML/Standard/InstallerConfigureMail.dtl
+        Kernel/Output/HTML/Standard/InstallerDBResult.dtl
+        Kernel/Output/HTML/Standard/InstallerDBStart.dtl
+        Kernel/Output/HTML/Standard/InstallerDBmssql.dtl
+        Kernel/Output/HTML/Standard/InstallerDBmysql.dtl
+        Kernel/Output/HTML/Standard/InstallerDBoracle.dtl
+        Kernel/Output/HTML/Standard/InstallerDBpostgresql.dtl
+        Kernel/Output/HTML/Standard/InstallerFinish.dtl
+        Kernel/Output/HTML/Standard/InstallerLicense.dtl
+        Kernel/Output/HTML/Standard/InstallerLicenseText.dtl
+        Kernel/Output/HTML/Standard/InstallerRegistration.dtl
+        Kernel/Output/HTML/Standard/InstallerSystem.dtl
+        Kernel/System/Main.pm
+        var/httpd/htdocs/js/Core.Installer.js
+        var/httpd/htdocs/skins/Agent/default/css/Core.Installer.css
+        )
+        )
+    {
+        print "\tGetting $File...\n";
+        my $URL          = "$RootURL/$File";
+        my $FileName     = File::Spec->catfile( $Path, 'OTRS', $File );
+        my $ResponseCode = getstore( $URL, $FileName );
+        if ( $ResponseCode ne '200' ) {
+            die "Problem from downloading '$URL', response code $ResponseCode!\n";
+        }
+        print ""
+    }
+    print "Done.\n\n";
+}
