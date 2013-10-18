@@ -316,7 +316,7 @@ Section -InstPerl
         DetailPrint "Configuring ActiveState Perl. Warning: this can take a very long time..."
         NSExec::ExecToLog '"$0" /C "ppm install DBD::mysql"'
         NSExec::ExecToLog '"$0" /C "ppm install DBD::Pg"'
-        NSExec::ExecToLog '"$0" /C "ppm install Crypt::Eksblowfish::bcrypt2"'
+        NSExec::ExecToLog '"$0" /C "ppm install Crypt::Eksblowfish"'
         NSExec::ExecToLog '"$0" /C "ppm install Crypt::SSLeay"'
         NSExec::ExecToLog '"$0" /C "ppm install Date::Format"'
         NSExec::ExecToLog '"$0" /C "ppm install Date::Manip"'
