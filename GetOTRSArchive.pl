@@ -85,14 +85,12 @@ print "Done.\n\n";
 print "Updating NSIS installer file...\n";
 my $Product = basename( $URL, '.zip' );
 my %V;
-( $V{Major}, $V{Minor}, $V{Patch}, $V{Jointer}, $V{Postfix} )
-    = ( $Product =~ /-(\d*)\.(\d*)\.(\d*)\.?(beta|rc|)(\d*)/ );
+( $V{Major}, $V{Minor}, $V{Patch}, $V{Postfix} )
+    = ( $Product =~ /-(\d*)\.(\d*)\.(\d*)\.?(\w*\d*)/g );
 
 # if there is a version postfix, like 'beta' or 'rc', it should be prefixed with a dot
 # this is important for processing the download statistics
-if ( $V{Jointer} ) {
-    $V{Jointer} = '.' . $V{Jointer};
-}
+$V{Jointer} = $V{Postfix} ? '.' : '';
 
 # read in nsi file
 open my $NSISInFile, '<', $NSISFile || die "Can't open $NSISFile: $@";    ## no critic
