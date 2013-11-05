@@ -1,6 +1,10 @@
 # OTRS Windows Installer Build Guide
 
-## Prepare Prerequisites
+Once you set up the installation prerequisites, you can skip all steps except for 'Prepare OTRS'
+and 'Build the installer' if you need to build a new installer for a new version of OTRS.
+
+
+## Prepare NSIS Installer
 
 1. Download and install the newest NSIS installer from http://nsis.sourceforge.net/
 
@@ -18,6 +22,7 @@
  - Download Ports.nsh from http://nsis.sourceforge.net/Check_open_ports
  - Copy the file to your NSIS Include directory (e. g. C:\Program Files\NSIS\Include)
 
+
 ## Prepare installer directory
 
 1. Create a directory `c:\Installer`
@@ -26,13 +31,6 @@
 
     git clone https://github.com/OTRS/otrs-windows-installer.git otrs4win
 
-## Prepare OTRS
-
-1. Download the newest version of OTRS from ftp.otrs.org
-
-2. Unzip the content to C:\Installer\OTRS\
-
-3. Update the version number (and the version postfix) in the OTRS.nsi file
 
 ## Prepare Strawberry Perl
 
@@ -82,6 +80,7 @@
 
 6. Download mod_auth_sspi, extract it and put it in C:\Installer\Apache\Modules - this is an optional module people can configure for easy SSO on Windows
 
+
 ## Prepare MySQL
 
 1. Download the most recent MySQL server "Windows Essentials (x86)" from http://dev.mysql.com/downloads/
@@ -93,6 +92,7 @@
 
 3. Copy the mysql files to C:\Installer\MySQL\
 
+
 ## Prepare CRONw
 
 1. Download the most recent CRONw from http://cronw.sourceforge.net/
@@ -102,9 +102,18 @@
 3. Delete the useless modules directory
     del C:\Installer\CRONw\modules
 
+
+## Prepare OTRS
+
+1. Open a cmd.exe window in the Installer directory.
+
+2. Run the following script - it will download, extract, and put the OTRS directory in the correct place as well as update the version numbers in the OTRS.nsi installer file.
+
+    perl otrs4win\GetOTRSArchive.pl http://ftp.otrs.org/pub/otrs/otrs-3.2.12.zip
+
+
 ## Build the Installer
 
 1. Right-click OTRS.nsi in Explorer, select 'Compile'.
 
 2. Upload the installer after build finishes (takes about 10 minutes).
-
