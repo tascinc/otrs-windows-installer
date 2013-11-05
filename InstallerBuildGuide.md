@@ -18,25 +18,19 @@
  - Download Ports.nsh from http://nsis.sourceforge.net/Check_open_ports
  - Copy the file to your NSIS Include directory (e. g. C:\Program Files\NSIS\Include)
 
-5. Download and install the newest Eclipse framework from http://www.eclipse.org/
+## Prepare installer directory
 
-6. Download and install the most recent EclipseNSIS plugin
- - Start Eclipse
- - Click Help > Install New Software
- - Add http://eclipsensis.sf.net/update as software location
- - Install EclipseNSIS
+1. Create a directory `c:\Installer`
 
-## Prepare otrs4win
+2. Checkout the module otrs-windows-installer in the local directory C:\Installer in a dir called `otrs4win`
 
-1. Checkout the module otrs4win in the local directory C:\otrs4win
-
-2. Create a new project in your Eclipse
+    git clone https://github.com/OTRS/otrs-windows-installer.git otrs4win
 
 ## Prepare OTRS
 
 1. Download the newest version of OTRS from ftp.otrs.org
 
-2. Unzip the content to C:\otrs4win\OTRS\
+2. Unzip the content to C:\Installer\OTRS\
 
 3. Update the version number (and the version postfix) in the OTRS.nsi file
 
@@ -61,7 +55,7 @@
 6. Delete the temp directory
     > del c:\strawberry\temp
 
-7. Copy the strawberry perl files to C:\otrs4win\StrawberryPerl\
+7. Copy the strawberry perl files to C:\Installer\StrawberryPerl\
 
 
 ## Prepare Apache
@@ -79,14 +73,14 @@
 
 3. Stop the apache service
 
-4. Copy the apache files to C:\otrs4win\Apache\
+4. Copy the apache files to C:\Installer\Apache\
 
-5. Download the following files and store them in C:\otrs4win\Apache\Modules
+5. Download the following files and store them in C:\Installer\Apache\Modules
  - http://strawberryperl.com/package/kmx/mod_perl/5.12_x86/mod_perl.so
  - http://strawberryperl.com/package/kmx/mod_perl/5.12_x86/mod_apreq2.so
  - http://strawberryperl.com/package/kmx/mod_perl/5.12_x86/libapreq2.dll
 
-6. Download mod_auth_sspi, extract it and put it in C:\otrs4win\Apache\Modules - this is an optional module people can configure for easy SSO on Windows
+6. Download mod_auth_sspi, extract it and put it in C:\Installer\Apache\Modules - this is an optional module people can configure for easy SSO on Windows
 
 ## Prepare MySQL
 
@@ -97,22 +91,20 @@
  - Select ALL components
  - Install the MySQL server to C:\MySQL
 
-3. Copy the mysql files to C:\otrs4win\MySQL\
+3. Copy the mysql files to C:\Installer\MySQL\
 
 ## Prepare CRONw
 
 1. Download the most recent CRONw from http://cronw.sourceforge.net/
 
-2. Copy the CRONw files to C:\otrs4win\CRONw\
+2. Copy the CRONw files to C:\Installer\CRONw\
 
 3. Delete the useless modules directory
-    del C:\otrs4win\CRONw\modules
+    del C:\Installer\CRONw\modules
 
 ## Build the Installer
 
-1. Start your Eclipse
+1. Right-click OTRS.nsi in Explorer, select 'Compile'.
 
-2. Open the OTRS.nsi file
-
-3. Build the installer
+2. Upload the installer after build finishes (takes about 10 minutes).
 
