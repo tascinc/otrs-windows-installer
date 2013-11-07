@@ -93,7 +93,14 @@ and 'Build the installer' if you need to build a new installer for a new version
  - Select ALL components
  - Install the MySQL server to C:\MySQL
 
-3. Copy the mysql files to C:\Installer\MySQL\
+3. Skip the wizward for the configuration.
+
+4. Copy the data folder of the MySQL from
+    C:\ProgramData\MySQL\MySQL Server 5.1\Data\
+    to
+    C:\MySQL\data
+
+5. Copy the mysql files to C:\Installer\MySQL\
 
 
 ## Prepare CRONw
