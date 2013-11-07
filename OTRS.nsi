@@ -26,7 +26,7 @@
 !define Installer_Home_Nsis       "${Installer_Home}\otrs4win"
 !define Installer_Version_Major   3
 !define Installer_Version_Minor   0
-!define Installer_Version_Patch   2
+!define Installer_Version_Patch   3
 #!define Installer_Version_Jointer "-"
 #!define Installer_Version_Postfix "rc1"
 !define Installer_Version_Jointer ""
@@ -455,9 +455,6 @@ Section /o -InstApache InstApache
        NSExec::ExecToLog '"$WINDIR\system32\inetsrv\appcmd.exe" add vdir /app.name:$\"Default Web Site/$\" /path:/otrs-web /physicalPath:$INSTDIR\OTRS\var\httpd\htdocs'
        NSExec::ExecToLog '"$WINDIR\system32\inetsrv\appcmd.exe" add app /site.name:$\"Default Web Site$\" /path:/otrs /physicalPath:$INSTDIR\OTRS\bin\cgi-bin -applicationPool:OTRS'
 
-       # write permission on OTRS sub folder for IIS
-       AccessControl::GrantOnFile "$INSTDIR\OTRS" "(S-1-5-32-545)" "FullAccess"
-
    ${EndIf}
 
 SectionEnd
@@ -472,6 +469,9 @@ Section -InstOTRS
 
     File /r "${Installer_Home}\OTRS"
 
+    # write permission on OTRS subfolder - Full Control for 'Users' group
+    AccessControl::GrantOnFile "$INSTDIR\OTRS" "(S-1-5-32-545)" "FullAccess"
+    
     # configure OTRS
     GetFullPathName /SHORT $InstallDirShort $INSTDIR
 

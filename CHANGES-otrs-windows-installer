@@ -1,3 +1,6 @@
+3.0.3 2013-11-07
+ - Fixed 2013110642045943 - On Win2012 server with IIS, Config.pm is not writable.
+
 3.0.2 2013-07-26
  - Fixed bug#9499 - Windows Installer will not setup IIS correctly if installed
     in Program Files.
