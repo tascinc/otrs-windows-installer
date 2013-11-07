@@ -22,6 +22,14 @@ and 'Build the installer' if you need to build a new installer for a new version
  - Download Ports.nsh from http://nsis.sourceforge.net/Check_open_ports
  - Copy the file to your NSIS Include directory (e. g. C:\Program Files\NSIS\Include)
 
+5. Install EnvVarUpdate Include
+ - Download EnvVarUpdate.nsh from http://nsis.sourceforge.net/mediawiki/images/a/ad/EnvVarUpdate.7z
+ - Copy the file to your NSIS Include directory (e. g. C:\Program Files\NSIS\Include)
+
+6. Install Access Control Plugin
+ - Download AccessControl.dll from http://nsis.sourceforge.net/AccessControl_plug-in
+ - Copy the file to your NSIS Plugin directory (e. g. C:\Program Files\NSIS\Plugin)
+
 
 ## Prepare installer directory
 
@@ -34,26 +42,21 @@ and 'Build the installer' if you need to build a new installer for a new version
 
 ## Prepare Strawberry Perl
 
-1. Download the latest Portable version of Strawberry Perl from http://strawberryperl.com/
+1. Download the Portable version of Strawberry Perl 5.16 (32 bit) from http://strawberryperl.com/
 
 2. Extract the files to C:\strawberry\
 
 3. Install CPAN modules using the CPAN shell
 
-    > cpan Task::Win32::OTRS
+    > cpan Task::OTRS::Win32
 
-4. Add mod_perl
- - Install mod_perl binaries with the following commands (ref: http://strawberryperl.com/package/kmx/mod_perl/README-512.TXT)
- - pip http://strawberryperl.com/package/kmx/mod_perl/5.12_x86/mod_perl-2.0.4-MSWin32-x86-multi-thread-5.12.par
- - pip http://strawberryperl.com/package/kmx/mod_perl/5.12_x86/libapreq2-2.12-MSWin32-x86-multi-thread-5.12.par
-
-5. Delete the cpan directory to save space
+4. Delete the cpan directory to save space
     > del c:\strawberry\cpan
 
-6. Delete the temp directory
+5. Delete the temp directory
     > del c:\strawberry\temp
 
-7. Copy the strawberry perl files to C:\Installer\StrawberryPerl\
+6. Copy the strawberry perl files to C:\Installer\StrawberryPerl\
 
 
 ## Prepare Apache
@@ -83,7 +86,7 @@ and 'Build the installer' if you need to build a new installer for a new version
 
 ## Prepare MySQL
 
-1. Download the most recent MySQL server "Windows Essentials (x86)" from http://dev.mysql.com/downloads/
+1. Download the most recent MySQL server 5.1 (32 bit) "Windows Essentials (x86)" from http://dev.mysql.com/downloads/
 
 2. Install it on a test system to extract the needed files
  - Select "Custom" installation method
@@ -95,7 +98,7 @@ and 'Build the installer' if you need to build a new installer for a new version
 
 ## Prepare CRONw
 
-1. Download the most recent CRONw from http://cronw.sourceforge.net/
+1. Download the CRONw 2.0 from http://cronw.sourceforge.net/
 
 2. Copy the CRONw files to C:\Installer\CRONw\
 
