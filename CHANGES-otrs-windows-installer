@@ -1,4 +1,5 @@
-3.0.3 2013-11-07
+3.0.3 2013-11-08
+ - Let Web Installer skip questions about database if using bundled MySQL.
  - Fixed 2013110642045943 - On Win2012 server with IIS, Config.pm is not writable.
 
 3.0.2 2013-07-26

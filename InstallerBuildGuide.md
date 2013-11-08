@@ -30,6 +30,9 @@ and 'Build the installer' if you need to build a new installer for a new version
  - Download AccessControl.dll from http://nsis.sourceforge.net/AccessControl_plug-in
  - Copy the file to your NSIS Plugin directory (e. g. C:\Program Files\NSIS\Plugin)
 
+7. Install Pwgen Plugin
+ - Download Pwgen.dll from http://nsis.sourceforge.net/Pwgen_plug-in
+ - Copy the file to your NSIS Plugin directory (e. g. C:\Program Files\NSIS\Plugin)
 
 ## Prepare installer directory
 

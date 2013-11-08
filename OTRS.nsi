@@ -57,6 +57,7 @@ var PerlMinor
 var PerlExe
 var ToInstallDir
 var MySQLInstalled
+var MySQLConfig
 var Installed_OTRS_Major
 var Installed_OTRS_Minor
 var Installed_OTRS_Patch
@@ -397,11 +398,18 @@ Section /o -InstMySQL InstMySQL
             # register mysql as service
             NSExec::ExecToLog '"$INSTDIR\MySQL\bin\mysqld.exe" --install MySQL --defaults-file="$INSTDIR\MySQL\my.ini"'
 
-            # remove the helper script
             sleep 1000  # sleep one second to give the OS time to unlock the file
-            Delete /REBOOTOK "$INSTDIR\otrs4win\Scripts\ConfigureMySQL.pl"
+
+            # generate a strong password for the OTRS database user
+            pwgen::GeneratePassword 14
+            pop $0
+
+            StrCpy $MySQLConfig "$\"DBType$\": $\"mysql$\", $\"InstallType$\": $\"CreateDB$\", $\"DBHost$\": $\"localhost$\", $\"OTRSDBUser$\": $\"otrs$\", $\"OTRSDBPassword$\": $\"$0$\", $\"DBName$\": $\"otrs$\", $\"DBUser$\": $\"root$\", $\"DBPassword$\": $\"$\", "
 
         ${EndIf}
+
+        # remove the helper script
+        Delete /REBOOTOK "$INSTDIR\otrs4win\Scripts\ConfigureMySQL.pl"
 
     ${EndIf}
 
@@ -818,7 +826,11 @@ Function InstCheckActiveStatePerl
     ${If} ${FileExists} "$ActiveStatePerl"
 
         # check if ActiveState Perl is correct version
-        # we need 5.16 because of apache mod_perl libs
+        # ActiveState always has the two latest 'stable' perls for download
+        # Right now (Nov 2013) this is 5.16 and 5.18
+        # we need 5.16 - with 5.18 we have still open issues:
+        # http://bugs.otrs.org/show_bug.cgi?id=9905
+        # also not all 5.18 fixes are backported to OTRS 3.1.
         nsExec::ExecToStack '"$ActiveStatePerl" -MConfig -e $\"print $Config{api_revision}$\"'
         Pop $0
         Pop $PerlMajor
@@ -949,7 +961,7 @@ Function InstStartWeb
         # write a .json file to indicate we already had the License page
         CreateDirectory $INSTDIR\OTRS\var\tmp
         FileOpen $9 "$INSTDIR\OTRS\var\tmp\installer.json" w ;Opens an empty file for writing
-        FileWrite $9 "{$\"SkipLicense$\":1,$\"SkipLog$\":1}$\n"
+        FileWrite $9 "{$MySQLConfig $\"SkipLicense$\":1,$\"SkipLog$\":1}$\n"
         FileClose $9 ;Closes the filled file
 
         # open the web installer
