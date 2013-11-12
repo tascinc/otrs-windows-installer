@@ -579,7 +579,7 @@ Section -un.UninstPre
 
     # stop the otrs services
     DetailPrint "Stopping services"
-    nsExec::Exec "$\"$PerlExe$\" $\"$INSTDIR\OTRS\bin\otrs.Scheduler4win.pl$\" -a stop"
+    nsExec::Exec "perl $\"$INSTDIR\OTRS\bin\otrs.Scheduler4win.pl$\" -a stop"
     nsExec::Exec "NET STOP $\"Cron Service (CRONw)$\""
     nsExec::Exec "NET STOP Apache2.2"
     nsExec::Exec "NET STOP MySQL"
@@ -610,7 +610,7 @@ Section -un.UninstOTRS
 
     # deregister Scheduler service (just for 3.1 and later)
     IfFileExists $INSTDIR\OTRS\bin\otrs.Scheduler4winInstaller.pl 0 +2
-        NSExec::ExecToLog "$\"$PerlExe$\" $\"$INSTDIR\OTRS\bin\otrs.Scheduler4winInstaller.pl$\" -a remove"
+        NSExec::ExecToLog "perl $\"$INSTDIR\OTRS\bin\otrs.Scheduler4winInstaller.pl$\" -a remove"
 
     # delete the OTRS files
     RmDir /r /REBOOTOK $INSTDIR\OTRS
@@ -621,7 +621,7 @@ SectionEnd
 Section -un.UninstCRONw
 
     # deregister CRONw as service
-    NSExec::ExecToLog "$\"$PerlExe$\" $\"$INSTDIR\CRONw\cronHelper.pl$\" --remove"
+    NSExec::ExecToLog "perl $\"$INSTDIR\CRONw\cronHelper.pl$\" --remove"
 
     # delete the CRONw files
     RmDir /r /REBOOTOK $INSTDIR\CRONw
