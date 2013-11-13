@@ -34,8 +34,8 @@
 
 !define OTRS_Name            "OTRS"
 !define OTRS_Version_Major "3"
-!define OTRS_Version_Minor "2"
-!define OTRS_Version_Patch "9"
+!define OTRS_Version_Minor "3"
+!define OTRS_Version_Patch "1"
 !define OTRS_Version_Jointer ""
 !define OTRS_Version_Postfix ""
 !define OTRS_Company         "OTRS Group"
@@ -51,6 +51,7 @@
 !define Win_RegKey_Uninstall "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\${OTRS_Name}"
 
 var ActiveStatePerl
+var MinorDifference
 var PerlEx
 var PerlMajor
 var PerlMinor
@@ -479,7 +480,7 @@ Section -InstOTRS
 
     # write permission on OTRS subfolder - Full Control for 'Users' group
     AccessControl::GrantOnFile "$INSTDIR\OTRS" "(S-1-5-32-545)" "FullAccess"
-    
+
     # configure OTRS
     GetFullPathName /SHORT $InstallDirShort $INSTDIR
 
@@ -492,9 +493,36 @@ Section -InstOTRS
 
     ${If} $Upgrade == "no"
 
-    # register Scheduler service (just for 3.1 and later)
-    IfFileExists $INSTDIR\OTRS\bin\otrs.Scheduler4winInstaller.pl 0 +2
-        NSExec::ExecToLog "$\"$PerlExe$\" $\"$INSTDIR\OTRS\bin\otrs.Scheduler4winInstaller.pl$\" -a install"
+        # register Scheduler service (just for 3.1 and later)
+        IfFileExists $INSTDIR\OTRS\bin\otrs.Scheduler4winInstaller.pl 0 +2
+            NSExec::ExecToLog "$\"$PerlExe$\" $\"$INSTDIR\OTRS\bin\otrs.Scheduler4winInstaller.pl$\" -a install"
+    ${Else}
+        # upgrade/patch for otrs
+        ${If} $Upgrade == "patch"
+            # if we have a patch update (3.3.0 -> 3.3.1)
+            DetailPrint "Execute additional TODOs for patch level upgrade..."
+            # delete cache
+            NSExec::ExecToLog "perl $\"$INSTDIR\OTRS\bin\otrs.DeleteCache.pl$\""
+
+            # rebuild config
+            NSExec::ExecToLog "perl $\"$INSTDIR\OTRS\bin\otrs.RebuildConfig.pl$\""
+        ${ElseIf} $Upgrade == "minor"
+            # if we have a minor update (3.2.8 -> 3.3.1)
+            DetailPrint "Execute additional TODOs for minor level upgrade..."
+
+            # upgrade DB (RebuildConfig and DeleteCache is include in DBUpdate-to...pl)
+            NSExec::ExecToLog "perl $\"$INSTDIR\OTRS\bin\otrs.ExecuteDatabaseXML.pl$\" $\"$INSTDIR\OTRS\scripts\database\update\otrs-upgrade-to-${OTRS_Version_Major}.${OTRS_Version_Minor}.xml$\""
+            NSExec::ExecToLog "perl $\"$INSTDIR\OTRS\scripts\DBUpdate-to-${OTRS_Version_Major}.${OTRS_Version_Minor}.pl$\""
+        ${EndIf}
+
+        # so if we have ActiveStatePerl then we will
+        # have IIS server installed.
+        ${If} ${FileExists} "$ActiveStatePerl"
+            # restart IIS server
+            DetailPrint "Reset Microsoft IIS Server..."
+            NSExec::ExecToLog "iisreset"
+        ${EndIf}
+
     ${EndIf}
 
     # add common otrs information
@@ -778,20 +806,23 @@ Function InstCheckAlreadyInstalled
         ${EndIf}
 
         ${If} $R0 = 2
+
             # we can only do patch level upgrades or upgrades that differ one minor
             ${If} $Installed_OTRS_Major < ${OTRS_Version_Major}
                 MessageBox MB_OK|MB_ICONSTOP "You have installed $Installed_OTRS_Version. Please don't skip minor levels when upgrading."
                 Abort
             ${Else}
+                IntOp $MinorDifference ${OTRS_Version_Minor} - $Installed_OTRS_Minor
+
                 # same major level
-                ${If} $Installed_OTRS_Minor == 0
+                ${If} $MinorDifference > 1
                    MessageBox MB_OK|MB_ICONSTOP "You have installed $Installed_OTRS_Version. Please don't skip minor levels when upgrading."
                    Abort
                 ${EndIf}
-                ${If} $Installed_OTRS_Minor == 1
+                ${If} $MinorDifference == 1
                     StrCpy $Upgrade "minor"
                 ${EndIf}
-                ${If} $Installed_OTRS_Minor == ${OTRS_Version_Minor}
+                ${If} $MinorDifference == 0
                     StrCpy $Upgrade "patch"
                 ${EndIf}
             ${EndIf}
@@ -831,11 +862,11 @@ Function InstCheckActiveStatePerl
         # we need 5.16 - with 5.18 we have still open issues:
         # http://bugs.otrs.org/show_bug.cgi?id=9905
         # also not all 5.18 fixes are backported to OTRS 3.1.
-        nsExec::ExecToStack '"$ActiveStatePerl" -MConfig -e $\"print $Config{api_revision}$\"'
+        nsExec::ExecToStack '"$ActiveStatePerl" -MConfig -e $\"print $$Config{api_revision}$\"'
         Pop $0
         Pop $PerlMajor
 
-        nsExec::ExecToStack '"$ActiveStatePerl" -MConfig -e $\"print $Config{api_version}$\"'
+        nsExec::ExecToStack '"$ActiveStatePerl" -MConfig -e $\"print $$Config{api_version}$\"'
         Pop $0
         Pop $PerlMinor
 
@@ -912,7 +943,7 @@ FunctionEnd
 Function InstInstallationDirValidate
 
     ${If} $Upgrade == "no"
-    
+
         StrCpy $INSTDIR $ToInstallDir
 
         # make sure $INSTDIR path is either empty or does not exist.
@@ -976,7 +1007,7 @@ Function CancelAndLaunchSite
 
     # Cancel was pressed, the user wants to go to ActiveState to download ActivePerl
     # this opens http://www.activestate.com/activeperl/downloads but I can change the URL if needed
-    ExecShell "open" "http://j.mp/12g32nt"
+    ExecShell "open" "http://www.activestate.com/activeperl/downloads"
     Quit
 
 FunctionEnd
