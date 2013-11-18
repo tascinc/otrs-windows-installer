@@ -179,6 +179,7 @@ ShowInstDetails Hide
 !define MUI_PAGE_CUSTOMFUNCTION_SHOW  Questions
 !define MUI_FINISHPAGE_TEXT           $(mui_finishpage_text)
 !define MUI_FINISHPAGE_BUTTON         $(mui_finishpage_button)
+
 !insertmacro MUI_PAGE_FINISH
 
 # ------------------------------------------------------------ #
@@ -210,76 +211,80 @@ ShowUninstDetails NeverShow
 !insertmacro MUI_LANGUAGE Dutch
 
 # English strings
-LangString mui_welcomepage_text   ${LANG_ENGLISH} "This wizard will guide you through the installation of ${OTRS_Name}. $\r$\n$\r$\n\
+LangString mui_welcomepage_text        ${LANG_ENGLISH} "This wizard will guide you through the installation of ${OTRS_Name}. $\r$\n$\r$\n\
 If you want to avoid rebooting your system after setup please close all other applications before starting the installation.$\r$\n$\r$\n\
 Click Next to start the installation."
-LangString questions              ${LANG_ENGLISH} "Questions? Need help?"
-LangString perl_header            ${LANG_ENGLISH} "Production or test environment?"
-LangString perl_subheader         ${LANG_ENGLISH} "Please install ActiveState Perl for production use"
-LangString perl_title             ${LANG_ENGLISH} "ActiveState Perl not found!"
-LangString perl_advise_text_part1 ${LANG_ENGLISH} "For production environments downloading and installing ActiveState ActivePerl (x86) is highly recommended before running this installer."
-LangString perl_cancel_button     ${LANG_ENGLISH} "Cancel and download ActivePerl"
-LangString perl_advise_text_part2 ${LANG_ENGLISH} "If you click Next, the installer will set up its own version of perl. This will configure Apache in CGI mode and will be relatively slow. Please only use this for testing or evaluating ${OTRS_Name}."
-LangString mui_finishpage_text    ${LANG_ENGLISH} "Installation of all needed services to run ${OTRS_Name} finished successfully.$\r$\n$\r$\nIf you click 'Launch' you'll start the Web Installer to configure ${OTRS_Name}."
-LangString mui_finishpage_button  ${LANG_ENGLISH} "Launch"
-LangString database_header        ${LANG_ENGLISH} "Select database for ${OTRS_Name}"
-LangString database_options       ${LANG_ENGLISH} "Options"
-LangString database_bundled       ${LANG_ENGLISH} "Install the bundled MySQL database"
-LangString database_own           ${LANG_ENGLISH} "Use an already installed database (MySQL, PostgreSQL, Oracle, SQL Server)"
+LangString questions                   ${LANG_ENGLISH} "Questions? Need help?"
+LangString perl_header                 ${LANG_ENGLISH} "Production or test environment?"
+LangString perl_subheader              ${LANG_ENGLISH} "Please install ActiveState Perl for production use"
+LangString perl_title                  ${LANG_ENGLISH} "ActiveState Perl not found!"
+LangString perl_advise_text_part1      ${LANG_ENGLISH} "For production environments downloading and installing ActiveState ActivePerl (x86) is highly recommended before running this installer."
+LangString perl_cancel_button          ${LANG_ENGLISH} "Cancel and download ActivePerl"
+LangString perl_advise_text_part2      ${LANG_ENGLISH} "If you click Next, the installer will set up its own version of perl. This will configure Apache in CGI mode and will be relatively slow. Please only use this for testing or evaluating ${OTRS_Name}."
+LangString mui_finishpage_text         ${LANG_ENGLISH} "Installation of all needed services to run ${OTRS_Name} finished successfully.$\r$\n$\r$\nIf you click 'Launch' you'll start the Web Installer to configure ${OTRS_Name}."
+LangString mui_finishpage_text_upgrade ${LANG_ENGLISH} "The upgrade of your ${OTRS_Name} is completed successfully and all needed services are restarted. $\r$\n$\r$\nIf you click 'Launch' you'll get redirected to your ${OTRS_Name}."
+LangString mui_finishpage_button       ${LANG_ENGLISH} "Launch"
+LangString database_header             ${LANG_ENGLISH} "Select database for ${OTRS_Name}"
+LangString database_options            ${LANG_ENGLISH} "Options"
+LangString database_bundled            ${LANG_ENGLISH} "Install the bundled MySQL database"
+LangString database_own                ${LANG_ENGLISH} "Use an already installed database (MySQL, PostgreSQL, Oracle, SQL Server)"
 
 # German strings
-LangString mui_welcomepage_text   ${LANG_GERMAN} "Dieser Assistent wird Sie durch den Installationsprozess von ${OTRS_Name} führen. $\r$\n$\r$\n\
+LangString mui_welcomepage_text        ${LANG_GERMAN} "Dieser Assistent wird Sie durch den Installationsprozess von ${OTRS_Name} führen. $\r$\n$\r$\n\
 Um einen Neustart nach Abschluss der Installation zu vermeiden, schließen Sie bitte alle laufenden Programme bevor Sie die Installation starten.$\r$\n$\r$\n\
 Fortfahren um die Installation zu starten."
-LangString questions              ${LANG_GERMAN} "Fragen? Benötigen Sie Hilfe?"
-LangString perl_header            ${LANG_GERMAN} "Produktiv- oder Testumgebung?"
-LangString perl_subheader         ${LANG_GERMAN} "Bei produktiven Einsatz bitte ActiveState Perl benutzen"
-LangString perl_title             ${LANG_GERMAN} "ActiveState Perl nicht gefunden!"
-LangString perl_advise_text_part1 ${LANG_GERMAN} "Für produktive Umgebungen wird dringend empfohlen, ActiveState ActivePerl (x86) herunterzuladen und zu installieren, bevor dieser Installer gestartet wird."
-LangString perl_cancel_button     ${LANG_GERMAN} "Abbrechen und ActivePerl downloaden"
-LangString perl_advise_text_part2 ${LANG_GERMAN} "Wenn Sie fortfahren, wird eine integrierte Perl-Version verwendet und Apache im CGI Modus konfiguriert. Da dieses Setup relativ langsam sein wird, wird dies nur empfohlen um ${OTRS_Name} zu evaluieren oder zu testen."
-LangString mui_finishpage_text    ${LANG_GERMAN} "Die Installation aller benötigten Dienste um ${OTRS_Name} zu betreiben wurde erfolgreich abgeschlossen.$\r$\n$\r$\nBitte 'Start' klicken um ${OTRS_Name} mit Hilfe des WebInstallers zu konfigurieren."
-LangString mui_finishpage_button  ${LANG_GERMAN} "Start"
-LangString database_header        ${LANG_GERMAN} "Datenbank für ${OTRS_Name} auswählen"
-LangString database_options       ${LANG_GERMAN} "Optionen"
-LangString database_bundled       ${LANG_GERMAN} "Die mitgelieferte MySQL-Datenbank installieren"
-LangString database_own           ${LANG_GERMAN} "Eine bereits installierte Datenbank verwenden (MySQL, PostgreSQL, Oracle, SQL Server)"
+LangString questions                   ${LANG_GERMAN} "Fragen? Benötigen Sie Hilfe?"
+LangString perl_header                 ${LANG_GERMAN} "Produktiv- oder Testumgebung?"
+LangString perl_subheader              ${LANG_GERMAN} "Bei produktiven Einsatz bitte ActiveState Perl benutzen"
+LangString perl_title                  ${LANG_GERMAN} "ActiveState Perl nicht gefunden!"
+LangString perl_advise_text_part1      ${LANG_GERMAN} "Für produktive Umgebungen wird dringend empfohlen, ActiveState ActivePerl (x86) herunterzuladen und zu installieren, bevor dieser Installer gestartet wird."
+LangString perl_cancel_button          ${LANG_GERMAN} "Abbrechen und ActivePerl downloaden"
+LangString perl_advise_text_part2      ${LANG_GERMAN} "Wenn Sie fortfahren, wird eine integrierte Perl-Version verwendet und Apache im CGI Modus konfiguriert. Da dieses Setup relativ langsam sein wird, wird dies nur empfohlen um ${OTRS_Name} zu evaluieren oder zu testen."
+LangString mui_finishpage_text         ${LANG_GERMAN} "Die Installation aller benötigten Dienste um ${OTRS_Name} zu betreiben wurde erfolgreich abgeschlossen.$\r$\n$\r$\nBitte 'Start' klicken um ${OTRS_Name} mit Hilfe des WebInstallers zu konfigurieren."
+LangString mui_finishpage_text_upgrade ${LANG_GERMAN} "Das Upgrade Ihres ${OTRS_Name} ist erfolgreich abgeschlossen und alle damit verbundenen Dienste wurden neugestartet.$\r$\n$\r$\n Wenn Sie 'Start' drücken, werden Sie zu Ihrem ${OTRS_Name} weitergeleitet."
+LangString mui_finishpage_button       ${LANG_GERMAN} "Start"
+LangString database_header             ${LANG_GERMAN} "Datenbank für ${OTRS_Name} auswählen"
+LangString database_options            ${LANG_GERMAN} "Optionen"
+LangString database_bundled            ${LANG_GERMAN} "Die mitgelieferte MySQL-Datenbank installieren"
+LangString database_own                ${LANG_GERMAN} "Eine bereits installierte Datenbank verwenden (MySQL, PostgreSQL, Oracle, SQL Server)"
 
 # Spanish strings
-LangString mui_welcomepage_text   ${LANG_SPANISH} "Este asistente le guiará a través de la instalación de ${OTRS_Name}. $\r$\n$\r$\n\
+LangString mui_welcomepage_text        ${LANG_SPANISH} "Este asistente le guiará a través de la instalación de ${OTRS_Name}. $\r$\n$\r$\n\
 Si usted desea evitar el reiniciar su sistema después de la instalación, por favor cierre cualquier otra aplicación antes de iniciar la instalación.$\r$\n$\r$\n\
 Haga clic en Siguiente para iniciar la instalación."
-LangString questions              ${LANG_SPANISH} "Questions? Need help?"
-LangString perl_header            ${LANG_SPANISH} "¿En producción o entorno de prueba?"
-LangString perl_subheader         ${LANG_SPANISH} "Por favor instale ActiveState Perl si será usado en producción"
-LangString perl_title             ${LANG_SPANISH} "!No se encontró ActiveState Perl!"
-LangString perl_advise_text_part1 ${LANG_SPANISH} "Para entornos de producción, la descarga e instalación de ActiveState ActivePerl (x86) es altamente recomendable antes de ejecutar este programa de instalación."
-LangString perl_cancel_button     ${LANG_SPANISH} "Cancelar y descargar ActivePerl"
-LangString perl_advise_text_part2 ${LANG_SPANISH} "Si hace clic en Siguiente, el instalador configurará su propia versión de perl. Esto a su vez configurará Apache en modo CGI y esto hará que el sistema sea relativamente lento. Por favor use esta configuración solo para pruebas y evaluación de ${OTRS_Name}."
-LangString mui_finishpage_text    ${LANG_SPANISH} "La instalación de todos los servicios necesarios para ejecutar ${OTRS_Name} finalizó con éxito.$\r$\n$\r$\nSi hace clic en 'Iniciar', podrá comenzar el instalador Web para configurar ${OTRS_Name}."
-LangString mui_finishpage_button  ${LANG_SPANISH} "Iniciar"
-LangString database_header        ${LANG_SPANISH} "Select database for ${OTRS_Name}"
-LangString database_options       ${LANG_SPANISH} "Options"
-LangString database_bundled       ${LANG_SPANISH} "Install the bundled MySQL database"
-LangString database_own           ${LANG_SPANISH} "Use an already installed database (MySQL, PostgreSQL, Oracle, SQL Server)"
+LangString questions                   ${LANG_SPANISH} "Questions? Need help?"
+LangString perl_header                 ${LANG_SPANISH} "¿En producción o entorno de prueba?"
+LangString perl_subheader              ${LANG_SPANISH} "Por favor instale ActiveState Perl si será usado en producción"
+LangString perl_title                  ${LANG_SPANISH} "!No se encontró ActiveState Perl!"
+LangString perl_advise_text_part1      ${LANG_SPANISH} "Para entornos de producción, la descarga e instalación de ActiveState ActivePerl (x86) es altamente recomendable antes de ejecutar este programa de instalación."
+LangString perl_cancel_button          ${LANG_SPANISH} "Cancelar y descargar ActivePerl"
+LangString perl_advise_text_part2      ${LANG_SPANISH} "Si hace clic en Siguiente, el instalador configurará su propia versión de perl. Esto a su vez configurará Apache en modo CGI y esto hará que el sistema sea relativamente lento. Por favor use esta configuración solo para pruebas y evaluación de ${OTRS_Name}."
+LangString mui_finishpage_text         ${LANG_SPANISH} "La instalación de todos los servicios necesarios para ejecutar ${OTRS_Name} finalizó con éxito.$\r$\n$\r$\nSi hace clic en 'Iniciar', podrá comenzar el instalador Web para configurar ${OTRS_Name}."
+LangString mui_finishpage_text_upgrade ${LANG_SPANISH} "The upgrade of your ${OTRS_Name} is completed successfully and all needed services are restarted. $\r$\n$\r$\nIf you click 'Launch' you'll redirected to your ${OTRS_Name}."
+LangString mui_finishpage_button       ${LANG_SPANISH} "Iniciar"
+LangString database_header             ${LANG_SPANISH} "Select database for ${OTRS_Name}"
+LangString database_options            ${LANG_SPANISH} "Options"
+LangString database_bundled            ${LANG_SPANISH} "Install the bundled MySQL database"
+LangString database_own                ${LANG_SPANISH} "Use an already installed database (MySQL, PostgreSQL, Oracle, SQL Server)"
 
 # Dutch strings
-LangString mui_welcomepage_text   ${LANG_DUTCH} "Dit is de installatieprocedure voor ${OTRS_Name}. $\r$\n$\r$\n\
+LangString mui_welcomepage_text        ${LANG_DUTCH} "Dit is de installatieprocedure voor ${OTRS_Name}. $\r$\n$\r$\n\
 als u een herstart wilt voorkomen kunt u het beste alle andere applicaties afsluiten voordat u deze installatie start.$\r$\n$\r$\n\
 Klik Volgende om de installatie te starten."
-LangString questions              ${LANG_DUTCH} "Vragen? Hulp nodig?"
-LangString perl_header            ${LANG_DUTCH} "Productie- of testomgeving?"
-LangString perl_subheader         ${LANG_DUTCH} "Installeer ActiveState perl op productie-omgevingen"
-LangString perl_title             ${LANG_DUTCH} "Geen ActiveState Perl gevonden!"
-LangString perl_advise_text_part1 ${LANG_DUTCH} "Voor gebruik in productie-omgevingen raden we aan om ActiveState ActivePerl (x86) te downloaden en installeren voordat u de OTRS installatie start."
-LangString perl_cancel_button     ${LANG_DUTCH} "Annuleer en download ActivePerl"
-LangString perl_advise_text_part2 ${LANG_DUTCH} "Als u op Volgende klikt zal de installatieprocedure een gebundelde perl-versie installeren. Dit configureert Apache in CGI mode en is relatief langzaam. We raden u aan dit alleen voor het testen of evalueren van ${OTRS_Name} te gebruiken."
-LangString mui_finishpage_text    ${LANG_DUTCH} "Installatie van alle services nodig voor ${OTRS_Name} is afgerond.$\r$\n$\r$\nZodra u op 'Start' klikt begint de Web Installer die u gebruikt voor het configureren van ${OTRS_Name}."
-LangString mui_finishpage_button  ${LANG_DUTCH} "Start"
-LangString database_header        ${LANG_DUTCH} "Kies database voor ${OTRS_Name}"
-LangString database_options       ${LANG_DUTCH} "Opties"
-LangString database_bundled       ${LANG_DUTCH} "Installeer de gebundelde MySQL database"
-LangString database_own           ${LANG_DUTCH} "Gebruik een al geïnstalleerde database (MySQL, PostgreSQL, Oracle, SQL Server)"
+LangString questions                   ${LANG_DUTCH} "Vragen? Hulp nodig?"
+LangString perl_header                 ${LANG_DUTCH} "Productie- of testomgeving?"
+LangString perl_subheader              ${LANG_DUTCH} "Installeer ActiveState perl op productie-omgevingen"
+LangString perl_title                  ${LANG_DUTCH} "Geen ActiveState Perl gevonden!"
+LangString perl_advise_text_part1      ${LANG_DUTCH} "Voor gebruik in productie-omgevingen raden we aan om ActiveState ActivePerl (x86) te downloaden en installeren voordat u de OTRS installatie start."
+LangString perl_cancel_button          ${LANG_DUTCH} "Annuleer en download ActivePerl"
+LangString perl_advise_text_part2      ${LANG_DUTCH} "Als u op Volgende klikt zal de installatieprocedure een gebundelde perl-versie installeren. Dit configureert Apache in CGI mode en is relatief langzaam. We raden u aan dit alleen voor het testen of evalueren van ${OTRS_Name} te gebruiken."
+LangString mui_finishpage_text         ${LANG_DUTCH} "Installatie van alle services nodig voor ${OTRS_Name} is afgerond.$\r$\n$\r$\nZodra u op 'Start' klikt begint de Web Installer die u gebruikt voor het configureren van ${OTRS_Name}."
+LangString mui_finishpage_text_upgrade ${LANG_DUTCH} "The upgrade of your ${OTRS_Name} is completed successfully and all needed services are restarted. $\r$\n$\r$\nIf you click 'Launch' you'll redirected to your ${OTRS_Name}."
+LangString mui_finishpage_button       ${LANG_DUTCH} "Start"
+LangString database_header             ${LANG_DUTCH} "Kies database voor ${OTRS_Name}"
+LangString database_options            ${LANG_DUTCH} "Opties"
+LangString database_bundled            ${LANG_DUTCH} "Installeer de gebundelde MySQL database"
+LangString database_own                ${LANG_DUTCH} "Gebruik een al geïnstalleerde database (MySQL, PostgreSQL, Oracle, SQL Server)"
 
 # ------------------------------------------------------------ #
 # install sections
@@ -909,7 +914,6 @@ Function InstCheckWebServerAlreadyInstalled
 FunctionEnd
 
 Function Questions
-
     ${NSD_CreateLabel} 120u 171u 95u 9u $(questions)
     Pop $hCtl_label_Questions
     SetCtlColors $hCtl_label_Questions "" "${MUI_BGCOLOR}"
@@ -920,6 +924,14 @@ Function Questions
     SetCtlColors $hCtl_btn_OTRSLink "0x31596B" "${MUI_BGCOLOR}"
     ${NSD_OnClick} $hCtl_btn_OTRSLink onClickOTRSLink
 
+    # set different text for finish page the installer
+    # did a upgrade of the OTRS System
+    ${IfNot} $Upgrade == "no"
+        # the variable can be found in the Finish.nsh
+        # of NSIS and the expression ${WM_SETTEXT} 0 "STR:[Text]" sets the
+        # new text for the label
+        SendMessage $mui.FinishPage.Text ${WM_SETTEXT} 0 "STR:$(mui_finishpage_text_upgrade)"
+    ${EndIf}
 FunctionEnd
 
 Function onClickOTRSLink
