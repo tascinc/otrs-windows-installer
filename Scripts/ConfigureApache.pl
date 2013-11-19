@@ -96,7 +96,9 @@ sub ReplaceApacheDir {
     return if !-T $File;
 
     # read file
+    ## no critic
     return if !open my $FH1, '<', $File;
+    ## use critic
     my $OrgString = do { local $/; <$FH1> };
     close $FH1;
 
@@ -110,7 +112,9 @@ sub ReplaceApacheDir {
     return 1 if $OrgString eq $NewString;
 
     # write new file
+    ## no critic
     return if !open my $FH2, '>', $File;
+    ## use critic
     print $FH2 $NewString;
     close $FH2;
 

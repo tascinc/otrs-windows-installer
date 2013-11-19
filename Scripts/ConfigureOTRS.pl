@@ -81,9 +81,10 @@ PrepareConfigPm();
 ConfigCron4Win32Pl();
 
 if ( $Opts{s} ) {
+
     # modify shebang line of files in cgi-bin
     my $CGIBin = File::Spec->catdir( $InstallDir, 'OTRS\bin\cgi-bin' );
-    find ( \&UpdateShebang, ($CGIBin) );
+    find( \&UpdateShebang, ($CGIBin) );
 }
 
 1;
@@ -147,7 +148,9 @@ sub ReplaceOTRSDir {
         next FILE if !-T $File;
 
         # read file
+        ## no critic
         next FILE if !open my $FH1, '<', $File;
+        ## use critic
         my $OrgString = do { local $/; <$FH1> };
         close $FH1;
 
@@ -161,7 +164,9 @@ sub ReplaceOTRSDir {
         next FILE if $OrgString eq $NewString;
 
         # write new file
+        ## no critic
         return if !open my $FH2, '>', $File;
+        ## use critic
         print $FH2 $NewString;
         close $FH2;
 
@@ -191,7 +196,9 @@ sub PrepareConfigPm {
     return if !-T $File;
 
     # read file
+    ## no critic
     return if !open my $FH1, '<', $File;
+    ## use critic
     my $OrgString = do { local $/; <$FH1> };
     close $FH1;
 
@@ -211,7 +218,9 @@ sub PrepareConfigPm {
     return 1 if $OrgString eq $NewString;
 
     # write new file
+    ## no critic
     return if !open my $FH2, '>', $File;
+    ## use critic
     print $FH2 $NewString;
     close $FH2;
 
@@ -238,7 +247,9 @@ sub ConfigCron4Win32Pl {
     return if !-T $File;
 
     # read file
+    ## no critic
     return if !open my $FH1, '<', $File;
+    ## use critic
     my $OrgString = do { local $/; <$FH1> };
     close $FH1;
 
@@ -257,7 +268,9 @@ sub ConfigCron4Win32Pl {
     return 1 if $OrgString eq $NewString;
 
     # write new file
+    ## no critic
     return if !open my $FH2, '>', $File;
+    ## use critic
     print $FH2 $NewString;
     close $FH2;
 
@@ -286,7 +299,9 @@ sub UpdateShebang {
     return if -l $File;
 
     # read file
+    ## no critic
     return if !open my $FH1, '<', $File;
+    ## use critic
     my $OrgString = do { local $/; <$FH1> };
     close $FH1;
 
@@ -302,7 +317,9 @@ sub UpdateShebang {
     return 1 if $OrgString eq $NewString;
 
     # write new file
+    ## no critic
     return if !open my $FH2, '>', $File;
+    ## use critic
     print $FH2 $NewString;
     close $FH2;
 

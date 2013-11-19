@@ -107,7 +107,9 @@ sub PrepareMyIni {
     return if !-T $File;
 
     # read file
+    ## no critic
     return if !open my $FH1, '<', $File;
+    ## use critic
     my $OrgString = do { local $/; <$FH1> };
     close $FH1;
 
@@ -130,7 +132,9 @@ query_cache_type = 1}xms;
     return 1 if $OrgString eq $NewString;
 
     # write new file
+    ## no critic
     return if !open my $FH2, '>', $File;
+    ## use critic
     print $FH2 $NewString;
     close $FH2;
 

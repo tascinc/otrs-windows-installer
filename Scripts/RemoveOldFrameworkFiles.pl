@@ -38,14 +38,14 @@ getopt( 'haond', \%Opts );
 
 # help option
 if ( $Opts{h} ) {
-    _help();
+    _Help();
 }
 
 if ( defined $Opts{a} && lc $Opts{a} eq 'remove' ) {
     $Action = 'remove';
     if ( !defined $Opts{d} ) {
         print "missing -d option!\n";
-        _help();
+        _Help();
     }
     if ( !-d $Opts{d} ) {
         print "Directory $Opts{d} does not exist!\n";
@@ -57,13 +57,17 @@ if ( defined $Opts{a} && lc $Opts{a} eq 'remove' ) {
 for my $Archive ( sort keys %Types ) {
     if ( !defined $Opts{$Archive} ) {
         print "Missing -$Archive option!\n";
-        _help();
+        _Help();
     }
     if ( !-e $Opts{$Archive} ) {
         print "File $Opts{$Archive} does not exist!\n";
         exit 1;
     }
+
+    ## no critic
     open( my $FH, '<', $Opts{$Archive} ) || die "ERROR: Can't open $Opts{$Archive}: $!";
+    ## use critic
+
     while (<$FH>) {
 
         # we have the MD5sum and then the file name, we want the last part
@@ -80,9 +84,13 @@ for my $Archive ( sort keys %Types ) {
 # comparison
 FILE:
 for my $File ( sort keys %{ $Compare{o} } ) {
-    next if exists $Compare{n}{$File};
+
+    next FILE if exists $Compare{n}{$File};
+
     if ( $Action eq 'remove' ) {
+
         my $FilePath = File::Spec->catfile( $Opts{d}, $File );
+
         if ( !-e $FilePath ) {
             print "File $FilePath does not exist on disk!\n";
             next FILE;
@@ -97,7 +105,7 @@ for my $File ( sort keys %{ $Compare{o} } ) {
 exit;
 
 # Internal
-sub _help {
+sub _Help {
     print STDOUT
         "RemoveOldFrameworkFiles.pl <Revision - script to identify and remove old framework files\n";
     print STDOUT "Copyright (C) 2001-2013 OTRS AG, http://otrs.com/\n";
