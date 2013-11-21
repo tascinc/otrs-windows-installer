@@ -279,7 +279,7 @@ LangString perl_advise_text_part1      ${LANG_DUTCH} "Voor gebruik in productie-
 LangString perl_cancel_button          ${LANG_DUTCH} "Annuleer en download ActivePerl"
 LangString perl_advise_text_part2      ${LANG_DUTCH} "Als u op Volgende klikt zal de installatieprocedure een gebundelde perl-versie installeren. Dit configureert Apache in CGI mode en is relatief langzaam. We raden u aan dit alleen voor het testen of evalueren van ${OTRS_Name} te gebruiken."
 LangString mui_finishpage_text         ${LANG_DUTCH} "Installatie van alle services nodig voor ${OTRS_Name} is afgerond.$\r$\n$\r$\nZodra u op 'Start' klikt begint de Web Installer die u gebruikt voor het configureren van ${OTRS_Name}."
-LangString mui_finishpage_text_upgrade ${LANG_DUTCH} "The upgrade of your ${OTRS_Name} is completed successfully and all needed services are restarted. $\r$\n$\r$\nIf you click 'Launch' you'll redirected to your ${OTRS_Name}."
+LangString mui_finishpage_text_upgrade ${LANG_DUTCH} "De upgrade van ${OTRS_Name} is compleet en alle services zijn herstart. $\r$\n$\r$\nAls u op 'Start' klikt wordt de ${OTRS_Name} inlogpagina geopend."
 LangString mui_finishpage_button       ${LANG_DUTCH} "Start"
 LangString database_header             ${LANG_DUTCH} "Kies database voor ${OTRS_Name}"
 LangString database_options            ${LANG_DUTCH} "Opties"
