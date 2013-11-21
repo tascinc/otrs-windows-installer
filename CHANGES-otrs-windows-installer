@@ -1,4 +1,4 @@
-3.0.4 2013-??-??
+3.0.4 2013-11-26
 - Extented upgrading proccess for minor and patch level upgrades.
     Including:
       database upgrades

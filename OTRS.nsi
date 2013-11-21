@@ -26,7 +26,7 @@
 !define Installer_Home_Nsis       "${Installer_Home}\otrs4win"
 !define Installer_Version_Major   3
 !define Installer_Version_Minor   0
-!define Installer_Version_Patch   3
+!define Installer_Version_Patch   4
 #!define Installer_Version_Jointer "-"
 #!define Installer_Version_Postfix "rc1"
 !define Installer_Version_Jointer ""
@@ -260,7 +260,7 @@ LangString perl_advise_text_part1      ${LANG_SPANISH} "Para entornos de producc
 LangString perl_cancel_button          ${LANG_SPANISH} "Cancelar y descargar ActivePerl"
 LangString perl_advise_text_part2      ${LANG_SPANISH} "Si hace clic en Siguiente, el instalador configurará su propia versión de perl. Esto a su vez configurará Apache en modo CGI y esto hará que el sistema sea relativamente lento. Por favor use esta configuración solo para pruebas y evaluación de ${OTRS_Name}."
 LangString mui_finishpage_text         ${LANG_SPANISH} "La instalación de todos los servicios necesarios para ejecutar ${OTRS_Name} finalizó con éxito.$\r$\n$\r$\nSi hace clic en 'Iniciar', podrá comenzar el instalador Web para configurar ${OTRS_Name}."
-LangString mui_finishpage_text_upgrade ${LANG_SPANISH} "The upgrade of your ${OTRS_Name} is completed successfully and all needed services are restarted. $\r$\n$\r$\nIf you click 'Launch' you'll redirected to your ${OTRS_Name}."
+LangString mui_finishpage_text_upgrade ${LANG_SPANISH} "La actualización de su ${OTRS_Name} ha sido completada satisfactoriamente y todos los servicios fueron reanudados.$\r$\n$\r$\nAl presionar 'Enviar' será redireccionado a su ${OTRS_Name}."
 LangString mui_finishpage_button       ${LANG_SPANISH} "Iniciar"
 LangString database_header             ${LANG_SPANISH} "Select database for ${OTRS_Name}"
 LangString database_options            ${LANG_SPANISH} "Options"
