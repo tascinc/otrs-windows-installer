@@ -61,6 +61,8 @@ and 'Build the installer' if you need to build a new installer for a new version
 
 6. Copy the strawberry perl files to C:\Installer\StrawberryPerl\
 
+7. Rename C:\otrs\StrawberryPerl\perl\vendor\lib\IO\Socket\INET6.pm to INET6.pm.hidden (because of Bug#10004)
+
 
 ## Prepare Apache
 
