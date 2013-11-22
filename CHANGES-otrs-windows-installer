@@ -10,6 +10,7 @@
 - Removed short links.
 - Fixed installer warnings.
 - Fixed removing of services after uninstalling.
+- Added workaround for Bug#10004 Can't connect to LDAP using StrawberryPerl on 3.3.1 to installer
 
 3.0.3 2013-11-08
  - Let Web Installer skip questions about database if using bundled MySQL.
