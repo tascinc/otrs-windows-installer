@@ -511,6 +511,10 @@ Section -InstOTRS
 
             # rebuild config
             NSExec::ExecToLog "perl $\"$INSTDIR\OTRS\bin\otrs.RebuildConfig.pl$\""
+
+            # reinstall all packages, such as ITSM
+            NSExec::ExecToLog "perl $\"$INSTDIR\OTRS\bin\otrs.PackageManager.pl$\" -a reinstall-all"
+
         ${ElseIf} $Upgrade == "minor"
             # if we have a minor update (3.2.8 -> 3.3.1)
             DetailPrint "Execute additional TODOs for minor level upgrade..."
@@ -519,6 +523,9 @@ Section -InstOTRS
             NSExec::ExecToLog "perl $\"$INSTDIR\OTRS\bin\otrs.ExecuteDatabaseXML.pl$\" $\"$INSTDIR\OTRS\scripts\database\update\otrs-upgrade-to-${OTRS_Version_Major}.${OTRS_Version_Minor}.xml$\""
             NSExec::ExecToLog "perl $\"$INSTDIR\OTRS\scripts\DBUpdate-to-${OTRS_Version_Major}.${OTRS_Version_Minor}.pl$\""
         ${EndIf}
+
+        # delete files that existed in the old framework version but no longer exist in the new one
+        NSExec::ExecToLog "perl $\"$INSTDIR\otrs4win\Scripts\RemoveOldFrameworkFiles.pl$\" -a remove -o $\"$INSTDIR\OTRS\ARCHIVE_OLD$\" -n $\"$INSTDIR\ARCHIVE$\" -d $\"$INSTDIR\OTRS$\""
 
         # so if we have ActiveStatePerl then we will
         # have IIS server installed.

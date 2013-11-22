@@ -1,10 +1,12 @@
 3.0.4 2013-11-26
-- Extented upgrading proccess for minor and patch level upgrades.
+- Extended upgrading proccess for minor and patch level upgrades.
     Including:
       database upgrades
       rebuild of otrs config
       deleting of otrs cache
+      reinstallation of packages on patch level upgrades
       restarting micrsoft iis server (optional)
+      removal of old framework files
 - Removed short links.
 - Fixed installer warnings.
 - Fixed removing of services after uninstalling.
