@@ -97,9 +97,7 @@ for my $File ( sort keys %{ $Compare{o} } ) {
         }
         unlink $FilePath;
     }
-    else {
-        print "$File\n";
-    }
+    print "$File\n";
 }
 
 exit;

@@ -35,7 +35,7 @@
 !define OTRS_Name            "OTRS"
 !define OTRS_Version_Major "3"
 !define OTRS_Version_Minor "3"
-!define OTRS_Version_Patch "1"
+!define OTRS_Version_Patch "2"
 !define OTRS_Version_Jointer ""
 !define OTRS_Version_Postfix ""
 !define OTRS_Company         "OTRS Group"
@@ -416,8 +416,11 @@ Section /o -InstMySQL InstMySQL
 
         # remove the helper script
         Delete /REBOOTOK "$INSTDIR\otrs4win\Scripts\ConfigureMySQL.pl"
-
     ${EndIf}
+
+    # Start MySQL Service
+    DetailPrint "Starting MySQL service"
+    nsExec::Exec "NET START MySQL"
 
 SectionEnd
 
@@ -502,30 +505,28 @@ Section -InstOTRS
         IfFileExists $INSTDIR\OTRS\bin\otrs.Scheduler4winInstaller.pl 0 +2
             NSExec::ExecToLog "$\"$PerlExe$\" $\"$INSTDIR\OTRS\bin\otrs.Scheduler4winInstaller.pl$\" -a install"
     ${Else}
+
+        DetailPrint "Execute additional TODOs for $Upgrade level upgrade..."
+
+        # delete files that existed in the old framework version but no longer exist in the new one
+        NSExec::ExecToLog "perl $\"$INSTDIR\otrs4win\Scripts\RemoveOldFrameworkFiles.pl$\" -a remove -o $\"$INSTDIR\OTRS\ARCHIVE_OLD$\" -n $\"$INSTDIR\OTRS\ARCHIVE$\" -d $\"$INSTDIR\OTRS$\""
+
         # upgrade/patch for otrs
         ${If} $Upgrade == "patch"
-            # if we have a patch update (3.3.0 -> 3.3.1)
-            DetailPrint "Execute additional TODOs for patch level upgrade..."
+            # reinstall all packages, such as ITSM
+            NSExec::ExecToLog "perl $\"$INSTDIR\OTRS\bin\otrs.PackageManager.pl$\" -a reinstall-all"
+
             # delete cache
             NSExec::ExecToLog "perl $\"$INSTDIR\OTRS\bin\otrs.DeleteCache.pl$\""
 
             # rebuild config
             NSExec::ExecToLog "perl $\"$INSTDIR\OTRS\bin\otrs.RebuildConfig.pl$\""
 
-            # reinstall all packages, such as ITSM
-            NSExec::ExecToLog "perl $\"$INSTDIR\OTRS\bin\otrs.PackageManager.pl$\" -a reinstall-all"
-
         ${ElseIf} $Upgrade == "minor"
-            # if we have a minor update (3.2.8 -> 3.3.1)
-            DetailPrint "Execute additional TODOs for minor level upgrade..."
-
             # upgrade DB (RebuildConfig and DeleteCache is include in DBUpdate-to...pl)
             NSExec::ExecToLog "perl $\"$INSTDIR\OTRS\bin\otrs.ExecuteDatabaseXML.pl$\" $\"$INSTDIR\OTRS\scripts\database\update\otrs-upgrade-to-${OTRS_Version_Major}.${OTRS_Version_Minor}.xml$\""
             NSExec::ExecToLog "perl $\"$INSTDIR\OTRS\scripts\DBUpdate-to-${OTRS_Version_Major}.${OTRS_Version_Minor}.pl$\""
         ${EndIf}
-
-        # delete files that existed in the old framework version but no longer exist in the new one
-        NSExec::ExecToLog "perl $\"$INSTDIR\otrs4win\Scripts\RemoveOldFrameworkFiles.pl$\" -a remove -o $\"$INSTDIR\OTRS\ARCHIVE_OLD$\" -n $\"$INSTDIR\ARCHIVE$\" -d $\"$INSTDIR\OTRS$\""
 
         # so if we have ActiveStatePerl then we will
         # have IIS server installed.
@@ -600,7 +601,6 @@ Section -InstPost
     # start the otrs services
     sleep 2000
     DetailPrint "Starting services"
-    nsExec::Exec "NET START MySQL"
     nsExec::Exec "NET START $\"Cron Service (CRONw)$\""
     nsExec::Exec "$\"$PerlExe$\" $\"$INSTDIR\OTRS\bin\otrs.Scheduler4win.pl$\" -a start"
     nsExec::Exec "NET START Apache2.2"
