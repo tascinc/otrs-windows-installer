@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 # --
 # RemoveOldFrameworkFiles.pl - script to identify and remove old framework files
-# Copyright (C) 2001-2013 OTRS AG, http://otrs.com/
+# Copyright (C) 2001-2014 OTRS AG, http://otrs.com/
 # --
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU AFFERO General Public License as published by
@@ -106,7 +106,7 @@ exit;
 sub _Help {
     print STDOUT
         "RemoveOldFrameworkFiles.pl <Revision - script to identify and remove old framework files\n";
-    print STDOUT "Copyright (C) 2001-2013 OTRS AG, http://otrs.com/\n";
+    print STDOUT "Copyright (C) 2001-2014 OTRS AG, http://otrs.com/\n";
     print STDOUT "usage: $0 -a [show|remove] -o OldARCHIVE -n ARCHIVE [ -d <install directory>]\n";
     print STDOUT " ( -d is required for remove action )\n\n";
     exit 1;

@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 # --
 # ConfigureApache.pl - script to configure the apache server
-# Copyright (C) 2001-2013 OTRS AG, http://otrs.com/
+# Copyright (C) 2001-2014 OTRS AG, http://otrs.com/
 # --
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU AFFERO General Public License as published by
@@ -36,7 +36,7 @@ if ( !$Opts{'d'} ) {
 }
 if ( $Opts{'h'} ) {
     print STDOUT "ConfigureApache.pl - script to configure the apache\n";
-    print STDOUT "Copyright (C) 2001-2013 OTRS AG, http://otrs.com/\n";
+    print STDOUT "Copyright (C) 2001-2014 OTRS AG, http://otrs.com/\n";
     print STDOUT "usage: ConfigureApache.pl -d <install directory>\n\n";
     exit 1;
 }
