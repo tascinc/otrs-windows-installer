@@ -113,8 +113,8 @@ sub CreateGenericAgentPm {
     # check if source file exists
     return if !-e $SourceFile;
 
-    # check if source file is a directory
-    return if -d $SourceFile;
+    # return if target file exists (for instance, when upgrading!)
+    return if -e $DestinationFile;
 
     copy( $SourceFile, $DestinationFile );
 
