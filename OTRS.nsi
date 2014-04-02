@@ -390,6 +390,7 @@ SectionEnd
 Section /o -InstMySQL InstMySQL
 
     ${If} $MySQLInstalled <> 1
+    ${AndIf} $Upgrade == "no"
 
         ${IfNot} $BundledMySQL == "false"
 
