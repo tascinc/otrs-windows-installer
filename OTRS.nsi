@@ -35,7 +35,7 @@
 !define OTRS_Name            "OTRS"
 !define OTRS_Version_Major "3"
 !define OTRS_Version_Minor "3"
-!define OTRS_Version_Patch "2"
+!define OTRS_Version_Patch "5"
 !define OTRS_Version_Jointer ""
 !define OTRS_Version_Postfix ""
 !define OTRS_Company         "OTRS Group"
@@ -49,6 +49,9 @@
 
 !define Installer_Version "${Installer_Version_Major}.${Installer_Version_Minor}.${Installer_Version_Patch}${Installer_Version_Jointer}${Installer_Version_Postfix}"
 !define Win_RegKey_Uninstall "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\${OTRS_Name}"
+
+!define NET_FRAMEWORK_DOT_MAJOR "4"
+!define NET_FRAMEWORK_DOT_MINOR "0"
 
 var ActiveStatePerl
 var MinorDifference
@@ -473,6 +476,9 @@ Section /o -InstApache InstApache
        NSExec::ExecToLog '"$WINDIR\system32\inetsrv\appcmd.exe" add vdir /app.name:$\"Default Web Site/$\" /path:/otrs-web /physicalPath:$INSTDIR\OTRS\var\httpd\htdocs'
        NSExec::ExecToLog '"$WINDIR\system32\inetsrv\appcmd.exe" add app /site.name:$\"Default Web Site$\" /path:/otrs /physicalPath:$INSTDIR\OTRS\bin\cgi-bin -applicationPool:OTRS'
 
+       # set .NET Framework 4.0 as required version for the pools
+       NSExec::ExecToLog "$\"$WINDIR\system32\inetsrv\appcmd.exe$\" set apppool /apppool.name:$\"DefaultAppPool$\" /managedRuntimeVersion:$\"v4.0$\""
+       NSExec::ExecToLog "$\"$WINDIR\system32\inetsrv\appcmd.exe$\" set apppool /apppool.name:$\"OTRS$\" /managedRuntimeVersion:$\"v4.0$\""
    ${EndIf}
 
 SectionEnd
@@ -846,6 +852,78 @@ Function InstCheckAlreadyInstalled
 
 FunctionEnd
 
+# Usage
+# Define in your script two constants:
+#   NET_FRAMEWORK_DOT_MAJOR "(Major framework version)"
+#   NET_FRAMEWORK_DOT_MINOR "{Minor framework version)"
+#
+# Call IsDotNetInstalled
+# This function will abort the installation if the required version
+# or higher version of the .NET Framework is not installed.  Place it in
+# either your .onInit function or your first install section before
+# other code.
+Function IsDotNetInstalled
+
+    StrCpy $0 "0"
+    StrCpy $1 "SOFTWARE\Microsoft\.NETFramework" ;registry entry to look in.
+    StrCpy $2 0
+
+    StartEnum:
+        # Enumerate the versions installed.
+        EnumRegKey $3 HKLM "$1\policy" $2
+
+        # If we don't find any versions installed, it's not here.
+        StrCmp $3 "" noDotNet notEmpty
+
+    # We found something.
+    notEmpty:
+        # Find out if the RegKey starts with 'v'.
+        # If it doesn't, goto the next key.
+        StrCpy $4 $3 1 0
+        StrCmp $4 "v" +1 goNext
+        StrCpy $4 $3 1 1
+
+        # It starts with 'v'.  Now check to see how the installed major version
+        # relates to our required major version.
+        # If it's equal check the minor version, if it's greater,
+        # we found a good RegKey.
+        IntCmp $4 ${NET_FRAMEWORK_DOT_MAJOR} +1 goNext yesDotNetReg
+        # Check the minor version.  If it's equal or greater to our requested
+        # version then we're good.
+        StrCpy $4 $3 1 3
+        IntCmp $4 ${NET_FRAMEWORK_DOT_MINOR} yesDotNetReg goNext yesDotNetReg
+
+    goNext:
+        # Go to the next RegKey.
+        IntOp $2 $2 + 1
+        goto StartEnum
+
+    yesDotNetReg:
+        # Now that we've found a good RegKey, let's make sure it's actually
+        # installed by getting the install path and checking to see if the
+        # mscorlib.dll exists.
+        EnumRegValue $2 HKLM "$1\policy\$3" 0
+        # $2 should equal whatever comes after the major and minor versions
+        # (ie, v1.1.4322)
+        StrCmp $2 "" noDotNet
+        ReadRegStr $4 HKLM $1 "InstallRoot"
+        # Hopefully the install root isn't empty.
+        StrCmp $4 "" noDotNet
+        # build the actuall directory path to mscorlib.dll.
+        StrCpy $4 "$4$3.$2\mscorlib.dll"
+        IfFileExists $4 yesDotNet noDotNet
+
+    noDotNet:
+        # Nope, something went wrong along the way.  Looks like the
+        # proper .NET Framework isn't installed.
+        MessageBox MB_OK|MB_ICONSTOP "You must have v${NET_FRAMEWORK_DOT_MAJOR}.${NET_FRAMEWORK_DOT_MINOR} or greater of the .NET Framework installed."
+        Abort
+
+    yesDotNet:
+        # Everything checks out.  Go on with the rest of the installation.
+
+FunctionEnd
+
 Function InstCheckActiveStatePerl
 
     # check if 64-bit Perl is installed, we need 32-bit because of PerlEx
@@ -896,7 +974,8 @@ Function InstCheckActiveStatePerl
             Abort
         ${EndIf}
 
-
+        # check if the minimum required version of .NET Framework is installed
+        Call IsDotNetInstalled
     ${Else}
            DetailPrint "No ActiveState perl found"
     ${EndIf}
