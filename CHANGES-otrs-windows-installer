@@ -1,4 +1,4 @@
-3.0.5 ????-??-??
+3.0.5 2014-04-08
 - Fixed bug#10206 - Escalation notification emails are suddenly sent out by Generic Agent after OTRS Update.
 - Fixed bug#10417 - Windows-installer update 3.3.5 deletes myql-user "otrs".
 - Fixed bug#10293 - Cache-Issue results in ServerError.
