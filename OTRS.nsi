@@ -233,37 +233,37 @@ LangString database_bundled            ${LANG_ENGLISH} "Install the bundled MySQ
 LangString database_own                ${LANG_ENGLISH} "Use an already installed database (MySQL, PostgreSQL, Oracle, SQL Server)"
 
 # German strings
-LangString mui_welcomepage_text        ${LANG_GERMAN} "Dieser Assistent wird Sie durch den Installationsprozess von ${OTRS_Name} führen. $\r$\n$\r$\n\
-Um einen Neustart nach Abschluss der Installation zu vermeiden, schließen Sie bitte alle laufenden Programme bevor Sie die Installation starten.$\r$\n$\r$\n\
+LangString mui_welcomepage_text        ${LANG_GERMAN} "Dieser Assistent wird Sie durch den Installationsprozess von ${OTRS_Name} fï¿½hren. $\r$\n$\r$\n\
+Um einen Neustart nach Abschluss der Installation zu vermeiden, schlieï¿½en Sie bitte alle laufenden Programme bevor Sie die Installation starten.$\r$\n$\r$\n\
 Fortfahren um die Installation zu starten."
-LangString questions                   ${LANG_GERMAN} "Fragen? Benötigen Sie Hilfe?"
+LangString questions                   ${LANG_GERMAN} "Fragen? Benï¿½tigen Sie Hilfe?"
 LangString perl_header                 ${LANG_GERMAN} "Produktiv- oder Testumgebung?"
 LangString perl_subheader              ${LANG_GERMAN} "Bei produktiven Einsatz bitte ActiveState Perl benutzen"
 LangString perl_title                  ${LANG_GERMAN} "ActiveState Perl nicht gefunden!"
-LangString perl_advise_text_part1      ${LANG_GERMAN} "Für produktive Umgebungen wird dringend empfohlen, ActiveState ActivePerl (x86) herunterzuladen und zu installieren, bevor dieser Installer gestartet wird."
+LangString perl_advise_text_part1      ${LANG_GERMAN} "Fï¿½r produktive Umgebungen wird dringend empfohlen, ActiveState ActivePerl (x86) herunterzuladen und zu installieren, bevor dieser Installer gestartet wird."
 LangString perl_cancel_button          ${LANG_GERMAN} "Abbrechen und ActivePerl downloaden"
 LangString perl_advise_text_part2      ${LANG_GERMAN} "Wenn Sie fortfahren, wird eine integrierte Perl-Version verwendet und Apache im CGI Modus konfiguriert. Da dieses Setup relativ langsam sein wird, wird dies nur empfohlen um ${OTRS_Name} zu evaluieren oder zu testen."
-LangString mui_finishpage_text         ${LANG_GERMAN} "Die Installation aller benötigten Dienste um ${OTRS_Name} zu betreiben wurde erfolgreich abgeschlossen.$\r$\n$\r$\nBitte 'Start' klicken um ${OTRS_Name} mit Hilfe des WebInstallers zu konfigurieren."
-LangString mui_finishpage_text_upgrade ${LANG_GERMAN} "Das Upgrade Ihres ${OTRS_Name} ist erfolgreich abgeschlossen und alle damit verbundenen Dienste wurden neugestartet.$\r$\n$\r$\n Wenn Sie 'Start' drücken, werden Sie zu Ihrem ${OTRS_Name} weitergeleitet."
+LangString mui_finishpage_text         ${LANG_GERMAN} "Die Installation aller benï¿½tigten Dienste um ${OTRS_Name} zu betreiben wurde erfolgreich abgeschlossen.$\r$\n$\r$\nBitte 'Start' klicken um ${OTRS_Name} mit Hilfe des WebInstallers zu konfigurieren."
+LangString mui_finishpage_text_upgrade ${LANG_GERMAN} "Das Upgrade Ihres ${OTRS_Name} ist erfolgreich abgeschlossen und alle damit verbundenen Dienste wurden neugestartet.$\r$\n$\r$\n Wenn Sie 'Start' drï¿½cken, werden Sie zu Ihrem ${OTRS_Name} weitergeleitet."
 LangString mui_finishpage_button       ${LANG_GERMAN} "Start"
-LangString database_header             ${LANG_GERMAN} "Datenbank für ${OTRS_Name} auswählen"
+LangString database_header             ${LANG_GERMAN} "Datenbank fï¿½r ${OTRS_Name} auswï¿½hlen"
 LangString database_options            ${LANG_GERMAN} "Optionen"
 LangString database_bundled            ${LANG_GERMAN} "Die mitgelieferte MySQL-Datenbank installieren"
 LangString database_own                ${LANG_GERMAN} "Eine bereits installierte Datenbank verwenden (MySQL, PostgreSQL, Oracle, SQL Server)"
 
 # Spanish strings
-LangString mui_welcomepage_text        ${LANG_SPANISH} "Este asistente le guiará a través de la instalación de ${OTRS_Name}. $\r$\n$\r$\n\
-Si usted desea evitar el reiniciar su sistema después de la instalación, por favor cierre cualquier otra aplicación antes de iniciar la instalación.$\r$\n$\r$\n\
-Haga clic en Siguiente para iniciar la instalación."
+LangString mui_welcomepage_text        ${LANG_SPANISH} "Este asistente le guiarï¿½ a travï¿½s de la instalaciï¿½n de ${OTRS_Name}. $\r$\n$\r$\n\
+Si usted desea evitar el reiniciar su sistema despuï¿½s de la instalaciï¿½n, por favor cierre cualquier otra aplicaciï¿½n antes de iniciar la instalaciï¿½n.$\r$\n$\r$\n\
+Haga clic en Siguiente para iniciar la instalaciï¿½n."
 LangString questions                   ${LANG_SPANISH} "Questions? Need help?"
-LangString perl_header                 ${LANG_SPANISH} "¿En producción o entorno de prueba?"
-LangString perl_subheader              ${LANG_SPANISH} "Por favor instale ActiveState Perl si será usado en producción"
-LangString perl_title                  ${LANG_SPANISH} "!No se encontró ActiveState Perl!"
-LangString perl_advise_text_part1      ${LANG_SPANISH} "Para entornos de producción, la descarga e instalación de ActiveState ActivePerl (x86) es altamente recomendable antes de ejecutar este programa de instalación."
+LangString perl_header                 ${LANG_SPANISH} "ï¿½En producciï¿½n o entorno de prueba?"
+LangString perl_subheader              ${LANG_SPANISH} "Por favor instale ActiveState Perl si serï¿½ usado en producciï¿½n"
+LangString perl_title                  ${LANG_SPANISH} "!No se encontrï¿½ ActiveState Perl!"
+LangString perl_advise_text_part1      ${LANG_SPANISH} "Para entornos de producciï¿½n, la descarga e instalaciï¿½n de ActiveState ActivePerl (x86) es altamente recomendable antes de ejecutar este programa de instalaciï¿½n."
 LangString perl_cancel_button          ${LANG_SPANISH} "Cancelar y descargar ActivePerl"
-LangString perl_advise_text_part2      ${LANG_SPANISH} "Si hace clic en Siguiente, el instalador configurará su propia versión de perl. Esto a su vez configurará Apache en modo CGI y esto hará que el sistema sea relativamente lento. Por favor use esta configuración solo para pruebas y evaluación de ${OTRS_Name}."
-LangString mui_finishpage_text         ${LANG_SPANISH} "La instalación de todos los servicios necesarios para ejecutar ${OTRS_Name} finalizó con éxito.$\r$\n$\r$\nSi hace clic en 'Iniciar', podrá comenzar el instalador Web para configurar ${OTRS_Name}."
-LangString mui_finishpage_text_upgrade ${LANG_SPANISH} "La actualización de su ${OTRS_Name} ha sido completada satisfactoriamente y todos los servicios fueron reanudados.$\r$\n$\r$\nAl presionar 'Enviar' será redireccionado a su ${OTRS_Name}."
+LangString perl_advise_text_part2      ${LANG_SPANISH} "Si hace clic en Siguiente, el instalador configurarï¿½ su propia versiï¿½n de perl. Esto a su vez configurarï¿½ Apache en modo CGI y esto harï¿½ que el sistema sea relativamente lento. Por favor use esta configuraciï¿½n solo para pruebas y evaluaciï¿½n de ${OTRS_Name}."
+LangString mui_finishpage_text         ${LANG_SPANISH} "La instalaciï¿½n de todos los servicios necesarios para ejecutar ${OTRS_Name} finalizï¿½ con ï¿½xito.$\r$\n$\r$\nSi hace clic en 'Iniciar', podrï¿½ comenzar el instalador Web para configurar ${OTRS_Name}."
+LangString mui_finishpage_text_upgrade ${LANG_SPANISH} "La actualizaciï¿½n de su ${OTRS_Name} ha sido completada satisfactoriamente y todos los servicios fueron reanudados.$\r$\n$\r$\nAl presionar 'Enviar'ï¿½serï¿½ redireccionado a su ${OTRS_Name}."
 LangString mui_finishpage_button       ${LANG_SPANISH} "Iniciar"
 LangString database_header             ${LANG_SPANISH} "Select database for ${OTRS_Name}"
 LangString database_options            ${LANG_SPANISH} "Options"
@@ -287,7 +287,7 @@ LangString mui_finishpage_button       ${LANG_DUTCH} "Start"
 LangString database_header             ${LANG_DUTCH} "Kies database voor ${OTRS_Name}"
 LangString database_options            ${LANG_DUTCH} "Opties"
 LangString database_bundled            ${LANG_DUTCH} "Installeer de gebundelde MySQL database"
-LangString database_own                ${LANG_DUTCH} "Gebruik een al geïnstalleerde database (MySQL, PostgreSQL, Oracle, SQL Server)"
+LangString database_own                ${LANG_DUTCH} "Gebruik een al geï¿½nstalleerde database (MySQL, PostgreSQL, Oracle, SQL Server)"
 
 # ------------------------------------------------------------ #
 # install sections
@@ -1065,7 +1065,7 @@ Function InstInstallationDirValidate
         ${Else}
             # On 32-bit systems check just Program Files
             ${StrStr} $1 "$INSTDIR" "$PROGRAMFILES"
-            StrCpy $3 ''
+            StrCpy $2 ''
         ${EndIf}
 
         # StrStr returns an empty string if there was no match
